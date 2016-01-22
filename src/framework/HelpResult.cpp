@@ -398,7 +398,7 @@ std::string cli::framework::HelpResult::wrap(std::string text, size_t maxWidth) 
 		size_t lastSpace = text.find_last_of(" ");
 		if (lastSpace != std::string::npos && lastSpace > 0)
 		{
-			text = text.substr(0, lastSpace);
+			text = text.substr(0, lastSpace + 1);
 		}
 	}
 	return text;
@@ -426,7 +426,7 @@ std::string cli::framework::HelpResult::consolidateToColumn(size_t colStart,
 				first = false;
 				std::string wrappedText = wrap(text.substr(idx, text.length()), colWidth);
 				result << wrappedText << std::endl;
-				idx += wrappedText.length() + 1; // +1 ignore space
+				idx += wrappedText.length();
 			} while (idx < text.length());
 		}
 		else
