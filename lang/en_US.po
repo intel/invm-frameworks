@@ -1,0 +1,691 @@
+# THIS IS ONLY AN EXAMPLE AND SHOULD NOT BE USED TO LOCALIZE
+#
+# INTEL CONFIDENTIAL                                                                      
+#                                                                                         
+# Copyright 2011 Intel Corporation All Rights Reserved.                                   
+#                                                                                         
+# The source code contained or described herein and all documents related to the          
+# source code ("Material") are owned by Intel Corporation or its suppliers or             
+# licensors. Title to the Material remains with Intel Corporation or its                  
+# suppliers and licensors. The Material may contain trade secrets and proprietary         
+# and confidential information of Intel Corporation and its suppliers and licensors,      
+# and is protected by worldwide copyright and trade secret laws and treaty                
+# provisions. No part of the Material may be used, copied, reproduced, modified,          
+# published, uploaded, posted, transmitted, distributed, or disclosed in any way          
+# without Intel's prior express written permission.                                       
+#                                                                                         
+# No license under any patent, copyright, trade secret or other intellectual              
+# property right is granted to or conferred upon you by disclosure or delivery            
+# of the Materials, either expressly, by implication, inducement, estoppel or             
+# otherwise. Any license under such intellectual property rights must be express          
+# and approved by Intel in writing.                                                       
+#                                                                                         
+# Unless otherwise agreed by Intel in writing, you may not remove or alter this           
+# notice or any other notice embedded in Materials by Intel or Intel's suppliers          
+# or licensors in any way.                                                                
+#                                                                                                                             
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-21 09:22-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ex_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: framework/HelpResult.h:52
+msgid "Utility"
+msgstr "Translationof utility"
+
+#: framework/HelpResult.h:53
+msgid "Usage"
+msgstr "Translation of usage"
+
+#: framework/HelpResult.h:57
+msgid "Commands"
+msgstr "Translation of commands"
+
+#: framework/HelpResult.h:58
+msgid "Name"
+msgstr "Translation of name"
+
+#: framework/HelpResult.h:59
+msgid "Description"
+msgstr "Translation of description"
+
+#: framework/HelpResult.h:60
+msgid "Synopsis"
+msgstr "Translation of synopsis"
+
+#: framework/HelpResult.h:61
+msgid "Verb"
+msgstr "VTranslation of verb"
+
+#: framework/HelpResult.h:62
+msgid "Options"
+msgstr "Translation of options"
+
+#: framework/HelpResult.h:64
+msgid "Targets"
+msgstr "Translation of targets"
+
+#: framework/HelpResult.h:66
+msgid "Properties"
+msgstr "PTranslation of properties"
+
+#: framework/HelpResult.h:73
+msgid "No commands to display"
+msgstr "Translation of no commands to display"
+
+#: framework/ResultBase.h:45
+msgid "No results"
+msgstr ""
+
+#: framework/SyntaxErrorBadValueResult.h:48
+#, c-format
+msgid "'%s' is not a valid setting for the %s '%s'"
+msgstr ""
+
+#: framework/SyntaxErrorMissingValueResult.h:48
+#, c-format
+msgid "A value is required for the %s '%s'"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:76
+msgid "Update Firmware"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:77
+msgid ""
+"Download a firmware image to the device, verify the image is valid. On "
+"reset, the firmware will become active. If the firmware can not be loaded "
+"after reset, TODO: what happens. A firmware image refers to a local file "
+"containing the entire firmware in one package."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:85
+msgid "Change Firmware Log Level"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:86
+msgid "Change the firmware logging level on a NVM-DIMM."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:94
+msgid "Show Diagnostic"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:95
+msgid ""
+"View the results of a diagnostic test on the NVM-DIMMs in a Server. "
+"Providing a device guid displays the diagnostic only on the specific device. "
+"TODO: Which diagnostics are available needs to be defined?"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:105
+msgid "Run Diagnostic"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:106
+msgid ""
+"Execute a diagnostic test on the NVM-DIMMs in a Server. Providing a device "
+"UUID runs the diagnostic only on the specific device. TODO: Which "
+"diagnostics are available needs to be defined?"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:111
+msgid "diagnostic to run"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:114
+msgid "Create Snapshot"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:115
+msgid ""
+"Create a comprehensive set of data for all NVM-DIMMs in the system and store "
+"as a snapshot in the management config file for later retrieval. Data "
+"includes relevant host configuration data and system logs, details about "
+"each NVM-DIMM and its configuration, error log(s), trace logs (if active), "
+"sensor information, diagnostics results."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:121
+msgid "name"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:121
+msgid "A friendly name given to the snapshot."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:123
+msgid "Dump Support"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:124
+msgid ""
+"Collect a comprehensive set of data for all NVM-DIMMs in the system into a "
+"single file to document the context of a problem for offline analysis by "
+"support or development personnel. Data includes relevant host configuration "
+"data and system logs, details about each NVM-DIMM and its configuration, "
+"error log(s), trace logs (if active), sensor information, diagnostics "
+"results."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:133
+msgid "Delete Support"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:134
+msgid "Delete all collected support data."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:137
+msgid "Change Software Log Level"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:138
+msgid ""
+"Set the level of logs that are captured by the NVM-DIMM software on the Host "
+"server."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:144
+msgid "Show Version"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:145
+msgid ""
+"Retrieve the version information including but not limited to the NVMCLI "
+"version and versions of the libraries used by NVMCLI."
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:222
+msgid "Missing setting for property 'Log'"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:231
+msgid "Management Software Debug Logging: On"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:237
+msgid "Management Software Debug Logging: Off"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:242
+#, c-format
+msgid "Invalid setting '%s' for property 'Log'"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:276
+msgid "'Name' property expects a value"
+msgstr ""
+
+#: features/core/FieldSupportFeature.cpp:283
+msgid "Success"
+msgstr ""
+
+#: features/core/SensorFeature.cpp:85
+msgid "Show Sensor"
+msgstr ""
+
+#: features/core/SensorFeature.cpp:86
+msgid ""
+"Retrieves a list of sensors for the NVM-DIMMs in a given server. The default "
+"behavior is to list a few key properties of each sensor which portray the "
+"current status; the options can be used to expand/restrict the output. If "
+"more than one device is installed in the server , output can be restricted "
+"to the sensors for a single device by supplying the target -dimm along with "
+"the device UUID. Alternately, the list of sensors of a specified type across "
+"all devices can be specified when the sensor Type is present, and the device "
+"UUID is omitted. Finally, output can be restricted to a single sensor by "
+"supplying both the device UUID and sensor ID."
+msgstr ""
+
+#: features/core/SensorFeature.cpp:101
+msgid "Filter the results based on the type of sensor."
+msgstr ""
+
+#: features/core/SensorFeature.cpp:103
+msgid "Modify Sensor"
+msgstr ""
+
+#: features/core/SensorFeature.cpp:104
+msgid ""
+"Modify the settings of an existing temperature or spare sensor by providing "
+"the appropriate critical threshold."
+msgstr ""
+
+#: features/core/SensorFeature.cpp:106
+msgid "Which sensor to update"
+msgstr ""
+
+#: features/core/SensorFeature.cpp:108
+msgid "If specified, will only update the sensor on the DIMM provided."
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:48
+msgid "Load Simulator"
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:49
+msgid ""
+"Load a simulator system file to the system adapters in the management "
+"library. Note: This command isn't supported for non-simulator builds."
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:54
+msgid "Remove Simulator"
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:55
+msgid ""
+"Unload the currently loaded simulator file. Note: This command isn't "
+"supported for non-simulator builds."
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:85
+msgid "Missing required option '-source'"
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:95
+#, c-format
+msgid "Successfully updated the default simulator: '%s'"
+msgstr ""
+
+#: features/core/SimulatorFeature.cpp:109
+msgid "Successfully removed the default simulator"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:72
+msgid "Show Host System"
+msgstr "Mostrar Host Sistema"
+
+#: features/core/SystemFeature.cpp:73
+msgid ""
+"The show command with the system target is used to display basic host "
+"information."
+msgstr "El comando show con el objetivo del sistema se utiliza para mostrar información básica de acogida."
+
+#: features/core/SystemFeature.cpp:78
+msgid "Show Device(s)"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:79
+msgid ""
+"Get a list of NVM-DIMMs installed in a given server. The default behavior is "
+"to list a few key properties for each device; the options can be used to "
+"expand/restrict the output. If more than one device is installed output can "
+"be restricted to a single device by supplying its UUID."
+msgstr ""
+
+#: features/core/SystemFeature.cpp:87
+msgid "Modify Device(s)"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:88
+msgid ""
+"Modify NVM-DIMMs on a system. At least one property must be supplied. Most "
+"of the time the NVM-DIMM UUID should NOT be used so that NVM-DIMM settings "
+"stay consistent. However , the NVM-DIMM UUID can be used to change settings "
+"on a single NVM-DIMM in extreme advanced situations. On success, the command "
+"returns all the device data as described in Show Device. If all NVM-DIMMs "
+"are being updated and one fails, an error message is reported on the "
+"failure, however , the others will stay updated. (TODO: Is this accurate or "
+"will the system try to rollback all changes?)"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:106
+msgid "Reset Device to Factory Settings"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:107
+msgid ""
+"Restore the configuration of a given device to the configuration in place at "
+"the time it left the factory. If there is only one NVM-DIMM in the server , "
+"a device UUID is not required."
+msgstr ""
+
+#: features/core/SystemFeature.cpp:114
+msgid "Show Pools"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:115
+msgid ""
+"Retrieve a list of Storage Pools for the NVM-DIMMs in a given server. Output "
+"can be restricted to a single pool by supplying the pool's UUID. Also output "
+"fields can be restricted using the options for output."
+msgstr ""
+
+#: features/core/SystemFeature.cpp:122
+msgid "Change Security"
+msgstr ""
+
+#: features/core/SystemFeature.cpp:123
+msgid "Modify data at rest security settings."
+msgstr ""
+
+#: features/core/SystemFeature.cpp:182
+msgid "Target 'system' does not accept a value"
+msgstr ""
+
+#: features/core/ValidationFeature.cpp:61
+msgid "Inject Error"
+msgstr ""
+
+#: features/core/ValidationFeature.cpp:62
+msgid ""
+"This command is available only when the AEP DIMM is in a manufacturing/"
+"validation mode. The caller supplies a mask indicating the types of errors "
+"to inject and the values (as appropriate). Clearing the mask clears all "
+"injected errors. If only one NVM-DIMM is on the system then the device UUID "
+"is not required."
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:62
+msgid "Show Volume"
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:63
+msgid ""
+"Get a list of extents for the NVM-DIMMs in a given server. The default "
+"behavior is to list a few key properties for each extent; the options can be "
+"used to expand/restrict the output. Volumes returned can also be filtered by "
+"supplying the UUID for the extent, NVM-DIMM, socket, or pool."
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:74
+msgid "Create Volume"
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:75
+msgid ""
+"Creates a new volume from the specified pool. Friendly name, purpose are "
+"optional values. Block count and size taken together must result in a "
+"capacity that is less than or equal to the available capacity of the pool. "
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:89
+msgid "Modify Volume"
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:90
+msgid ""
+"Modify the settings of an existing volume. At least one property must be "
+"supplied. On success, the command returns all the volume data for the volume "
+"as described in Show Volume(s). "
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:100
+msgid "Delete Volume"
+msgstr ""
+
+#: features/core/VolumeFeature.cpp:101
+msgid ""
+"Delete a volume and return all capacity of the volume to the system. Various "
+"conditions can exist that make deleting a given extent undesirable. A delete "
+"command will result in a failure if it's believed that the delete will "
+"result in an undesirable situation. The force option overrides this behavior."
+msgstr ""
+
+#: features/core/FieldSupportFeature.h:44
+#, c-format
+msgid "Successfully updated the firmware on device %s."
+msgstr ""
+
+#: features/core/FieldSupportFeature.h:45
+#, c-format
+msgid "There was an error updating the firmware on device %s: %s"
+msgstr ""
+
+#: features/core/FieldSupportFeature.h:46
+msgid "Successfully created support file."
+msgstr ""
+
+#: features/core/FieldSupportFeature.h:47
+msgid "Successfully deleted the support data."
+msgstr ""
+
+#: features/core/SensorFeature.h:46
+#, c-format
+msgid "Successfully modified the %s sensor on device %s."
+msgstr ""
+
+#: features/core/SystemFeature.h:53
+msgid "'NewPassphrase' and 'ConfirmPassphrase' must match."
+msgstr ""
+
+#: features/core/SystemFeature.h:54
+#, c-format
+msgid "Successfully removed the passphrase from device %s."
+msgstr ""
+
+#: features/core/SystemFeature.h:55
+#, c-format
+msgid ""
+"Unable to remove the passphrase from device %s. Security is already disabled."
+msgstr ""
+
+#: features/core/SystemFeature.h:56
+#, c-format
+msgid "Unable to unlock the  device %s. Security is already disabled."
+msgstr ""
+
+#: features/core/SystemFeature.h:57
+#, c-format
+msgid "Successfully unlocked the device %s."
+msgstr ""
+
+#: features/core/SystemFeature.h:58
+#, c-format
+msgid "Successfully erased the device %s."
+msgstr ""
+
+#: support.c:150
+msgid "The method succeeded."
+msgstr ""
+
+#: support.c:153
+msgid "An unknown error occurred."
+msgstr ""
+
+#: support.c:157
+msgid "There was not enough memory to complete the requested operation."
+msgstr ""
+
+#: support.c:162
+msgid "This method is not supported in the current context."
+msgstr ""
+
+#: support.c:167
+msgid ""
+"One or more of the input parameters are out of range or otherwise invalid."
+msgstr ""
+
+#: support.c:173
+msgid "The device is not manageable by the management software."
+msgstr ""
+
+#: support.c:178
+msgid ""
+"The caller does not have appropriate privileges to complete the operation."
+msgstr ""
+
+#: support.c:183 support.c:279
+msgid "The return code is not valid."
+msgstr ""
+
+#: support.c:188
+msgid ""
+"The device is unable to complete the command because of a data transfer "
+"error."
+msgstr ""
+
+#: support.c:194
+msgid ""
+"The device is unable to complete the command because of an internal error."
+msgstr ""
+
+#: support.c:200
+msgid "The device is unable to complete the command because it is busy."
+msgstr ""
+
+#: support.c:204
+msgid "The passphrase is not valid."
+msgstr ""
+
+#: support.c:208
+msgid "The new passphrase does not meet the minimum requirements."
+msgstr ""
+
+#: support.c:213
+msgid "No changes can be made to the security state of the device."
+msgstr ""
+
+#: support.c:218
+msgid "The maximum passphrase submission limit has been reached."
+msgstr ""
+
+#: support.c:222
+msgid "Data at rest security is not enabled."
+msgstr ""
+
+#: support.c:226
+msgid "The device identifier is not valid."
+msgstr ""
+
+#: support.c:230
+msgid "The array is not big enough."
+msgstr ""
+
+#: support.c:233
+msgid "The callback identifier is not valid."
+msgstr ""
+
+#: support.c:237
+msgid "The file is not valid."
+msgstr ""
+
+#: support.c:240
+msgid "No simulator is loaded."
+msgstr ""
+
+#: support.c:243
+msgid "The pool identifier is not valid."
+msgstr ""
+
+#: support.c:247
+msgid "The extent identifier is not valid."
+msgstr ""
+
+#: support.c:251
+msgid "The block size is not valid."
+msgstr ""
+
+#: support.c:254
+msgid "The size is not valid."
+msgstr ""
+
+#: support.c:258
+msgid "The firmware image is not valid for the device."
+msgstr ""
+
+#: support.c:263
+msgid "The communications with the device driver failed."
+msgstr ""
+
+#: support.c:268
+msgid "The device table has not been initialized."
+msgstr ""
+
+#: support.c:272
+msgid "A problem occurred while trying to retrieve NUMA data."
+msgstr ""
+
+#: support.c:276
+msgid "The NUMA node_id is not valid."
+msgstr ""
+
+#: support.c:284
+#, c-format
+msgid "return code description is %s"
+msgstr ""
+
+#: framework/NvmStrings.h:59
+msgid "An unknown exception occurred."
+msgstr ""
+
+#: framework/NvmStrings.h:60
+#, c-format
+msgid "The Native API Library returned an unknown error code: %d."
+msgstr ""
+
+#: framework/NvmStrings.h:61
+#, c-format
+msgid "The method %s::%s is not supported in the current context."
+msgstr ""
+
+#: framework/NvmStrings.h:62
+#, c-format
+msgid "There is not enough memory in the method %s::%s for '%s'."
+msgstr ""
+
+#: framework/NvmStrings.h:63
+#, c-format
+msgid "The parameter '%s' is not valid."
+msgstr ""
+
+#: framework/NvmStrings.h:64
+#, c-format
+msgid "Validate configuration is not supported in %s::%s."
+msgstr ""
+
+#: features/core/CommandParts.h:47
+msgid "System target is required."
+msgstr "Se requiere el objetivo sistema"
+
+#: features/core/CommandParts.h:48
+msgid "NVDIMM target"
+msgstr ""
+
+#: features/core/CommandParts.h:49
+msgid "NVDIMM target is required."
+msgstr ""
+
+#: features/core/CommandParts.h:50
+msgid "Volume target."
+msgstr ""
+
+#: features/core/CommandParts.h:51
+msgid "Volume target is required."
+msgstr ""
+
+#: features/core/CommandParts.h:52
+msgid "Sensor target"
+msgstr ""
+
+#: features/core/CommandParts.h:53
+msgid "Sensor target is required."
+msgstr ""
+
+#: features/core/CommandParts.h:54
+msgid "Socket target."
+msgstr ""
+
+#: features/core/CommandParts.h:55
+msgid "Pool target."
+msgstr ""
+
+#: features/core/CommandParts.h:56
+msgid "Pool target is required."
+msgstr ""
+
+#: features/core/CommandParts.h:57
+msgid "Support target is required."
+msgstr ""
