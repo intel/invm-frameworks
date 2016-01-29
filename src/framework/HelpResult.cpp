@@ -396,10 +396,16 @@ std::string cli::framework::HelpResult::wrap(std::string text, size_t maxWidth) 
 	{
 		text = text.substr(0, maxWidth);
 		size_t lastSpace = text.find_last_of(" ");
+		size_t lastOr = text.find_last_of("|");
 		if (lastSpace != std::string::npos && lastSpace > 0)
 		{
 			text = text.substr(0, lastSpace + 1);
 		}
+		else if (lastOr != std::string::npos && lastOr > 0)
+		{
+			text = text.substr(0, lastOr + 1);
+		}
+
 	}
 	return text;
 }
