@@ -136,7 +136,8 @@ std::string cli::framework::CommandSpec::listToString(const CommandSpecPartList 
 
 		if (!value.empty())
 		{
-			value = "(" + value + ")";
+			if (value.size() > 1)
+				value = "(" + value + ")";
 			if (!list[i].valueRequired)
 			{
 				value = "[" + value + "]";
