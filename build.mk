@@ -40,6 +40,9 @@ MOVE = mv
 MKDIR = mkdir -p
 RMDIR = rm -rf
 SOFTLINK = ln -s
+SED = sed
+TAR = tar
+RPMBUILD = rpmbuild
 
 # useful makefile debugging tools
 # Its a hack, but it does the job! To unpause, simply hit the [ENTER] key.
@@ -55,9 +58,12 @@ BLDMK_SPACE = $(BLDMK_EMPTY) $(BLDMK_EMPTY)
 
 #version number passed in from the build server
 #TODO: Currently not working on build server
-#ifndef BUILDNUM
-	BUILDNUM=99.99.99.9999
-#endif
+ifndef BUILDNUM
+	BUILDNUM= $(shell git describe --abbrev=0 | sed -e 's/\([a-zA-Z_-]*\)\(.*\)/\2/g')
+	ifeq ($(strip $(BUILDNUM)),)
+		BUILDNUM=99.99.99.9999
+	endif
+endif
 
 #parse into individual pieces
 VERSION_MAJOR = $(word 1,$(subst ., ,$(BUILDNUM)))
@@ -131,6 +137,14 @@ ifeq ($(UNAME), Linux)
 
 		C_CPP_FLAGS_CMN += -m64 -fPIC
 		C_CPP_FLAGS_SRC += -D__LINUX__
+		
+		ifneq ("$(wildcard /etc/redhat-release)","")
+			LINUX_DIST := rel
+		else ifneq ("$(wildcard /etc/SuSE-release)","")
+			LINUX_DIST := sle
+		else
+			LINUX_DIST := $(warning Unrecognized Linux distribution)
+		endif
 	endif		
 else
 	BUILD_WINDOWS = 1
@@ -191,6 +205,7 @@ HEADER_DIR = $(OUTPUT_DIR)/build/$(OS_TYPE)/$(BUILD_TYPE)/include/intel_cli_fram
 I18N_HEADER_DIR = $(OUTPUT_DIR)/build/$(OS_TYPE)/$(BUILD_TYPE)/include/I18N
 #DOCS_DIR = $(OUTPUT_DIR)/docs
 SOURCEDROP_DIR ?= $(OUTPUT_DIR)/workspace/intelcliframework
+RPMBUILD_DIR ?= $(shell pwd)/$(OUTPUT_DIR)/rpmbuild
 
 # define utility variables
 POCO_BASE = $(abspath $(EXTERN_DIR)/poco/poco-1_4_6p1)

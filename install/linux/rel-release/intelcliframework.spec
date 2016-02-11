@@ -1,6 +1,6 @@
-%{!?rpm_name: %define rpm_name intelcliframework}
-%{!?build_version: %define build_version 99.99.99.9999}
-%{!?build_release: %define build_release 1}
+%define rpm_name intelcliframework
+%define build_version 99.99.99.9999
+%define build_release 1
 %define dname %{rpm_name}-devel
 
 Name:           %{rpm_name}-libs
@@ -28,7 +28,7 @@ The %{name}-devel package contains header files for
 developing applications that use %{name}.
 
 %prep
-%setup -D -T -q -n %{rpm_name}
+%setup -q -n %{rpm_name}
 
 %build
 make BUILDNUM=%{build_version} RELEASE=1

@@ -97,4 +97,21 @@ uninstall :
 	$(RMDIR) $(FRAMEWORK_INCLUDE_DIR)
 	$(RMDIR) $(I18N_INCLUDE_DIR)
 
-.PHONY : all qb_standard src i18n test clean clobber install uninstall sourcedrop
+rpm :
+	#Make the Directories
+	$(MKDIR) $(RPMBUILD_DIR) $(RPMBUILD_DIR)/BUILD $(RPMBUILD_DIR)/SOURCES $(RPMBUILD_DIR)/RPMS \
+				$(RPMBUILD_DIR)/SRPMS $(RPMBUILD_DIR)/SPECS $(RPMBUILD_DIR)/BUILDROOT \
+				$(RPMBUILD_DIR)/BUILD/intel_cli_framework
+	
+	#Copy Spec File
+	$(COPY) install/linux/$(LINUX_DIST)-release/*.spec $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec
+	#Update the Spec file
+	$(SED) -i 's/^%define rpm_name .*/%define rpm_name intel_cli_framework/g' $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec
+	$(SED) -i 's/^%define build_version .*/%define build_version $(BUILDNUM)/g' $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec
+	
+	#Archive the directory
+	git archive --format=tar --prefix="intel_cli_framework/" HEAD | bzip2 -c > $(RPMBUILD_DIR)/SOURCES/intel_cli_framework.tar.bz2
+	#rpmbuild 
+	$(RPMBUILD) -ba $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec --define "_topdir $(RPMBUILD_DIR)" 
+	
+.PHONY : all qb_standard src i18n test clean clobber install uninstall sourcedrop rpm
