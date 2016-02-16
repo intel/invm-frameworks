@@ -7,7 +7,7 @@ Name:           lib%{rpm_name}
 Version:		%{build_version}
 Release:		%{build_release}%{?dist}
 Summary:		Framework for Intel Storage CLI Binaries
-License:        Prioprietary
+License:        BSD
 Group:          Development/Libraries
 URL:			http://www.intel.com
 Source:         %{rpm_name}.tar.bz2
@@ -19,7 +19,7 @@ Framework libraries for the Intel Storage CLI binaries
 
 %package -n %dname
 Summary:        Development files for %{name}
-License:        Prioprietary
+License:        BSD
 Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
@@ -44,6 +44,7 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 %defattr(-,root,root)
 %{_libdir}/libcliframework.so.*
 %{_libdir}/libIntel_i18n.so.*
+%license LICENSE
 
 %files -n %dname
 %defattr(-,root,root)
@@ -51,6 +52,7 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 %{_libdir}/libIntel_i18n.so
 %{_includedir}/intel_cli_framework
 %{_includedir}/I18N
+%license LICENSE
 
 %changelog
 * Wed Dec 24 2015 nicholas.w.moulin@intel.com
