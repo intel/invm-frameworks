@@ -44,7 +44,7 @@ HEADERS = $(wildcard *.h)
 EXTERNAL_HEADERS = CliFrameworkTypes.h CommandSpec.h DuplicateTokenErrorResult.h \
 	ErrorResult.h FeatureBase.h FeatureRef.h Framework.h HelpFeature.h Logger.h \
 	NoInputErrorResult.h NotImplementedErrorResult.h \
-	ObjectListResult.h Parser.h PropertyListResult.cpp PropertyListResult.h ResultBase.h \
+	ObjectListResult.h Parser.h PropertyListResult.h ResultBase.h \
 	SimpleListResult.h SimpleResult.h SyntaxErrorBadValueResult.h SyntaxErrorMissingValueResult.h \
 	SyntaxErrorUnexpectedValueResult.h SyntaxErrorResult.h Trace.h
 	 
@@ -101,10 +101,10 @@ targets: $(OBJECT_MODULE_DIR) $(BUILD_DIR) $(TARGETNAME) headers
 
 headers : $(HEADER_DIR) 
 	$(COPY) --parents $(EXTERNAL_HEADERS) $(HEADER_DIR)
+ifndef SKIP_UNITTESTS
 	$(MKDIR) $(HEADER_DIR)/$(UNITTEST)
 	$(COPY) $(UNITTEST)/GTestExtensions.h $(HEADER_DIR)/$(UNITTEST)
 	sed -i 's/<framework\/NotImplementedErrorResult.h/<intel_cli_framework\/NotImplementedErrorResult.h/g' $(HEADER_DIR)/$(UNITTEST)/GTestExtensions.h
-ifndef SKIP_UNITTESTS
 	$(MAKE) $(HEADER_DIR)/$(UNITTEST)
 endif
 
@@ -152,8 +152,10 @@ sourcedrop :
 	$(MKDIR) $(SOURCEDROP_DIR)/src/framework
 	$(COPY) *.* $(SOURCEDROP_DIR)/src/framework/
 	$(COPY) makefile $(SOURCEDROP_DIR)/src/framework/
+ifndef SKIP_UNITTESTS
 	$(MKDIR) $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)
 	$(COPY) $(UNITTEST)/GTestExtensions.h $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)
 	sed -i 's/<framework\/NotImplementedErrorResult.h/<intel_cli_framework\/NotImplementedErrorResult.h/g' $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)/GTestExtensions.h
+endif
 
 .PHONY : all targets headers unittest test clean clobber sourcedrop i18n
