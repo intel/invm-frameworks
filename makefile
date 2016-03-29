@@ -39,18 +39,23 @@ FLAGS := SKIP_UNITTESTS=$(SKIP_UNITTESTS)
 # Linux Install Files
 LIB_DIR ?= /usr/lib64
 # files that get installed into /usr/lib64
-LIB_FILES = libcliframework.so* libIntel_i18n.so* 
+LIB_FILES = libcliframework.so* 
 INCLUDE_DIR ?= /usr/include
 # files that get installed into /usr/include/
 FRAMEWORK_INCLUDE_DIR = intel_cli_framework
-I18N_INCLUDE_DIR = I18N
+I18N_INCLUDE_DIR = intel_i18n
 
 # ---- RECIPES -------------------------------------------------------------------------------------
 
-all :
-	$(MAKE) -C external/Intel_i18n $(FLAGS)
+all: $(BUILD_DIR) 
+ifdef BUILD_WINDOWS
+	$(MAKE) -C src libcopy $(FLAGS)
+endif
 	$(MAKE) -C src framework $(FLAGS)
 	$(MAKE) i18n 
+
+$(BUILD_DIR):
+	$(MKDIR) $@
 
 # Create internationalization files
 i18n:	
@@ -64,11 +69,9 @@ ifndef RELEASE
 endif
 
 clean :
-	$(MAKE) -C external/Intel_i18n clean $(FLAGS)
 	$(MAKE) -C src clean $(FLAGS)
 
 clobber :
-	$(MAKE) -C external/Intel_i18n clobber $(FLAGS)
 	$(MAKE) -C src clobber $(FLAGS)
 	$(RM) $(BUILD_DIR)/cyrstalridge.pot
 	$(RM) -r $(LOCALE_DIR)
@@ -78,7 +81,6 @@ install :
 	# complete the paths for the files to be installed
 	$(eval LIB_FILES := $(addprefix $(BUILD_DIR)/, $(LIB_FILES)))
 	$(eval FRAMEWORK_INCLUDE_DIR := $(addprefix $(BUILD_DIR)/include/, $(FRAMEWORK_INCLUDE_DIR)))
-	$(eval I18N_INCLUDE_DIR := $(addprefix $(BUILD_DIR)/include/, $(I18N_INCLUDE_DIR)))
 	# install files into lib directory
 	$(MKDIR) $(RPM_ROOT)$(LIB_DIR)
 	$(COPY) $(LIB_FILES) $(RPM_ROOT)$(LIB_DIR)
@@ -86,16 +88,13 @@ install :
 	# install files into include directory
 	$(MKDIR) $(RPM_ROOT)$(INCLUDE_DIR)
 	$(COPY) $(FRAMEWORK_INCLUDE_DIR) $(RPM_ROOT)$(INCLUDE_DIR)
-	$(COPY) $(I18N_INCLUDE_DIR) $(RPM_ROOT)$(INCLUDE_DIR)
 uninstall : 
 
 	$(eval LIB_FILES := $(addprefix $(RPM_ROOT)$(LIB_DIR)/, $(LIB_FILES)))
 	$(eval FRAMEWORK_INCLUDE_DIR := $(addprefix $(RPM_ROOT)$(INCLUDE_DIR)/, $(FRAMEWORK_INCLUDE_DIR)))
-	$(eval I18N_INCLUDE_DIR := $(addprefix $(RPM_ROOT)$(INCLUDE_DIR)/, $(I18N_INCLUDE_DIR)))
 	
 	$(RM) $(LIB_FILES)
 	$(RMDIR) $(FRAMEWORK_INCLUDE_DIR)
-	$(RMDIR) $(I18N_INCLUDE_DIR)
 
 rpm :
 	#Make the Directories

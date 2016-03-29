@@ -41,17 +41,15 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 %postun -p /sbin/ldconfig
 
 %files
-%attr(755,root,root) %{_libdir}/libcliframework.so.*
-%attr(755,root,root) %{_libdir}/libIntel_i18n.so.*
+%defattr(755,root,root,755)
+%{_libdir}/libcliframework.so.*
 %license LICENSE
 
 %files -n %dname
-%attr(755,root,root) %{_libdir}/libcliframework.so
-%attr(755,root,root) %{_libdir}/libIntel_i18n.so
-%attr(755,root,root) %dir %{_includedir}/intel_cli_framework
+%defattr(755,root,root,755)
+%{_libdir}/libcliframework.so
+%dir %{_includedir}/intel_cli_framework
 %attr(644,root,root) %{_includedir}/intel_cli_framework/*.h
-%attr(755,root,root) %dir %{_includedir}/I18N
-%attr(644,root,root) %{_includedir}/I18N/*.h
 %license LICENSE
 
 %changelog

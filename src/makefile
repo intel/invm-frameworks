@@ -63,7 +63,7 @@ LIBS = 	-L$(BUILD_DIR) -lcliframework \
 		-L$(BUILD_DIR) -lexfeatures \
 
 ifdef INTEL_I18N
-INCS += -I$(EXTERN_DIR)/Intel_i18n
+INCS += -I$(EXTERN_DIR)/intel_i18n/include
 LIBS += -lIntel_i18n
 else
 ifdef BUILD_WINDOWS
@@ -79,13 +79,16 @@ else
 endif
 
 # ---- RECIPES -------------------------------------------------------------------------------------
-all : $(BUILD_DIR)  framework features $(TARGET_NAME)
+all : $(BUILD_DIR)  libcopy framework features $(TARGET_NAME)
 
 $(TARGET_NAME): $(FRAMEWORK) $(FEATURES) $(OBJNAMES) 
 	$(CPP) $(CPPFLAGS) $(OBJNAMES) $(LIBS) -o $@
 
 $(BUILD_DIR):
 	$(MKDIR) $@
+
+libcopy:
+	$(COPY) $(I18N_DIR)/$(OS_TYPE)_$(BUILD_TYPE)/lib* $(BUILD_DIR)
 
 framework:
 	$(MAKE) -C framework all

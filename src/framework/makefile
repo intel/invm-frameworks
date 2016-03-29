@@ -83,7 +83,7 @@ else
 endif
 
 ifdef INTEL_I18N
-	INCS = -I$(EXTERN_DIR)/Intel_i18n
+	INCS = -I$(EXTERN_DIR)/intel_i18n/include
 	LIBS += -lIntel_i18n
 else
 ifdef BUILD_WINDOWS
