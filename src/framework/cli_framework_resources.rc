@@ -31,7 +31,7 @@ BEGIN
 			VALUE "FileDescription", "CLI Framework\0"
 			VALUE "FileVersion", "1.0.0.0\0"
 			VALUE "InternalName", "libcliframework.dll"
-			VALUE "LegalCopyright", "Copyright© 2015 Intel Corporation. All rights reserved\0"
+			VALUE "LegalCopyright", "Copyright© 2015 2016 Intel Corporation. All rights reserved\0"
 			VALUE "OriginalFilename", "libcliframework.dll"
 			VALUE "ProductName", "CLI Framework\0"
 			VALUE "ProductVersion", "1.0.0.0\0"
