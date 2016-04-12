@@ -35,9 +35,9 @@ include $(ROOT_DIR)/build.mk
 OBJECT_MODULE_DIR = $(OBJECT_DIR)
 
 # ---- COMPONENTS ----------------------------------------------------------------------------------
-FRAMEWORK = $(BUILD_DIR)/libcliframework.$(LIB_SUFFIX)
+FRAMEWORK = $(BUILD_DIR)/$(LIB_BASENAME).$(LIB_SUFFIX)
 FEATURES = $(BUILD_DIR)/libexfeatures.$(LIB_SUFFIX)
-INTELI18N = $(BUILD_DIR)/libIntel_i18n.$(LIB_SUFIX)
+INTELI18N = $(BUILD_DIR)/$(I18N_LIB_BASENAME).$(LIB_SUFIX)
 
 # ---- FILES ---------------------------------------------------------------------------------------
 SRC = $(wildcard *.cpp)
@@ -59,12 +59,12 @@ TARGET_NAME = $(addprefix $(BUILD_DIR)/, $(TARGET))
 # ---- COMPILER PARAMETERS -------------------------------------------------------------------------
 INCS = 	-I$(SRC_DIR)
 		
-LIBS = 	-L$(BUILD_DIR) -lcliframework \
+LIBS = 	-L$(BUILD_DIR) -l$(LIB_NAME)\
 		-L$(BUILD_DIR) -lexfeatures \
 
 ifdef INTEL_I18N
 INCS += -I$(EXTERN_DIR)/intel_i18n/include
-LIBS += -lIntel_i18n
+LIBS += -l$(I18N_LIB_NAME)
 else
 ifdef BUILD_WINDOWS
 LIBS += -llibintl

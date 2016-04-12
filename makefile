@@ -39,11 +39,11 @@ FLAGS := SKIP_UNITTESTS=$(SKIP_UNITTESTS)
 # Linux Install Files
 LIB_DIR ?= /usr/lib64
 # files that get installed into /usr/lib64
-LIB_FILES = libcliframework.so* 
+LIB_FILES = $(LIB_BASENAME).so* 
 INCLUDE_DIR ?= /usr/include
 # files that get installed into /usr/include/
-FRAMEWORK_INCLUDE_DIR = intel_cli_framework
-I18N_INCLUDE_DIR = intel_i18n
+FRAMEWORK_INCLUDE_DIR = $(HEADER_DIRECTORY)
+I18N_INCLUDE_DIR = $(I18N_HEADER_DIRECTORY)
 
 # ---- RECIPES -------------------------------------------------------------------------------------
 
@@ -100,17 +100,17 @@ rpm :
 	#Make the Directories
 	$(MKDIR) $(RPMBUILD_DIR) $(RPMBUILD_DIR)/BUILD $(RPMBUILD_DIR)/SOURCES $(RPMBUILD_DIR)/RPMS \
 				$(RPMBUILD_DIR)/SRPMS $(RPMBUILD_DIR)/SPECS $(RPMBUILD_DIR)/BUILDROOT \
-				$(RPMBUILD_DIR)/BUILD/intel_cli_framework
+				$(RPMBUILD_DIR)/BUILD/$(HEADER_DIRECTORY)
 	
 	#Copy Spec File
-	$(COPY) install/linux/$(LINUX_DIST)-release/*.spec $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec
+	$(COPY) install/linux/$(LINUX_DIST)-release/*.spec $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec
 	#Update the Spec file
-	$(SED) -i 's/^%define rpm_name .*/%define rpm_name intel_cli_framework/g' $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec
-	$(SED) -i 's/^%define build_version .*/%define build_version $(BUILDNUM)/g' $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec
+	$(SED) -i 's/^%define rpm_name .*/%define rpm_name $(LIB_BASENAME)/g' $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec
+	$(SED) -i 's/^%define build_version .*/%define build_version $(BUILDNUM)/g' $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec
 	
 	#Archive the directory
-	git archive --format=tar --prefix="intel_cli_framework/" HEAD | bzip2 -c > $(RPMBUILD_DIR)/SOURCES/intel_cli_framework.tar.bz2
+	git archive --format=tar --prefix="$(LIB_BASENAME)/" HEAD | bzip2 -c > $(RPMBUILD_DIR)/SOURCES/$(LIB_BASENAME).tar.bz2
 	#rpmbuild 
-	$(RPMBUILD) -ba $(RPMBUILD_DIR)/SPECS/intel_cli_framework.spec --define "_topdir $(RPMBUILD_DIR)" 
+	$(RPMBUILD) -ba $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec --define "_topdir $(RPMBUILD_DIR)" 
 	
 .PHONY : all qb_standard src i18n test clean clobber install uninstall sourcedrop rpm

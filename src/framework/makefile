@@ -60,7 +60,7 @@ OBJNAMES = $(addprefix $(OBJECT_MODULE_DIR)/, $(OBJS))
 -include $(addprefix $(OBJECT_MODULE_DIR)/, $(patsubst %.cpp,%.d,$(SRC)))
 
 # Target library 'linker name'
-TARGETBASE = libcliframework.$(LIB_SUFFIX)
+TARGETBASE = $(LIB_BASENAME).$(LIB_SUFFIX)
 # Target library 'soname'
 TARGETSO = $(TARGETBASE).$(VERSION_MAJOR)
 # Target library 'real name'
@@ -84,7 +84,7 @@ endif
 
 ifdef INTEL_I18N
 	INCS = -I$(EXTERN_DIR)/intel_i18n/include
-	LIBS += -lIntel_i18n
+	LIBS += -l$(I18N_LIB_NAME)
 else
 ifdef BUILD_WINDOWS
 	LIBS += -llibintl
@@ -104,7 +104,7 @@ headers : $(HEADER_DIR)
 ifndef SKIP_UNITTESTS
 	$(MKDIR) $(HEADER_DIR)/$(UNITTEST)
 	$(COPY) $(UNITTEST)/GTestExtensions.h $(HEADER_DIR)/$(UNITTEST)
-	sed -i 's/<framework\/NotImplementedErrorResult.h/<intel_cli_framework\/NotImplementedErrorResult.h/g' $(HEADER_DIR)/$(UNITTEST)/GTestExtensions.h
+	sed -i 's/<framework\/NotImplementedErrorResult.h/<libintelnvm-cli\/NotImplementedErrorResult.h/g' $(HEADER_DIR)/$(UNITTEST)/GTestExtensions.h
 	$(MAKE) $(HEADER_DIR)/$(UNITTEST)
 endif
 
@@ -146,7 +146,7 @@ clean:
 	$(MAKE) -C $(UNITTEST) clean
 
 clobber : clean
-	rm -f $(BUILD_DIR)/libcliframework*
+	rm -f $(BUILD_DIR)/$(HEADER_DIRECTORY)*
 
 sourcedrop :
 	$(MKDIR) $(SOURCEDROP_DIR)/src/framework
@@ -155,7 +155,7 @@ sourcedrop :
 ifndef SKIP_UNITTESTS
 	$(MKDIR) $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)
 	$(COPY) $(UNITTEST)/GTestExtensions.h $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)
-	sed -i 's/<framework\/NotImplementedErrorResult.h/<intel_cli_framework\/NotImplementedErrorResult.h/g' $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)/GTestExtensions.h
+	sed -i 's/<framework\/NotImplementedErrorResult.h/<libintelnvm-cli\/NotImplementedErrorResult.h/g' $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)/GTestExtensions.h
 endif
 
 .PHONY : all targets headers unittest test clean clobber sourcedrop i18n

@@ -1,9 +1,9 @@
-%define rpm_name intelcliframework
+%define rpm_name libintelnvm-cli
 %define build_version 99.99.99.9999
 %define build_release 1
 %define dname lib%{rpm_name}-devel
 
-Name:           lib%{rpm_name}
+Name:           %{rpm_name}
 Version:		%{build_version}
 Release:		%{build_release}%{?dist}
 Summary:		Framework for Intel Storage CLI Binaries
@@ -42,14 +42,14 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 
 %files
 %defattr(755,root,root,755)
-%{_libdir}/libcliframework.so.*
+%{_libdir}/libintelnvm-cli.so.*
 %license LICENSE
 
 %files -n %dname
 %defattr(755,root,root,755)
-%{_libdir}/libcliframework.so
-%dir %{_includedir}/intel_cli_framework
-%attr(644,root,root) %{_includedir}/intel_cli_framework/*.h
+%{_libdir}/libintelnvm-cli.so
+%dir %{_includedir}/libintelnvm-cli
+%attr(644,root,root) %{_includedir}/libintelnvm-cli/*.h
 %license LICENSE
 
 %changelog
