@@ -1,7 +1,7 @@
 %define rpm_name libintelnvm-cli
 %define build_version 99.99.99.9999
 %define build_release 1
-%define dname lib%{rpm_name}-devel
+%define dname %{rpm_name}-devel
 
 Name:           %{rpm_name}
 Version:		%{build_version}

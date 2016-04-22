@@ -58,7 +58,7 @@ cli::framework::Lexer::Lexer(
 }
 
 /*
- * Parse identifies each string in a list of strings using the possible verbs, targets, options, 
+ * Parse identifies each string in a list of strings using the possible verbs, targets, options,
  * and properties. If a string isn't matched then it is assumed that is is the value of a target, option,
  * or property
  */
