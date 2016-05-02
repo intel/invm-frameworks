@@ -9,7 +9,7 @@ Release:		%{build_release}%{?dist}
 Summary:		Framework for Intel Storage CLI Binaries
 License:        BSD
 Group:          Development/Libraries
-URL:			http://www.intel.com
+URL:			https://01.org/intel-nvm-cli-library
 Source:         %{rpm_name}.tar.bz2
 
 %define  debug_package %{nil}
