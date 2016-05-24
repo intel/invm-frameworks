@@ -4,13 +4,13 @@
 %define dname %{rpm_name}-devel
 
 Name:           %{rpm_name}
-Version:		%{build_version}
-Release:		%{build_release}%{?dist}
-Summary:		Framework for Intel Storage CLI Binaries
+Version:        %{build_version}
+Release:        %{build_release}%{?dist}
+Summary:        Framework for Intel Storage CLI Binaries
 License:        BSD
 Group:          Development/Libraries
-URL:			https://01.org/intel-nvm-cli-library
-Source:         %{rpm_name}.tar.bz2
+URL:            https://01.org/intel-nvm-cli-library
+Source:         https://github.com/01org/intelnvmclilibrary/archive/%{rpm_name}-%{version}.tar.gz
 
 %define  debug_package %{nil}
 
@@ -53,5 +53,5 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 %license LICENSE
 
 %changelog
-* Wed Dec 24 2015 nicholas.w.moulin@intel.com
+* Thu Dec 24 2015 nicholas.w.moulin@intel.com
 - Initial rpm release

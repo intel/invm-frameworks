@@ -109,7 +109,7 @@ rpm :
 	$(SED) -i 's/^%define build_version .*/%define build_version $(BUILDNUM)/g' $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec
 	
 	#Archive the directory
-	git archive --format=tar --prefix="$(LIB_BASENAME)/" HEAD | bzip2 -c > $(RPMBUILD_DIR)/SOURCES/$(LIB_BASENAME).tar.bz2
+	git archive --format=tar --prefix="$(LIB_BASENAME)/" HEAD | gzip -c > $(RPMBUILD_DIR)/SOURCES/v$(BUILDNUM).tar.gz
 	#rpmbuild 
 	$(RPMBUILD) -ba $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec --define "_topdir $(RPMBUILD_DIR)" 
 	
