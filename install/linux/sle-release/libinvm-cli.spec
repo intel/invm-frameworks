@@ -23,7 +23,7 @@ The %{name}-devel package contains header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}-%{version}
 
 %build
 make BUILDNUM=%{build_version} RELEASE=1
@@ -37,7 +37,7 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 
 %files
 %defattr(755,root,root,755)
-%{_libdir}/libintelnvm-cli.so.*
+%{_libdir}/libinvm-cli.so.*
 %license LICENSE
 
 %files -n %{name}-devel
