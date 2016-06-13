@@ -30,9 +30,9 @@ BEGIN
 			VALUE "CompanyName", "Intel Corporation\0"
 			VALUE "FileDescription", "CLI Framework\0"
 			VALUE "FileVersion", "1.0.0.0\0"
-			VALUE "InternalName", "libintelnvm-cli.dll"
+			VALUE "InternalName", "libinvm-cli.dll"
 			VALUE "LegalCopyright", "Copyright© 2015 2016 Intel Corporation. All rights reserved\0"
-			VALUE "OriginalFilename", "libintelnvm-cli.dll"
+			VALUE "OriginalFilename", "libinvm-cli.dll"
 			VALUE "ProductName", "CLI Framework\0"
 			VALUE "ProductVersion", "1.0.0.0\0"
 		END

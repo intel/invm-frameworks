@@ -99,12 +99,12 @@ endif
 
 targets: $(OBJECT_MODULE_DIR) $(BUILD_DIR) $(TARGETNAME) headers
 
-headers : $(HEADER_DIR) 
+headers : $(HEADER_DIR)
 	$(COPY) --parents $(EXTERNAL_HEADERS) $(HEADER_DIR)
 ifndef SKIP_UNITTESTS
 	$(MKDIR) $(HEADER_DIR)/$(UNITTEST)
 	$(COPY) $(UNITTEST)/GTestExtensions.h $(HEADER_DIR)/$(UNITTEST)
-	sed -i 's/<framework\/NotImplementedErrorResult.h/<libintelnvm-cli\/NotImplementedErrorResult.h/g' $(HEADER_DIR)/$(UNITTEST)/GTestExtensions.h
+	sed -i 's/<framework\/NotImplementedErrorResult.h/<libinvm-cli\/NotImplementedErrorResult.h/g' $(HEADER_DIR)/$(UNITTEST)/GTestExtensions.h
 	$(MAKE) $(HEADER_DIR)/$(UNITTEST)
 endif
 
@@ -155,7 +155,7 @@ sourcedrop :
 ifndef SKIP_UNITTESTS
 	$(MKDIR) $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)
 	$(COPY) $(UNITTEST)/GTestExtensions.h $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)
-	sed -i 's/<framework\/NotImplementedErrorResult.h/<libintelnvm-cli\/NotImplementedErrorResult.h/g' $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)/GTestExtensions.h
+	sed -i 's/<framework\/NotImplementedErrorResult.h/<libinvm-cli\/NotImplementedErrorResult.h/g' $(SOURCEDROP_DIR)/src/framework/$(UNITTEST)/GTestExtensions.h
 endif
 
 .PHONY : all targets headers unittest test clean clobber sourcedrop i18n

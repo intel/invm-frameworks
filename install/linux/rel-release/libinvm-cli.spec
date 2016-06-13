@@ -1,37 +1,35 @@
-%define rpm_name libintelnvm-cli
 %define build_version 99.99.99.9999
-%define build_release 1
-%define dname %{rpm_name}-devel
 
-Name:           %{rpm_name}
+Name:           libinvm-cli
 Version:        %{build_version}
-Release:        %{build_release}%{?dist}
+Release:        1%{?dist}
 Summary:        Framework for Intel Storage CLI Binaries
 License:        BSD
 Group:          Development/Libraries
 URL:            https://01.org/intel-nvm-cli-library
-Source:         https://github.com/01org/intelnvmclilibrary/archive/%{rpm_name}-%{version}.tar.gz
+Source:         https://github.com/01org/intelnvmclilibrary/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-%define  debug_package %{nil}
+BuildRequires:libinvm-i18n
+BuildRequires:libinvm-i18n-devel
 
 %description
 Framework libraries for the Intel Storage CLI binaries
 
-%package -n %dname
+%package -n %{name}-devel
 Summary:        Development files for %{name}
 License:        BSD
 Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
-%description -n %dname
+%description -n %{name}-devel
 The %{name}-devel package contains header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n %{rpm_name}
+%setup -q -n %{name}-%{version}
 
 %build
-make BUILDNUM=%{build_version} RELEASE=1
+make BUILDNUM=%{build_version} RELEASE=1 CFLAGS_EXTERNAL="%{?cflag}"
 
 %install
 make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_includedir}
@@ -41,17 +39,16 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(755,root,root,755)
-%{_libdir}/libintelnvm-cli.so.*
+%doc README.md
+%{_libdir}/libinvm-cli.so.*
 %license LICENSE
 
-%files -n %dname
-%defattr(755,root,root,755)
-%{_libdir}/libintelnvm-cli.so
-%dir %{_includedir}/libintelnvm-cli
-%attr(644,root,root) %{_includedir}/libintelnvm-cli/*.h
+%files -n %{name}-devel
+%doc README.md
+%{_libdir}/libinvm-cli.so
+%{_includedir}/libinvm-cli
 %license LICENSE
 
 %changelog
-* Thu Dec 24 2015 nicholas.w.moulin@intel.com
+* Thu Dec 24 2015 Nicholas Moulin <nicholas.w.moulin@intel.com> - 1.0.0.1094-1
 - Initial rpm release
