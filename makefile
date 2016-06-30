@@ -110,6 +110,6 @@ rpm :
 	#Archive the directory
 	git archive --format=tar --prefix="$(LIB_BASENAME)-$(BUILDNUM)/" HEAD | gzip -c > $(RPMBUILD_DIR)/SOURCES/$(LIB_BASENAME)-$(BUILDNUM).tar.gz
 	#rpmbuild
-	$(RPMBUILD) -ba $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec --define "_topdir $(RPMBUILD_DIR)"
+	$(RPMBUILD) -ba $(RPMBUILD_DIR)/SPECS/$(LIB_BASENAME).spec --define "_topdir $(RPMBUILD_DIR)" --define "cflag $(CFLAGS_EXTERNAL)"
 
 .PHONY : all qb_standard src i18n test clean clobber install uninstall sourcedrop rpm
