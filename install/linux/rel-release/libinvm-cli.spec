@@ -9,8 +9,10 @@ Group:          Development/Libraries
 URL:            https://01.org/intel-nvm-cli-library
 Source:         https://github.com/01org/intelnvmclilibrary/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildRequires:libinvm-i18n
-BuildRequires:libinvm-i18n-devel
+BuildRequires:  gettext
+BuildRequires:  libinvm-i18n-devel
+
+Requires:       libinvm-i18n%{_isa} >= 1.0.0.1051-1
 
 %description
 Framework libraries supporting storage command line interface(CLI) applications.
