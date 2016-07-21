@@ -74,6 +74,8 @@ endif
 ifdef BUILD_WINDOWS
 	LIBS += -lws2_32 -lmswsock -ladvapi32 -lversion -lGdi32 -lShlwapi \
 	 		-L$(BUILD_DIR) -lssp -lpthread
+else ifdef BUILD_LINUX
+	LIBS += -lpthread -ldl
 else
 	LIBS += -lpthread -ldl -lm
 endif

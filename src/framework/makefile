@@ -78,6 +78,8 @@ LIBS = 	-L$(BUILD_DIR)
 
 ifdef BUILD_WINDOWS
 	LIBS += -lws2_32 -lmswsock
+else ifdef BUILD_LINUX
+	LIBS += -ldl
 else
 	LIBS += -ldl -lm
 endif
