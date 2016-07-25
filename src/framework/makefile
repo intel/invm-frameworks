@@ -118,7 +118,7 @@ $(TARGETNAME) : $(OBJNAMES)
 ifdef BUILD_WINDOWS
 	$(CPP) $(CPPFLAGS) -shared $^ $(LIBS) -o $@ 
 else
-	$(CPP) $(CPPFLAGS) -shared $^ $(LIBS) -Wl,-soname,$(TARGETSO) -o $@
+	$(CPP) $(CPPFLAGS) -shared $^ $(LIBS) -Wl,--as-needed,-soname,$(TARGETSO) -o $@
 	cd $(BUILD_DIR); $(RM) $(TARGETSO); $(SOFTLINK) $(TARGET) $(TARGETSO)
 	cd $(BUILD_DIR); $(RM) $(TARGETBASE); $(SOFTLINK) $(TARGET) $(TARGETBASE)
 endif
