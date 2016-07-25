@@ -144,7 +144,11 @@ ifeq ($(UNAME), Linux)
 		CPP = g++
 		AR = ar
 
-		C_CPP_FLAGS_CMN += -m64 -fPIC
+		C_CPP_FLAGS_CMN += -fPIC
+		uname_m = $(shell uname -m)
+		ifeq (,$(findstring arm,$(uname_m)))
+			C_CPP_FLAGS_CMN += -m64
+		endif
 		C_CPP_FLAGS_SRC += -D__LINUX__
 		
 		ifneq ("$(wildcard /etc/redhat-release)","")
