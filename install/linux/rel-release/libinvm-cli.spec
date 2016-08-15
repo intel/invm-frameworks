@@ -11,6 +11,7 @@ Source:         https://github.com/01org/libinvm-cli/archive/v%{version}.tar.gz#
 BuildRequires:  gettext
 BuildRequires:  libinvm-i18n-devel
 Requires:       libinvm-i18n >= 1.0.0.1015
+ExclusiveArch:  x86_64
 
 %description
 Framework library supporting storage command line interface(CLI) applications.
@@ -50,5 +51,5 @@ make install RELEASE=1 RPM_ROOT=%{buildroot} LIB_DIR=%{_libdir} INCLUDE_DIR=%{_i
 %license LICENSE
 
 %changelog
-* Thu Dec 24 2015 Nicholas Moulin <nicholas.w.moulin@intel.com> - 1.0.0.1096-1
+* Thu Dec 24 2015 Nicholas Moulin <nicholas.w.moulin@intel.com> - 1.0.0.1098-1
 - Initial rpm release
