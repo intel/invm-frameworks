@@ -126,10 +126,39 @@ cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verifyCommonOp
 	{
 		pResult = new SyntaxErrorMissingValueResult(framework::TOKENTYPE_OPTION, "units");
 	}
+	// -units value must match valid values
+	else if (pResult == NULL && parsedCommand.options.find(OPTION_UNITS.name) != parsedCommand.options.end())
+	{
+		std::vector<std::string> validOutputTypes;
+		validOutputTypes.push_back("B");
+		validOutputTypes.push_back("MB");
+		validOutputTypes.push_back("MiB");
+		validOutputTypes.push_back("GB");
+		validOutputTypes.push_back("GiB");
+		validOutputTypes.push_back("TB");
+		validOutputTypes.push_back("TiB");
+
+		std::string outputValue = parsedCommand.options.at(OPTION_UNITS.name);
+		bool validType = false;
+		for (std::vector<std::string>::const_iterator iter = validOutputTypes.begin();
+			iter != validOutputTypes.end(); iter++)
+		{
+			if (stringsIEqual(outputValue, *iter))
+			{
+				validType = true;
+				break;
+			}
+		}
+
+		if (!validType)
+		{
+			pResult =
+				new SyntaxErrorBadValueResult(framework::TOKENTYPE_OPTION, "units", outputValue);
+		}
+	}
 
 	return pResult;
 }
-
 
 cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verifyRequiredValues(
 	const ParsedCommand &parsedCommand,
