@@ -204,6 +204,7 @@ void getOptionsMap(cli::framework::StringMap &optionsMap)
 	optionsMap["-output"] = "-output";
 	optionsMap["-o"] = "-output";
 	optionsMap["-x"] = "-examine";
+	optionsMap["-u"] = "-units";
 	optionsMap["-units"] = "-units";
 }
 

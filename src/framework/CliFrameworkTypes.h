@@ -255,7 +255,7 @@ const CommandSpecPart OPTION_DESTINATION = {"-destination", false, "path", true,
 const CommandSpecPart OPTION_DESTINATION_R = {"-destination", true, "path", true, N_TR("Path to the destination file.")}; //!< required OPTION_DESTINATION
 const CommandSpecPart OPTION_OUTPUT = {OUTPUT_OPTION, false, OUTPUT_TYPES, true, N_TR("Change the output format."), "-o"}; //!< OPTION_OUTPUT
 const CommandSpecPart OPTION_HELP = {"-help", false, "", false, N_TR("Display help for the command."), "-h"}; //!< OPTION_HELP
-const CommandSpecPart OPTION_UNITS = {"-units", false, "", false, N_TR("Change the units of display.")}; //!< OPTION_UNITS
+const CommandSpecPart OPTION_UNITS = {"-units", false, "", false, N_TR("Change the units of display."), "-u"}; //!< OPTION_UNITS
 
 // properties used within framework features
 const CommandSpecPart PROPERTY_VERB = {"verb", false, "verb", true, N_TR("Filter help to a specific verb.")}; //!< PROPERTY_VERB
