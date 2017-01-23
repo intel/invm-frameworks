@@ -144,7 +144,7 @@ void os_readUserHiddenString(std::string *p_strResponse)
 	settings.c_cc[VMIN] = 1;
 	tcsetattr( STDIN_FILENO, TCSANOW, &settings );
 
-	char ch = 0;
+	int ch = 0;
 	while (((ch = std::cin.get()) != '\n') && (ch != 13))
 	{
 		p_strResponse->push_back(ch);

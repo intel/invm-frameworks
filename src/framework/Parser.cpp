@@ -37,7 +37,7 @@
 #include <string>
 #include <sstream>
 
-cli::framework::Parser::Parser()  {}
+cli::framework::Parser::Parser() : m_ignorePotentialCommands(false) {}
 
 /*
  * Entry point for the parsing.  It starts off making sure that the first token is a verb.

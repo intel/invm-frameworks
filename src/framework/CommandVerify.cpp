@@ -33,7 +33,8 @@
 
 
 cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verify(
-	cli::framework::ParsedCommand parsedCommand, cli::framework::CommandSpec commandSpec)
+	const cli::framework::ParsedCommand &parsedCommand,
+	const cli::framework::CommandSpec &commandSpec)
 {
 	Trace trace(__FILE__, __FUNCTION__, __LINE__);
 	SyntaxErrorResult *pResult = NULL;
@@ -131,19 +132,19 @@ cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verifyCommonOp
 
 
 cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verifyRequiredValues(
-	const ParsedCommand &m_parsedCommand,
+	const ParsedCommand &parsedCommand,
 	const CommandSpec &spec)
 {
 	cli::framework::SyntaxErrorResult *pResult = NULL;
 
-	pResult = verifyRequiredValues(spec.options, m_parsedCommand.options, TOKENTYPE_OPTION);
+	pResult = verifyRequiredValues(spec.options, parsedCommand.options, TOKENTYPE_OPTION);
 	if (pResult == NULL)
 	{
-		pResult = verifyRequiredValues(spec.targets, m_parsedCommand.targets, TOKENTYPE_TARGET);
+		pResult = verifyRequiredValues(spec.targets, parsedCommand.targets, TOKENTYPE_TARGET);
 	}
 	if (pResult == NULL)
 	{
-		pResult = verifyRequiredValues(spec.properties, m_parsedCommand.properties, TOKENTYPE_PROPERTY);
+		pResult = verifyRequiredValues(spec.properties, parsedCommand.properties, TOKENTYPE_PROPERTY);
 	}
 	return pResult;
 }

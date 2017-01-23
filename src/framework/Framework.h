@@ -45,7 +45,7 @@ namespace cli
 namespace framework
 {
 
-typedef std::map<std::string, cli::framework::FeatureBase*> featureList; //!< List of Features
+typedef std::map<std::string, cli::framework::FeatureBase*> featureMap; //!< Map of Features
 
 /*!
  * Static class that contains the main entry point to the framework
@@ -142,7 +142,7 @@ private:
 	 */
 	TokenList tokenize(const int tokenCount, const char *input[], CommandSpecList allCommandSpecs);
 
-	featureList m_featureList;
+	featureMap m_featureMap;
 
 	/*!
 	 * Internal helper function for displaying a list of tokens as a sentence

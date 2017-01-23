@@ -42,7 +42,8 @@ namespace framework
 class CommandVerify
 {
 public:
-	SyntaxErrorResult *verify(ParsedCommand parsedCommand, CommandSpec commandSpec);
+	SyntaxErrorResult *verify(const ParsedCommand &parsedCommand,
+		const CommandSpec &commandSpec);
 
 private:
 	SyntaxErrorResult *verifyCommonOptions(const ParsedCommand &parsedCommand);

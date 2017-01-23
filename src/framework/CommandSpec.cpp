@@ -47,7 +47,7 @@ cli::framework::CommandSpec::CommandSpec(int id, std::string name, std::string v
 	Trace(__FILE__, __FUNCTION__, __LINE__);
 }
 
-cli::framework::CommandSpec::CommandSpec() : id(0)
+cli::framework::CommandSpec::CommandSpec() : id(0), m_pFeature(NULL)
 {
 	Trace(__FILE__, __FUNCTION__, __LINE__);
 }

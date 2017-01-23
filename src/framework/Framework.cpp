@@ -293,10 +293,10 @@ std::string cli::framework::Framework::tokenArrayToString(TokenList tokens)
 /*
  * Register the specified feature instance by adding it to the common feature list
  */
-void cli::framework::Framework::registerFeature(std::string featurename, cli::framework::FeatureBase *featureInst)
+void cli::framework::Framework::registerFeature(std::string featureName, cli::framework::FeatureBase *featureInst)
 {
 	// add to master feature list
-	m_featureList.insert(std::pair<std::string, cli::framework::FeatureBase*>(featurename, featureInst));
+	m_featureMap[featureName] = featureInst;
 }
 
 /*
@@ -306,15 +306,8 @@ void cli::framework::Framework::removeFeature(std::string featureName)
 {
 	Trace trace(__FILE__, __FUNCTION__, __LINE__);
 
-	featureList::iterator featureIttr = m_featureList.begin();
-	for (; featureIttr != m_featureList.end(); featureIttr++)
-	{
-		if (0 == featureName.compare(featureIttr->first))
-		{
-			delete featureIttr->second;
-			m_featureList.erase(featureIttr);
-		}
-	}
+	delete m_featureMap[featureName];
+	m_featureMap.erase(featureName);
 }
 
 /*
@@ -324,13 +317,13 @@ void cli::framework::Framework::clearFeatureList()
 {
 	Trace trace(__FILE__, __FUNCTION__, __LINE__);
 
-	featureList::iterator featureIttr = m_featureList.begin();
-	for (; featureIttr != m_featureList.end(); featureIttr++)
+	featureMap::iterator featureIttr = m_featureMap.begin();
+	for (; featureIttr != m_featureMap.end(); featureIttr++)
 	{
 		delete featureIttr->second;
 	}
 
-	m_featureList.clear();
+	m_featureMap.clear();
 }
 
 cli::framework::CommandSpecList cli::framework::Framework::getRegisteredCommands()
@@ -338,8 +331,8 @@ cli::framework::CommandSpecList cli::framework::Framework::getRegisteredCommands
 	CommandSpecList result;
 	Trace trace(__FILE__, __FUNCTION__, __LINE__);
 
-	featureList::iterator featureIttr = m_featureList.begin();
-	for (; featureIttr != m_featureList.end(); featureIttr++)
+	featureMap::iterator featureIttr = m_featureMap.begin();
+	for (; featureIttr != m_featureMap.end(); featureIttr++)
 	{
 		FeatureBase *featureInst = featureIttr->second;
 
