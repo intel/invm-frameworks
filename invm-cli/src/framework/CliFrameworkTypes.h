@@ -162,12 +162,14 @@ private:
 typedef struct
 {
 	std::string lexeme; //!< the lexeme of the token
+	std::string rawLexeme; //!< the unaltered lexeme from the command line
 	TokenType tokenType; //!< type of the token
 } Token;
 
 typedef struct
 {
 	std::string lexeme; // string value that could be a property or a token value
+	std::string rawLexeme; // unaltered lexeme from the command line
 	std::string tokenKey; // name of the token that would take the lexeme as a value
 	CommandSpecPartType type; // type of the tokenKey
 } UnknownProperty;

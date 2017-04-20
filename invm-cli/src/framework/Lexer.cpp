@@ -200,7 +200,7 @@ std::vector<cli::framework::Token> cli::framework::Lexer::tokenize(const StringL
 			}
 		}
 
-		result.push_back((Token){tokenStr, type});
+		result.push_back((Token){tokenStr, std::string(cleanTokens[i]), type});
 	}
 	return result;
 }

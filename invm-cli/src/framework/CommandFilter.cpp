@@ -294,7 +294,8 @@ bool cli::framework::CommandFilter::anyCommandHasUnknownProperty(
 void cli::framework::CommandFilter::setUnknownAsValue()
 {
 	UnknownProperty &unknownProperty = m_unknownProperty;
-	std::string value = unknownProperty.lexeme;
+	// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+	std::string value = unknownProperty.rawLexeme;
 	std::string key = unknownProperty.tokenKey;
 	logger << "Setting the unknown token as value of " << key << std::endl;
 

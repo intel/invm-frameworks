@@ -175,8 +175,8 @@ private:
 	SyntaxErrorResult *createParseError(const Token &token);
 	SyntaxErrorResult *createDuplicateTokenError(const cli::framework::Token &token);
 
-	void setUnknownPropertyTo(const std::string &lexeme, const std::string &token,
-			const cli::framework::CommandSpecPartType &type);
+	void setUnknownPropertyTo(const std::string &lexeme, const std::string &rawLexeme,
+			const std::string &token, const cli::framework::CommandSpecPartType &type);
 
 	UnknownProperty m_unknownProperty;
 };

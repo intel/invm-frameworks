@@ -169,7 +169,8 @@ cli::framework::SyntaxErrorResult* cli::framework::Parser::stateTargetValue(int 
 
 	// because we can only get there from the target state, we know that m_currentTarget will
 	// be set correctly
-	m_parsedCommand.targets[m_currentTarget] += tokens[currentToken].lexeme;
+	// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+	m_parsedCommand.targets[m_currentTarget] += tokens[currentToken].rawLexeme;
 
 	currentToken ++; // look at next token
 	if ((int)tokens.size() > currentToken)
@@ -221,7 +222,9 @@ cli::framework::SyntaxErrorResult* cli::framework::Parser::stateTargetValueOrPro
 				break;
 			case TOKENTYPE_PROPERTY:
 			{
-				setUnknownPropertyTo(tokens[currentToken].lexeme, m_currentTarget, PARTTYPE_TARGET);
+				// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+				setUnknownPropertyTo(tokens[currentToken].lexeme, tokens[currentToken].rawLexeme,
+							m_currentTarget, PARTTYPE_TARGET);
 				pResult = stateProperty(nextToken, tokens);
 				break;
 			}
@@ -244,7 +247,9 @@ cli::framework::SyntaxErrorResult* cli::framework::Parser::stateTargetValueOrPro
 	else
 	{
 		// end of command, so don't know. Will have to wait for more context
-		setUnknownPropertyTo(tokens[currentToken].lexeme, m_currentTarget, PARTTYPE_TARGET);
+		// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+		setUnknownPropertyTo(tokens[currentToken].lexeme, tokens[currentToken].rawLexeme,
+					m_currentTarget, PARTTYPE_TARGET);
 	}
 	return pResult;
 }
@@ -314,7 +319,9 @@ cli::framework::SyntaxErrorResult *cli::framework::Parser::stateOptionValueOrPro
 				break;
 			case TOKENTYPE_PROPERTY:
 			{
-				setUnknownPropertyTo(tokens[currentToken].lexeme, m_currentOption, PARTTYPE_OPTION);
+				// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+				setUnknownPropertyTo(tokens[currentToken].lexeme, tokens[currentToken].rawLexeme,
+							m_currentOption, PARTTYPE_OPTION);
 				pResult = stateProperty(nextToken, tokens);
 				break;
 			}
@@ -340,18 +347,22 @@ cli::framework::SyntaxErrorResult *cli::framework::Parser::stateOptionValueOrPro
 	else
 	{
 		// end of command, so don't know. Will have to wait for more context
-		setUnknownPropertyTo(tokens[currentToken].lexeme, m_currentOption, PARTTYPE_OPTION);
+		// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+		setUnknownPropertyTo(tokens[currentToken].lexeme, tokens[currentToken].rawLexeme,
+					m_currentOption, PARTTYPE_OPTION);
 	}
 	return pResult;
 }
 
 void cli::framework::Parser::setUnknownPropertyTo(const std::string &lexeme,
+		const std::string &rawLexeme,
 		const std::string &token,
 		const cli::framework::CommandSpecPartType &type)
 {
 	m_unknownProperty.tokenKey = token;
 	m_unknownProperty.type = type;
 	m_unknownProperty.lexeme = lexeme;
+	m_unknownProperty.rawLexeme = rawLexeme;
 }
 
 
@@ -365,7 +376,8 @@ cli::framework::SyntaxErrorResult* cli::framework::Parser::stateOptionValue(int 
 	SyntaxErrorResult* pResult = NULL;
 	// because we can only get there from the option state, we know that m_currentOption will
 	// be set correctly
-	m_parsedCommand.options[m_currentOption] += tokens[currentToken].lexeme;
+	// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+	m_parsedCommand.options[m_currentOption] += tokens[currentToken].rawLexeme;
 
 	currentToken ++; // look at next token
 	if ((int)tokens.size() > currentToken)
@@ -554,7 +566,7 @@ cli::framework::SyntaxErrorResult* cli::framework::Parser::statePropertyOrProper
 	{
 		// there are not enough tokens left to have another property and equal sign so
 		// this must be a value
-		pResult = stateProperty(currentToken, tokens);
+		pResult = statePropertyValue(currentToken, tokens);
 	}
 	return pResult;
 }
@@ -568,7 +580,8 @@ cli::framework::SyntaxErrorResult* cli::framework::Parser::statePropertyValue(in
 	Trace trace(__FILE__, __FUNCTION__, __LINE__);
 	SyntaxErrorResult* pResult = NULL;
 
-	m_parsedCommand.properties[m_currentProperty] = tokens[currentToken].lexeme;
+	// Use rawLexeme, since lexeme may be modified to match a registered property/option/target
+	m_parsedCommand.properties[m_currentProperty] = tokens[currentToken].rawLexeme;
 
 	currentToken ++; // look at next token
 	if ((int)tokens.size() > currentToken)
