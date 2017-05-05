@@ -178,7 +178,8 @@ cli::framework::ResultBase* cli::framework::Framework::execute(int argCount, con
 
 		if (pResult != NULL)
 		{
-			pResult->setOutputOption(parser.getParsedCommand().options);
+			OutputOptions outputOptions(parsedCommand);
+			pResult->setOutputOption(outputOptions);
 		}
 	}
 	else

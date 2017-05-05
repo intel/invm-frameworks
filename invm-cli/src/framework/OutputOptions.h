@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 2016, Intel Corporation
+ * Copyright (c) 2017, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,38 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "DuplicateTokenErrorResult.h"
+/*
+ * Class to parse the output options and verbose
+ */
 
-cli::framework::DuplicateTokenErrorResult::DuplicateTokenErrorResult(Token token)
-{
-	setDuplicateTokenResult(token);
-}
+#ifndef _CLI_FRAMEWORK_OUTPUTOPTIONS_H_
+#define _CLI_FRAMEWORK_OUTPUTOPTIONS_H_
 
-cli::framework::DuplicateTokenErrorResult::DuplicateTokenErrorResult(std::string lexeme,
-	cli::framework::TokenType type)
-{
-	Token invalidToken;
-	invalidToken.lexeme = lexeme;
-	invalidToken.tokenType = type;
-	setDuplicateTokenResult(invalidToken);
-}
+#include "CliFrameworkTypes.h"
 
-void cli::framework::DuplicateTokenErrorResult::setDuplicateTokenResult(cli::framework::Token &token)
+namespace cli
 {
-	Trace(__FILE__, __FUNCTION__, __LINE__);
-	m_result = stringFromArgList(TR("Duplicate token found. The %s '%s' was found more than once."),
-			tokenTypeToString(token.tokenType).c_str(), token.lexeme.c_str());
+namespace framework
+{
+
+class OutputOptions
+{
+	public:
+		OutputOptions(const ParsedCommand &parsedCommand);
+
+		bool getVerbose() const;
+		std::string getOutputType() const;
+
+	private:
+		bool m_verbose;
+		std::string m_outputFormat;
+		std::vector<std::string> m_outputOptionValues;
+		std::vector<std::string> m_validOutputFormats;
+
+		void setVerbose();
+		void setOutputFormat();
+};
+
 }
+}
+#endif

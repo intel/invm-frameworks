@@ -69,7 +69,6 @@ std::vector<std::string> cli::framework::tokenizeString(const char *str, char de
 	return result;
 }
 
-
 bool cli::framework::stringsIEqual(const std::string &str1, const std::string &str2)
 {
  	Trace trace(__FILE__, __FUNCTION__, __LINE__);
@@ -213,4 +212,33 @@ int cli::framework::getTokenIndex(const std::string &lexeme,
 		}
 	}
 	return result;
+}
+
+std::vector<std::string> cli::framework::getValidOutputFormats()
+{
+	Trace trace(__FILE__, __FUNCTION__, __LINE__);
+	std::vector<std::string> validOutputTypes;
+
+	validOutputTypes.push_back(OPTION_OUTPUT_TEXT);
+	validOutputTypes.push_back(OPTION_OUTPUT_XML);
+#ifdef CLI_OUTPUT_JSON
+	validOutputTypes.push_back(OPTION_OUTPUT_JSON);
+#endif
+#ifdef CLI_OUTPUT_ESX
+	validOutputTypes.push_back(OPTION_OUTPUT_ESX);
+	validOutputTypes.push_back(OPTION_OUTPUT_ESXTABLE);
+#endif
+
+	return validOutputTypes;
+}
+
+std::vector<std::string> cli::framework::getValidOutputOptions()
+{
+	Trace trace(__FILE__, __FUNCTION__, __LINE__);
+	std::vector<std::string> validOutputOptions;
+
+	validOutputOptions = getValidOutputFormats();
+	validOutputOptions.push_back(OPTION_OUTPUT_VERBOSE);
+
+	return validOutputOptions;
 }

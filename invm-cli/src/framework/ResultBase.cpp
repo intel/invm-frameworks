@@ -26,6 +26,7 @@
  */
 
 #include "ResultBase.h"
+#include "OutputOptions.h"
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -60,47 +61,45 @@ enum cli::framework::ResultBase::outputTypes cli::framework::ResultBase::getOutp
 	return m_outputType;
 }
 
-bool cli::framework::ResultBase::setOutputOption(StringMap options)
+bool cli::framework::ResultBase::setOutputOption(const OutputOptions &outputOptions)
 {
 	Trace(__FILE__, __FUNCTION__, __LINE__);
 	bool result = true;
-	if (options.find(OUTPUT_OPTION) != options.end())
-	{
-		if (stringsIEqual(options[OUTPUT_OPTION], OPTION_OUTPUT_XML))
-		{
-			setOutputType(framework::ResultBase::OUTPUT_XML);
-		}
-		else if (stringsIEqual(options[OUTPUT_OPTION], OPTION_OUTPUT_TEXT))
-		{
-			// Don't allow the framework to overwrite the output type if the feature
-			// decided it should be in table form.
-			// No output option specified should look exactly like the text output option.
-			if (getOutputType() != framework::ResultBase::OUTPUT_TEXTTABLE)
-			{
-				setOutputType(framework::ResultBase::OUTPUT_TEXT);
-			}
-		}
-#ifdef CLI_OUTPUT_JSON
-		else if (stringsIEqual(options[OUTPUT_OPTION], OPTION_OUTPUT_JSON))
-		{
-			setOutputType(framework::ResultBase::OUTPUT_JSON);
-		}
-#endif
-#ifdef CLI_OUTPUT_ESX
-		else if (stringsIEqual(options[OUTPUT_OPTION], OPTION_OUTPUT_ESX))
-		{
-			setOutputType(framework::ResultBase::OUTPUT_ESXXML);
-		}
 
-		else if (stringsIEqual(options[OUTPUT_OPTION], OPTION_OUTPUT_ESXTABLE))
+	if (stringsIEqual(outputOptions.getOutputType(), OPTION_OUTPUT_TEXT))
+	{
+		// Don't allow the framework to overwrite the output type if the feature
+		// decided it should be in table form.
+		// No output option specified should look exactly like the text output option.
+		if (getOutputType() != framework::ResultBase::OUTPUT_TEXTTABLE)
 		{
-			setOutputType(framework::ResultBase::OUTPUT_ESXXMLTABLE);
+			setOutputType(framework::ResultBase::OUTPUT_TEXT);
 		}
+	}
+	else if (stringsIEqual(outputOptions.getOutputType(), OPTION_OUTPUT_XML))
+	{
+		setOutputType(framework::ResultBase::OUTPUT_XML);
+	}
+#ifdef	CLI_OUTPUT_JSON
+	else if (stringsIEqual(outputOptions.getOutputType(), OPTION_OUTPUT_JSON))
+	{
+		setOutputType(framework::ResultBase::OUTPUT_JSON);
+	}
 #endif
-		else
-		{
-			result = false;
-		}
+#ifdef	CLI_OUTPUT_ESX
+	else if (stringsIEqual(outputOptions.getOutputType(), OPTION_OUTPUT_ESX))
+	{
+		setOutputType(framework::ResultBase::OUTPUT_ESXXML);
+	}
+
+	else if (stringsIEqual(outputOptions.getOutputType(), OPTION_OUTPUT_ESXTABLE))
+	{
+		setOutputType(framework::ResultBase::OUTPUT_ESXXMLTABLE);
+	}
+#endif
+	else
+	{
+		result = false;
 	}
 	return result;
 }

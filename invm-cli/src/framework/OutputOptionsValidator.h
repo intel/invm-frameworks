@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 2016, Intel Corporation
+ * Copyright (c) 2017, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,52 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * Class to validate the output options
+ */
+
+#ifndef _CLI_FRAMEWORK_OUTPUTOPTIONSVALIDATOR_
+#define _CLI_FRAMEWORK_OUTPUTOPTIONSVALIDATOR_
+
+#include "SyntaxErrorResult.h"
 #include "DuplicateTokenErrorResult.h"
+#include "CliFrameworkTypes.h"
 
-cli::framework::DuplicateTokenErrorResult::DuplicateTokenErrorResult(Token token)
+#define	MAX_OUTPUT_OPTIONS	2
+
+// the error message is put together this way instead of a more dynamic approach because
+// it makes translation easier.
+#ifdef CLI_OUTPUT_JSON
+const std::string OUTPUT_ERROR_MSG = TR("Option 'output' accepts 'text', 'json', 'nvmxml' and 'verbose'. 'text', 'json', and 'nvmxml' cannot be used together");
+#else
+const std::string OUTPUT_ERROR_MSG = TR("Option '-output' accepts 'text', 'nvmxml' and 'verbose'. 'text' and 'nvmxml' cannot be used together.");
+#endif
+
+namespace cli
 {
-	setDuplicateTokenResult(token);
+namespace framework
+{
+class OutputOptionsValidator
+{
+	public:
+		OutputOptionsValidator(const ParsedCommand &parsedCommand);
+
+		SyntaxErrorResult *validate();
+
+	private:
+		std::vector<std::string> m_optionValues;
+		std::vector<std::string> m_validOutputFormats;
+		std::vector<std::string> m_validOutputOptions;
+
+		bool outputOptionsAreValid();
+		bool conflictingOutputOptionsExist();
+		cli::framework::SyntaxErrorResult *checkForDuplicateOutputOptions();
+		bool isFormatOption(const std::string &option);
+		bool isValidOption(const std::string &option);
+		cli::framework::SyntaxErrorResult *checkOutputOptionConsistency();
+};
+
+}
 }
 
-cli::framework::DuplicateTokenErrorResult::DuplicateTokenErrorResult(std::string lexeme,
-	cli::framework::TokenType type)
-{
-	Token invalidToken;
-	invalidToken.lexeme = lexeme;
-	invalidToken.tokenType = type;
-	setDuplicateTokenResult(invalidToken);
-}
-
-void cli::framework::DuplicateTokenErrorResult::setDuplicateTokenResult(cli::framework::Token &token)
-{
-	Trace(__FILE__, __FUNCTION__, __LINE__);
-	m_result = stringFromArgList(TR("Duplicate token found. The %s '%s' was found more than once."),
-			tokenTypeToString(token.tokenType).c_str(), token.lexeme.c_str());
-}
+#endif

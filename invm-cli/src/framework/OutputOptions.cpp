@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 2016, Intel Corporation
+ * Copyright (c) 2017, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,66 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "DuplicateTokenErrorResult.h"
+/*
+ * Class to parse the output options and verbose
+ */
 
-cli::framework::DuplicateTokenErrorResult::DuplicateTokenErrorResult(Token token)
+#include "OutputOptions.h"
+
+cli::framework::OutputOptions::OutputOptions(const ParsedCommand &parsedCommand)
 {
-	setDuplicateTokenResult(token);
+	m_verbose = false;
+	m_outputFormat = "text";
+	StringMap::const_iterator options_iter = parsedCommand.options.find(OUTPUT_OPTION);
+
+	if (options_iter != parsedCommand.options.end() && !options_iter->second.empty())
+	{
+		m_outputOptionValues = tokenizeString(toLower(options_iter->second).c_str(), ',');
+
+		m_validOutputFormats = getValidOutputFormats();
+		setVerbose();
+		setOutputFormat();
+	}
 }
 
-cli::framework::DuplicateTokenErrorResult::DuplicateTokenErrorResult(std::string lexeme,
-	cli::framework::TokenType type)
-{
-	Token invalidToken;
-	invalidToken.lexeme = lexeme;
-	invalidToken.tokenType = type;
-	setDuplicateTokenResult(invalidToken);
-}
-
-void cli::framework::DuplicateTokenErrorResult::setDuplicateTokenResult(cli::framework::Token &token)
+void cli::framework::OutputOptions::setVerbose()
 {
 	Trace(__FILE__, __FUNCTION__, __LINE__);
-	m_result = stringFromArgList(TR("Duplicate token found. The %s '%s' was found more than once."),
-			tokenTypeToString(token.tokenType).c_str(), token.lexeme.c_str());
+	if (m_outputOptionValues.end() != find(m_outputOptionValues.begin(),
+			m_outputOptionValues.end(), OPTION_OUTPUT_VERBOSE))
+	{
+		m_verbose = true;
+	}
+	else
+	{
+		m_verbose = false;
+	}
+}
+
+void cli::framework::OutputOptions::setOutputFormat()
+{
+	Trace(__FILE__, __FUNCTION__, __LINE__);
+	std::vector<std::string>::const_iterator iter;
+
+	for (iter = m_outputOptionValues.begin(); iter != m_outputOptionValues.end(); iter++)
+	{
+		if (m_validOutputFormats.end() != find(m_validOutputFormats.begin(),
+				m_validOutputFormats.end(), *iter))
+		{
+			m_outputFormat = *iter;
+			break;
+		}
+	}
+}
+
+bool cli::framework::OutputOptions::getVerbose() const
+{
+	Trace(__FILE__, __FUNCTION__, __LINE__);
+	return m_verbose;
+}
+
+std::string cli::framework::OutputOptions::getOutputType() const
+{
+	Trace(__FILE__, __FUNCTION__, __LINE__);
+	return m_outputFormat;
 }

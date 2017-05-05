@@ -33,6 +33,7 @@
 #define _CLI_FRAMEWORK_RESULTBASE_H_
 
 #include "CliFrameworkTypes.h"
+#include "OutputOptions.h"
 #include "cr_i18n.h"
 
 namespace cli
@@ -158,7 +159,7 @@ public:
 	 * @return
 	 * 		if there is an issue with the -output option then will return false, otherwise, true
 	 */
-	bool setOutputOption(StringMap options);
+	bool setOutputOption(const OutputOptions &outputOptions);
 
 	/*!
 	 * Convert a variable argument list into a std::string

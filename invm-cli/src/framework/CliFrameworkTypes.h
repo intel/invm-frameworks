@@ -208,6 +208,10 @@ typedef struct
  */
 bool parsedCommandContains(const ParsedCommand& parsedCommand, const CommandSpecPart& cmdPart);
 
+std::vector<std::string> getValidOutputFormats();
+
+std::vector<std::string> getValidOutputOptions();
+
 /*!
  * Common Command parts
  */
@@ -231,10 +235,12 @@ const std::string OPTION_OUTPUT_XML = "nvmxml"; //!< output type nvmxml
 const std::string OPTION_OUTPUT_ESX = "esx"; //!< output type esx
 const std::string OPTION_OUTPUT_JSON = "json"; //!< output type json
 const std::string OPTION_OUTPUT_ESXTABLE = "esxtable"; //!< output type esx
+const std::string OPTION_OUTPUT_VERBOSE = "verbose"; //!< print debug messages during execution
 
 // List of valid output types
 const std::string OUTPUT_TYPES = OPTION_OUTPUT_TEXT
 		+ "|" + OPTION_OUTPUT_XML
+		+ "|" + OPTION_OUTPUT_VERBOSE
 #ifdef CLI_OUTPUT_JSON
 		+ "|" + OPTION_OUTPUT_JSON
 #endif

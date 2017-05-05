@@ -42,7 +42,6 @@
 #include "SyntaxErrorResult.h"
 #include "FeatureBase.h"
 #include "FeatureRef.h"
-
 #include <map>
 
 namespace cli
@@ -170,7 +169,7 @@ private:
 			const std::string &keyName, bool *p_keyExists);
 
 	void resolveOutputOption(cli::framework::SyntaxErrorResult *pSyntaxError,
-		cli::framework::TokenList const &tokens);
+			cli::framework::TokenList const &tokens);
 
 	SyntaxErrorResult *createParseError(const Token &token);
 	SyntaxErrorResult *createDuplicateTokenError(const cli::framework::Token &token);

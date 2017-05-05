@@ -47,10 +47,14 @@ public:
 	/*!
 	 * Constructor
 	 * @param token
-	 * 		The token that was duplicated
+	 *		The token that was duplicated
 	 */
 	DuplicateTokenErrorResult (Token token);
 
+	DuplicateTokenErrorResult(std::string lexeme,
+			TokenType type);
+
+	void setDuplicateTokenResult(Token &token);
 
 private:
 

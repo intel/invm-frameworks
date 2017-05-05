@@ -30,7 +30,7 @@
 #include "SyntaxErrorUnexpectedValueResult.h"
 #include "SyntaxErrorMissingValueResult.h"
 #include "SyntaxErrorBadValueResult.h"
-
+#include "OutputOptionsValidator.h"
 
 cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verify(
 	const cli::framework::ParsedCommand &parsedCommand,
@@ -55,7 +55,6 @@ cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verifyCommonOp
 {
 	Trace trace(__FILE__, __FUNCTION__, __LINE__);
 	SyntaxErrorResult *pResult = NULL;
-
 	// can't include options -all and -display
 	if (parsedCommand.options.find(OPTION_ALL.name) != parsedCommand.options.end()
 		&& parsedCommand.options.find(OPTION_DISPLAY.name) != parsedCommand.options.end())
@@ -83,42 +82,9 @@ cli::framework::SyntaxErrorResult *cli::framework::CommandVerify::verifyCommonOp
 		// -output value must match valid values
 	else if (pResult == NULL && parsedCommand.options.find(OPTION_OUTPUT.name) != parsedCommand.options.end())
 	{
-		std::vector<std::string> validOutputTypes;
-		validOutputTypes.push_back(OPTION_OUTPUT_TEXT);
-		validOutputTypes.push_back(OPTION_OUTPUT_XML);
+		cli::framework::OutputOptionsValidator validator(parsedCommand);
+		pResult = validator.validate();
 
-		// the error message is put together this way instead of a more dynamic approach because
-		// it makes translation easier.
-		std::string outputErrorMsg = TR("Option 'output' expects 'text' or 'nvmxml'.");
-#ifdef CLI_OUTPUT_JSON
-		validOutputTypes.push_back(OPTION_OUTPUT_JSON);
-		outputErrorMsg = TR("Option 'output' expects 'text', 'json' or 'nvmxml'.");
-#endif
-#ifdef CLI_OUTPUT_ESX
-		outputErrorMsg = TR("Option 'output' expects 'text', 'esx', 'esxtable', or 'nvmxml'.");
-		validOutputTypes.push_back(OPTION_OUTPUT_ESX);
-		validOutputTypes.push_back(OPTION_OUTPUT_ESXTABLE);
-#endif
-#if defined(CLI_OUTPUT_ESX) && defined(CLI_OUTPUT_JSON)
-		outputErrorMsg = TR("Option 'output' expects 'text', 'json', 'nvmxml', 'esx', or 'esxtable'.");
-#endif
-
-		std::string outputValue = parsedCommand.options.at(OUTPUT_OPTION);
-		bool validType = false;
-		for (std::vector<std::string>::const_iterator iter = validOutputTypes.begin();
-			iter != validOutputTypes.end(); iter++)
-		{
-			if (stringsIEqual(outputValue, *iter))
-			{
-				validType = true;
-				break;
-			}
-		}
-
-		if (!validType)
-		{
-			pResult = new SyntaxErrorResult(outputErrorMsg);
-		}
 	}
 	// -units needs to have a value
 	else if (parsedCommand.options.find(OPTION_UNITS.name) != parsedCommand.options.end()
