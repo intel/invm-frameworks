@@ -57,9 +57,9 @@ endif()
 # Build Version
 if (NOT BUILDNUM)
     execute_process(COMMAND git describe --abbrev=0 OUTPUT_VARIABLE BUILDNUM)
-    if ("${BUILDNUM}" MATCHES "^([a-zA-Z-]*-)(.*)$")
+    if ("${BUILDNUM}" MATCHES "^([a-zA-Z-]*v)(.*)$")
         #replace
-        string(REGEX REPLACE "^([a-zA-Z-]*-)" "" BUILDNUM "${BUILDNUM}")
+        string(REGEX REPLACE "^([a-zA-Z-]*v)" "" BUILDNUM "${BUILDNUM}")
         string(REGEX REPLACE "\n$" "" BUILDNUM "${BUILDNUM}")
     else ()
         execute_process(COMMAND pwd OUTPUT_VARIABLE BUILDNUM)
