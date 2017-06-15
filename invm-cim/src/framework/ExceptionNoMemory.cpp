@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,25 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the implementation of the exception class
+ * for an out of memory error.
+ */
+
+#include <string/s_str.h>
+#include "ExceptionNoMemory.h"
+
+/*
+ * Constructor
+ */
+wbem::framework::ExceptionNoMemory::ExceptionNoMemory(
+	const char *pFile, const char *pFunction, const char *pMsg)
+	: wbem::framework::Exception()
+{
+	char description[ERROR_MESSAGE_LEN];
+	s_snprintf(description, sizeof(description),
+		EXCEPTION_NOMEMORY_MSG.c_str(), pFile, pFunction, pMsg);
+	m_Message = description;
+	logDebugMessage();
+}

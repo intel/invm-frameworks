@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,56 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the implementation of the base NvmException class for the
+ * Intel WBEM library.
+ */
+
+
+#include <logger/logging.h>
+#include "Exception.h"
+
+/*
+ * Constructor for WBEM library exception base class
+ */
+wbem::framework::Exception::Exception()
+{
+	m_Message = EXCEPTION_UNKNOWN_MSG.c_str();
+}
+
+/*
+ * Constructor for WBEM library exception base class
+ */
+wbem::framework::Exception::Exception(const std::string &msg)
+	: m_Message(msg)
+{
+	if (m_Message.empty())
+	{
+		m_Message = EXCEPTION_UNKNOWN_MSG;
+	}
+	logDebugMessage();
+}
+
+/*
+ * Log a debug message indicating the exception occurred
+ */
+void wbem::framework::Exception::logDebugMessage()
+{
+	COMMON_LOG_ERROR_F("Exception: %s", m_Message.c_str());
+}
+
+/*
+ * Destructor
+ */
+wbem::framework::Exception::~Exception() throw ()
+{
+}
+
+/*
+ * Retrieve the message
+ */
+const char* wbem::framework::Exception::what() const throw ()
+{
+	return m_Message.c_str();
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015, 2016 Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,32 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "libIntel_i18n_local.h"
+
+/*
+ * Generic function to memory map a file.
+ */
+void* my_mmap(void* start, size_t length, int fd, size_t offset);
+
+/*
+ * Generic function to unmap a file from memory.
+ */
+int my_munmap(void *start, size_t length);
+
+/*
+ * Generic function to retrieve the locale.  I'm simplifying this to 
+ * ignore the "modifier" and return "language_territory.codeset"
+ */
+
+int get_locale(char *locale);
+
+/**
+ * return the directory separator for this OS
+ */
+char * get_separator();
+
+/**
+ * return the full path to the catalog file
+ */
+int get_catalog_file(struct domainbinding *binding, I18N_STRING catalog_file);

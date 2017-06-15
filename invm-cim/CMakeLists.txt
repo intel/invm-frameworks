@@ -1,0 +1,91 @@
+cmake_minimum_required(VERSION 2.8.11)
+project(intel_cim_framework)
+
+get_filename_component(ROOT ./.. ABSOLUTE)
+
+if (LNX_BUILD)
+    add_definitions(
+            -fPIC
+    )
+endif()
+
+set(OUTPUT_PATH output/build/${OS_TYPE}/${BUILD_TYPE})
+set(OUTPUT_DIR ${ROOT}/${OUTPUT_PATH})
+set(INCLUDE_DIR ${OUTPUT_DIR}/include)
+set(HEADER_DIR ${INCLUDE_DIR}/libinvm-cim)
+
+set(CMAKE_BINARY_DIR ${OUTPUT_DIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
+
+# --------------------------------------------------------------------------------------------------
+# Project wide
+# --------------------------------------------------------------------------------------------------
+set(CMAKE_C_FLAGS "-std=c99")
+#SET(CMAKE_CXX_FLAGS "-std=c++0x")
+
+add_definitions(
+        -Wall
+        -Werror
+        -Wfatal-errors
+        -D_XOPEN_SOURCE=500
+        -ggdb
+        -MMD
+        -D__WBEM_PREFIX__=Intel_
+        -D__ADD_MANUFACTURING__=1
+        -D__BUILD_SIM__=1
+        -DPOCO_STATIC
+        -D_GNU_SOURCE
+        -D__PRODUCT_SHAREDSTATE_DIR__=""
+        -DCMPI_PLATFORM_LINUX_GENERIC_GNU=1
+        -DCMPI_VER_86=1
+)
+
+# --------------------------------------------------------------------------------------------------
+# libinvm-cim
+# --------------------------------------------------------------------------------------------------
+file(GLOB CIMFRAMEWORK_HEADERS
+	"src/framework/*.h"
+	"src/cimom/*.h"
+	"src/cimom/cmpi/*.h"
+	"src/common/logger/*.h"
+	"src/common/string/*.h"
+	"src/common/time/*.h"
+	"src/common/*.h"
+	)
+file(COPY ${CIMFRAMEWORK_HEADERS}
+	DESTINATION ${HEADER_DIR})
+
+FILE(GLOB CIMFRAMEWORK_SRC
+        src/cimom/*
+        src/cimom/cmpi/*
+        src/common/logger/*
+        src/common/string/*
+        src/common/time/*
+        examples/demoprovider/os/*
+        src/common/*
+        src/framework/*
+        )
+
+message(header: ${HEADER_DIR})
+add_library(invm-cim ${LIB_TYPE} ${CIMFRAMEWORK_SRC})
+
+set_target_properties(invm-cim
+       PROPERTIES
+       VERSION 1.0.0
+       SOVERSION 1
+       )
+
+target_include_directories(invm-cim PUBLIC
+        src/cimom
+        src/cimom/cmpi
+        src/framework
+        src/common
+        src/common/logger
+        src/common/string
+        src/common/time
+        ${ROOT}/external/invm-cim/rapidxml-1.13
+        ${ROOT}/external/cmpi/include/cmpi
+        ${ROOT}/external/cmpi/include
+        )

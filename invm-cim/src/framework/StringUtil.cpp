@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,74 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains string helper functions.
+ */
+
+
+#include <sstream>
+#include "StringUtil.h"
+
+bool wbem::framework::StringUtil::stringCompareIgnoreCase(std::string str1, std::string str2)
+{
+	if (str1.size() != str2.size())
+	{
+		return false;
+	}
+	for (unsigned int i = 0; i < str1.length(); i++)
+	{
+		if (std::tolower(str1[i]) != std::tolower(str2[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+COMMON_UINT64 wbem::framework::StringUtil::stringToUint64(const std::string& str)
+{
+	COMMON_UINT64 result;
+
+	std::stringstream ss(str);
+	ss >> result;
+
+	return result;
+}
+
+COMMON_INT64 wbem::framework::StringUtil::stringToInt64(const std::string& str)
+{
+	COMMON_INT64 result;
+
+	std::stringstream ss(str);
+	ss >> result;
+
+	return result;
+}
+
+
+std::string wbem::framework::StringUtil::removeStrings(
+		const std::string& fkValue, std::vector<std::string> strList)
+{
+	// avoid log tracing in this function, it is called a lot.
+	std::string ret = fkValue;
+	for (std::vector<std::string>::const_iterator itr = strList.begin(); itr != strList.end(); itr++)
+	{
+		size_t pos = ret.find(*itr);
+		if (pos!= std::string::npos)
+		{
+			ret.replace(pos, (*itr).length(), "");
+		}
+	}
+	return ret;
+}
+
+std::string wbem::framework::StringUtil::removeString(
+		const std::string& fkValue, const std::string& str)
+{
+	std::vector<std::string> filter;
+	filter.push_back(str);
+	return removeStrings(fkValue, filter);
+
+}

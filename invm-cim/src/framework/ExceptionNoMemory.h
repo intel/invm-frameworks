@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,42 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the definition of the exception class
+ * for an out of memory error.
+ */
+
+
+#ifndef	_WBEM_FRAMEWORK_EXCEPTION_NOMEMORY_H_
+#define	_WBEM_FRAMEWORK_EXCEPTION_NOMEMORY_H_
+
+#include "Exception.h"
+
+namespace wbem
+{
+namespace framework
+{
+
+/*!
+ * Out of memory Wbem library exception
+ */
+class ExceptionNoMemory: public Exception
+{
+	public:
+		/*!
+		 * Initialize an out of memory exception
+		 * @param[in] pFile
+		 * 		The name of the file.
+		 * @param[in] pFunction
+		 * 		The name of the function.
+		 * @param[in] pMsg
+		 * 		The item that could not be allocated.
+		 */
+	ExceptionNoMemory(const char *pFile, const char *pFunction, const char *pMsg);
+};
+
+} // framework
+} // wbem
+
+#endif // _WBEM_FRAMEWORK_EXCEPTION_NOMEMORY_H_

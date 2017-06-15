@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,34 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the implementation of common string tokenizer utilities.
+ */
+
+#include <stdlib.h>
+#include <string.h>
+
+/*
+ * Tokenize a string such that no token is omitted.
+ */
+char *x_strtok(char **input, const char *delims)
+{
+	if ((input == NULL) || (*input == NULL) || (delims == NULL))
+	{
+		return (NULL);
+	}
+
+	char *token = *input;
+	char *remainder = token + strcspn(token, delims);
+	if (*remainder != '\0')
+	{
+		*remainder++ = '\0';
+		*input = remainder;
+	}
+	else // last token - end of string
+	{
+		*input = NULL;
+	}
+	return (token);
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,45 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the definition of the exception class for an invalid attribute.
+ */
+
+#ifndef	_WBEM_FRAMEWORK_EXCEPTION_BADATTRIBUTE_H_
+#define	_WBEM_FRAMEWORK_EXCEPTION_BADATTRIBUTE_H_
+
+#include "Exception.h"
+
+namespace wbem
+{
+namespace framework
+{
+
+/*!
+ * An exception for an invalid input Attribute
+ */
+class ExceptionBadAttribute: public Exception
+{
+	public:
+	/*!
+	 * Initialize a bad Attribute exception
+	 * @param[in] pAttribute
+	 * 		The name of the input Attribute that was bad.
+	 */
+	ExceptionBadAttribute(const char *pAttribute);
+	~ExceptionBadAttribute() throw () {}
+
+	/*
+	 * return the bad Attribute that this exception was thrown with
+	 */
+	std::string getBadAttribute();
+
+	private:
+		std::string m_badAttribute;
+};
+
+} // framework
+} // wbem
+
+#endif // _WBEM_FRAMEWORK_EXCEPTION_BADATTRIBUTE_H_

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,27 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include "NullInstanceFactory.h"
+
+wbem::framework::NullInstanceFactory::~NullInstanceFactory()
+{
+
+}
+
+void wbem::framework::NullInstanceFactory::populateAttributeList(
+	wbem::framework::attribute_names_t &attributes)
+{
+
+}
+
+wbem::framework::instance_names_t *wbem::framework::NullInstanceFactory::getInstanceNames()
+{
+	return new instance_names_t();
+}
+
+bool wbem::framework::NullInstanceFactory::isAssociated(const std::string &associationClass,
+		wbem::framework::Instance *pAntInstance, wbem::framework::Instance *pDepInstance)
+{
+	return false; // can't be associated to anything
+}

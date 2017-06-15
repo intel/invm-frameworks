@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,40 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*!
+ * @file
+ * @brief
+ * Declaration of the Trace class
+ */
+
+#ifndef _WBEM_FRAMEWORK_TRACE_H
+#define _WBEM_FRAMEWORK_TRACE_H
+
+#include <string>
+
+namespace wbem {
+namespace framework {
+
+/*!
+ * Traces function entry and exit using the logger
+ */
+class Trace {
+public:
+	/*!
+	 * Create a log entry for tracing a function
+	 * @param fileName
+	 * @param functionName
+	 * @param lineNumber
+	 */
+	Trace(const char *fileName, const char * functionName, const int &lineNumber);
+	~Trace();
+private:
+	std::string m_functionName;
+
+
+};
+}
+}
+
+#endif

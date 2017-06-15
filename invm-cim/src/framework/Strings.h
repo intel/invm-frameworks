@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,32 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains common strings for the wbem library.
+*/
+
+#ifndef	_WBEM_FRAMEWORK_STRINGS_H_
+#define	_WBEM_FRAMEWORK_STRINGS_H_
+
+#include <string>
+
+namespace wbem
+{
+namespace framework
+{
+
+// Wbem exception messages
+const std::string EXCEPTION_UNKNOWN_MSG = "An unknown exception occurred.";
+const std::string EXCEPTION_NOTSUPPORTED_MSG = "The method %s::%s is not supported in the current context.";
+const std::string EXCEPTION_NOMEMORY_MSG = "There is not enough memory in the method %s::%s for '%s'.";
+const std::string EXCEPTION_BADPARAMETER_MSG = "The parameter '%s' is not valid.";
+const std::string EXCEPTION_BADATTRIBUTE_MSG = "The attribute '%s' is not valid.";
+
+// overall namespace name
+const std::string INTEL_ROOT_NAMESPACE = "root/intel";
+const std::string INTEROP_NAMESPACE = "root/interop";
+
+} // wbem
+} // framework
+#endif // _WBEM_FRAMEWORK_STRINGS_H_

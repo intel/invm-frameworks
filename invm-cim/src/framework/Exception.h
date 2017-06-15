@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,70 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the definition of the base Exception class for the
+ * Intel WBEM library.
+ */
+
+#ifndef	_WBEM_FRAMEWORK_EXCEPTION_H_
+#define	_WBEM_FRAMEWORK_EXCEPTION_H_
+
+#include <exception>
+#include <string>
+#include <stdarg.h>
+#include <stdio.h>
+
+#include "Strings.h"
+
+#define	ERROR_MESSAGE_LEN 1024 //!< The length of the exception error message
+
+namespace wbem
+{
+namespace framework
+{
+
+/*!
+ * Generic exception for the Wbem library.
+ */
+class Exception : public std::exception
+{
+	public:
+
+		/*!
+		 * Initialize a new empty exception.
+		 */
+		Exception();
+
+		/*!
+		 * Initialize a new exception with a message string.
+		 * @param[in] message
+		 * 		The message.
+		 */
+		Exception(const std::string &message);
+
+		/*!
+		 * Destructor cleans up
+		 */
+		virtual ~Exception() throw ();
+
+		/*!
+		 * Retrieve a text string describing the exception that occurred.
+		 * @return
+		 * 		The exception message.
+		 */
+		virtual const char* what() const throw();
+
+	protected:
+		/*!
+		 * Log the exception to the debug log.
+		 */
+		void logDebugMessage();
+
+		std::string m_Message; //!< The exception string message
+};
+
+} // framework
+} // wbem
+
+#endif // _WBEM_FRAMEWORK_NVMEXCEPTION_H_

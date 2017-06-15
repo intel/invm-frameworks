@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015, 2016 Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,54 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * Safe string manipulation utility functions
+ */
+
+#ifndef	_SAFE_STR_H_
+#define	_SAFE_STR_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+/*
+ * Safe copy of a char array
+ */
+char *safe_strncpy(char *dst, size_t dst_size, const char *src, size_t src_size);
+
+/*
+ * Safe concatenation of strings of different sizes.
+ */
+char *safe_strncat(char *dst, size_t dst_size, const char *src, size_t src_size);
+
+/*
+ * Safely determines the length of a string up to max_len
+ */
+size_t safe_strnlen(const char *str, size_t max_len);
+
+/*
+ *  Safely find the first occurence of str2 within str1.
+ */
+const char *safe_strnstrn(const char *str1, size_t max1len, char *str2, size_t max2len);
+
+/*
+ * Safe find of the last instance of a given char within a string.
+ */
+char *safe_strchr(char *str, char ch, int max_len);
+
+/*
+ * Safe case-sensitive string comparison
+ */
+int safe_strncmp(const char *const str1, const char *const str2, size_t size);
+
+/*
+ * Safe case-sensitive string duplication
+ */
+char *safe_strndup(const char *str, size_t maxlen);
+
+#ifdef __cplusplus
+}
+#endif
+#endif /* _SAFE_STR_H_ */

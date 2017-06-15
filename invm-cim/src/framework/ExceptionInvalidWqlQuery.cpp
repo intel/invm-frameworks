@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,60 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the implementation of the exception class
+ * for an invalid WQL query string.
+ */
+
+#include "ExceptionInvalidWqlQuery.h"
+
+namespace wbem
+{
+namespace framework
+{
+
+ExceptionInvalidWqlQuery::ExceptionInvalidWqlQuery(const InvalidWqlReason reason,
+		const std::string &token) :
+		m_reason(reason),
+		m_token(token)
+{
+	std::string messageStr;
+	switch (reason)
+	{
+	case REASON_BADLYFORMED:
+		messageStr = INVALIDWQL_REASONBADLYFORMED;
+		break;
+	case REASON_BADCLASSNAME:
+		messageStr = INVALIDWQL_REASONBADCLASSNAME + token;
+		break;
+	case REASON_BADATTR:
+		messageStr = INVALIDWQL_REASONBADATTR + token;
+		break;
+	case REASON_BADOPERATOR:
+		messageStr = INVALIDWQL_REASONBADOPERATOR + token;
+		break;
+	case REASON_BADVALUE:
+		messageStr = INVALIDWQL_REASONBADVALUE + token;
+		break;
+	case REASON_UNMATCHEDPARENS:
+		messageStr = INVALIDWQL_REASONUNMATCHEDPARENS;
+		break;
+	case REASON_UNMATCHEDQUOTES:
+		messageStr = INVALIDWQL_REASONUNMATCHEDQUOTES;
+		break;
+	case REASON_UNKNOWN:
+	default:
+		messageStr = INVALIDWQL_REASONUNKNOWN;
+	}
+
+	m_Message = messageStr;
+	logDebugMessage();
+}
+
+ExceptionInvalidWqlQuery::~ExceptionInvalidWqlQuery() throw ()
+{
+}
+
+} /* namespace framework */
+} /* namespace wbem */

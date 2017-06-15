@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,47 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains utility methods used by the WMI Provider
+ */
+
+#ifndef _WMIUTILITIES_H_
+#define _WMIUTILITIES_H_
+
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include <windows.h>
+
+namespace convert
+{
+	/*!
+	 * Convert a std::string to std::wstring
+	 * @param str
+	 * 		The string to convert
+	 * @return
+	 * 		std::wstring version of the std::string
+	 */
+	std::wstring str_to_wstr(const std::string& str);
+	/*!
+	 * Convert a std::wstring to std::string
+	 * @param wstr
+	 * 		wstring to convert
+	 * @return
+	 * 		std::string version of the std::wstring
+	 */
+	std::string wstr_to_str(const std::wstring& wstr);
+}
+
+/*!
+ * Impersonate the client
+ */
+HRESULT STDMETHODCALLTYPE Impersonate();
+/*!
+ * Get COM impersonation level of caller.
+ * @return impersonation level
+ */
+DWORD GetCurrentImpersonationLevel ();
+#endif

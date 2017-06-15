@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,45 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the definition of the exception class for an invalid parameter.
+ */
+
+#ifndef	_WBEM_FRAMEWORK_EXCEPTION_BADPARAMETER_H_
+#define	_WBEM_FRAMEWORK_EXCEPTION_BADPARAMETER_H_
+
+#include "Exception.h"
+
+namespace wbem
+{
+namespace framework
+{
+
+/*!
+ * An exception for an invalid input parameter
+ */
+class ExceptionBadParameter: public Exception
+{
+	public:
+	/*!
+	 * Initialize a bad parameter exception
+	 * @param[in] pParameter
+	 * 		The name of the input parameter that was bad.
+	 */
+	ExceptionBadParameter(const char *pParameter);
+	~ExceptionBadParameter() throw () {}
+
+	/*
+	 * return the bad parameter that this exception was thrown with
+	 */
+	std::string getBadParameter();
+
+	private:
+		std::string m_badParameter;
+};
+
+} // framework
+} // wbem
+
+#endif // _WBEM_FRAMEWORK_EXCEPTION_BADPARAMETER_H_

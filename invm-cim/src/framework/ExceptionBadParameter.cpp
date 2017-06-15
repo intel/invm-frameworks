@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,29 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the implementation of the exception class for an invalid parameter.
+ */
+
+#include <string/s_str.h>
+#include "ExceptionBadParameter.h"
+/*
+ * Constructor
+ */
+wbem::framework::ExceptionBadParameter::ExceptionBadParameter(const char *pParameter)
+: wbem::framework::Exception()
+{
+	m_badParameter = pParameter != NULL ? pParameter : "";
+	char description[ERROR_MESSAGE_LEN];
+	s_snprintf(description, ERROR_MESSAGE_LEN,
+			EXCEPTION_BADPARAMETER_MSG.c_str(),
+			pParameter);
+	m_Message = description;
+	logDebugMessage();
+}
+
+std::string wbem::framework::ExceptionBadParameter::getBadParameter()
+{
+	return m_badParameter;
+}

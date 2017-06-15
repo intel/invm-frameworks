@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,64 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains a class to convert a CIM Object path to an ObjectPath
+ */
+
+
+#ifndef _OBJECTPATHBUILDER_H_
+#define _OBJECTPATHBUILDER_H_
+
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include "Attribute.h"
+#include "ObjectPath.h"
+
+namespace wbem
+{
+	namespace framework
+	{
+
+		/*!
+		 * Used to parse a CIM Object Path into an ObjectPath
+		 * @details
+		 * Uses the ABNF Notation of Grammar at:
+		 * http://msdn.microsoft.com/en-us/library/cc250722(v=prot.20).aspx
+		 */
+		class ObjectPathBuilder
+		{
+		public:
+			/*!
+			 * Constructor
+			 * @param[in] cimPath
+			 * 		path to parse
+			 */
+			ObjectPathBuilder(const std::string &cimPath);
+
+			/*!
+			 *
+			 * @param[out] pPath
+			 * 		Builds the NvmObjectPath up with the cim path builder was initialized with
+			 * @return
+			 * 		Whether it was successful or not.
+			 */
+			bool Build(wbem::framework::ObjectPath *pPath);
+		private:
+			std::string m_cimPath;
+
+			std::map<std::string, std::string> m_properties;
+			std::string m_className;
+			std::string m_namespace;
+			std::string m_host;
+
+			bool Parse();
+
+			void ParseNamespacePath(std::string value);
+			void ParseObjectPath(std::string value);
+		};
+	}
+}
+#endif

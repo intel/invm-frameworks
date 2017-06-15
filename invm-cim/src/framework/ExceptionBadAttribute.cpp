@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,29 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the implementation of the exception class for an invalid Attribute.
+ */
+
+#include <string/s_str.h>
+#include "ExceptionBadAttribute.h"
+/*
+ * Constructor
+ */
+wbem::framework::ExceptionBadAttribute::ExceptionBadAttribute(const char *pAttribute)
+: wbem::framework::Exception()
+{
+	m_badAttribute = pAttribute != NULL ? pAttribute : "";
+	char description[ERROR_MESSAGE_LEN];
+	s_snprintf(description, ERROR_MESSAGE_LEN,
+			EXCEPTION_BADATTRIBUTE_MSG.c_str(),
+			pAttribute);
+	m_Message = description;
+	logDebugMessage();
+}
+
+std::string wbem::framework::ExceptionBadAttribute::getBadAttribute()
+{
+	return m_badAttribute;
+}

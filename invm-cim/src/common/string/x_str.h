@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,44 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains the definition of common string tokenizer utilities.
+ */
+
+#ifndef	_X_STR_H_
+#define	_X_STR_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+/*!
+ * Tokenize a string such that no token is omitted.
+ * @remarks
+ * 		Unlike the function @c strtok, which skips the tokens which result from adjacent
+ * 		delimiters, this implementation will return every token between every delimiter. @n
+ * 		Unlike @c strtok, this function is memoryless and thread-safe, meaning it must be
+ * 		passed @c input to receive each token. @n
+ * 		Like @c strtok, this function will alter @c input. @n
+ * 		This is a platform independent function equivalent to the GCC implementation of @c strsep
+ * @param[in,out] input
+ * 		A pointer to the @b char array to be tokenized. @n
+ * 		@c *input must be null terminated. @n
+ * 		After the call, @c *input will point to the next token, while @c **input may be NULL,
+ * 		if at the end.
+ * @param[in] delims
+ * 		A null terminated @b char array containing the delimiters to be used.
+ * @return
+ * 		A pointer to the first token found in @c *input, otherwise @n
+ * 		@b NULL, if @c input == @b NULL, @c *input == @b NULL, @c delims == NULL @n
+ */
+char *x_strtok(char **input, const char *delims);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _X_STR_H_ */

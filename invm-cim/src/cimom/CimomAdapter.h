@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,28 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef INTEL_CIM_FRAMEWORK_CIMOMADAPTER_H
+#define INTEL_CIM_FRAMEWORK_CIMOMADAPTER_H
+
+#include "Instance.h"
+#include <string>
+
+bool classIsA(std::string child, std::string parent);
+
+namespace wbem
+{
+namespace framework
+{
+class CimomAdapter
+{
+public:
+	virtual ~CimomAdapter() {}
+	virtual void sendIndication(Instance &indication) = 0;
+};
+
+}
+}
+
+
+#endif //INTEL_CIM_FRAMEWORK_CIMOMADAPTER_H

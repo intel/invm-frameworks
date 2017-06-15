@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Intel Corporation
+ * Copyright (c) 2015 2016, Intel Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,3 +24,28 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * This file contains string helper functions.
+ */
+
+#include <string>
+#include <vector>
+#include "common_types.h"
+
+namespace wbem
+{
+namespace framework
+{
+	class StringUtil
+	{
+	public:
+		static bool stringCompareIgnoreCase(std::string str1, std::string str2);
+		static COMMON_UINT64 stringToUint64(const std::string& str);
+		static COMMON_INT64 stringToInt64(const std::string& str);
+		static std::string removeStrings(const std::string &fkValue, std::vector<std::string> strList);
+
+		static std::string removeString(const std::string &fkValue, const std::string &st);
+	};
+}
+}
