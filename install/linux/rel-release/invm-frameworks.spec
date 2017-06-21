@@ -9,6 +9,7 @@ Group:          Development/Libraries
 URL:            https://01.org/intel-nvm-frameworks
 Source:         https://github.com/01org/invm-frameworks/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires:  gettext
+BuildRequires:  cmake
 ExclusiveArch:  x86_64
 
 %description
