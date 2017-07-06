@@ -19,6 +19,12 @@ cmake ..
 make -j all
 ```
 
+RPMs can also be built:
+
+	cmake .; make rpm
+
+The RPMs will be in ./output/rpmbuild/RPMS/
+
 ### Windows
 The recommend way for building on Windows is to use the CMake Unix Makefiles generator.
 
