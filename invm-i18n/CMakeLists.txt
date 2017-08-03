@@ -38,6 +38,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+
+find_library(gtest NAMES gtest PATHS ${ROOT}/external/precompiled_libs/${OS_TYPE}/gtest)
+find_library(gtest_main NAMES gtest_main PATHS ${ROOT}/external/precompiled_libs/${OS_TYPE}/gtest)
+
 # --------------------------------------------------------------------------------------------------
 # invm-i18n
 # --------------------------------------------------------------------------------------------------

@@ -131,7 +131,6 @@ cp -rf ./output/build/linux/debug/include/libinvm-cli %{buildroot}%{_includedir}
 
 %files -n libinvm-i18n-devel
 %doc README.md
-%{_libdir}/libinvm-i18n.so
 %{_includedir}/libinvm-i18n
 %license LICENSE
 
@@ -145,7 +144,6 @@ cp -rf ./output/build/linux/debug/include/libinvm-cli %{buildroot}%{_includedir}
 
 %files -n libinvm-cli-devel
 %doc README.md
-%{_libdir}/libinvm-cli.so
 %{_includedir}/libinvm-cli
 %license LICENSE
 
@@ -159,7 +157,6 @@ cp -rf ./output/build/linux/debug/include/libinvm-cli %{buildroot}%{_includedir}
 
 %files -n libinvm-cim-devel
 %doc README.md
-%{_libdir}/libinvm-cim.so
 %{_includedir}/libinvm-cim
 %license LICENSE
 

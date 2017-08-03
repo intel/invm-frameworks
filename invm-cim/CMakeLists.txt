@@ -3,12 +3,6 @@ project(intel_cim_framework)
 
 get_filename_component(ROOT ./.. ABSOLUTE)
 
-if (LNX_BUILD)
-    add_definitions(
-            -fPIC
-    )
-endif()
-
 set(OUTPUT_PATH output/build/${OS_TYPE}/${BUILD_TYPE})
 set(OUTPUT_DIR ${ROOT}/${OUTPUT_PATH})
 set(INCLUDE_DIR ${OUTPUT_DIR}/include)
@@ -18,29 +12,7 @@ set(CMAKE_BINARY_DIR ${OUTPUT_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
-
-# --------------------------------------------------------------------------------------------------
-# Project wide
-# --------------------------------------------------------------------------------------------------
-set(CMAKE_C_FLAGS "-std=c99")
-#SET(CMAKE_CXX_FLAGS "-std=c++0x")
-
-add_definitions(
-        -Wall
-        -Werror
-        -Wfatal-errors
-        -D_XOPEN_SOURCE=500
-        -ggdb
-        -MMD
-        -D__WBEM_PREFIX__=Intel_
-        -D__ADD_MANUFACTURING__=1
-        -D__BUILD_SIM__=1
-        -DPOCO_STATIC
-        -D_GNU_SOURCE
-        -D__PRODUCT_SHAREDSTATE_DIR__=""
-        -DCMPI_PLATFORM_LINUX_GENERIC_GNU=1
-        -DCMPI_VER_86=1
-)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
 # --------------------------------------------------------------------------------------------------
 # libinvm-cim
@@ -68,7 +40,6 @@ FILE(GLOB CIMFRAMEWORK_SRC
         src/framework/*
         )
 
-message(header: ${HEADER_DIR})
 add_library(invm-cim ${LIB_TYPE} ${CIMFRAMEWORK_SRC})
 
 set_target_properties(invm-cim
@@ -76,6 +47,18 @@ set_target_properties(invm-cim
        VERSION 1.0.0
        SOVERSION 1
        )
+
+target_compile_definitions(invm-cim
+        PRIVATE -D_FORTIFY_SOURCE=2
+        PRIVATE -D_XOPEN_SOURCE=500
+        PRIVATE -D__WBEM_PREFIX__=Intel_
+        PRIVATE -D__ADD_MANUFACTURING__=1
+        PRIVATE -DPOCO_STATIC
+        PRIVATE -D_GNU_SOURCE
+        PRIVATE -D__PRODUCT_SHAREDSTATE_DIR__=""
+        PRIVATE -DCMPI_PLATFORM_LINUX_GENERIC_GNU=1
+        PRIVATE -DCMPI_VER_86=1
+)
 
 target_include_directories(invm-cim PUBLIC
         src/cimom
@@ -86,6 +69,6 @@ target_include_directories(invm-cim PUBLIC
         src/common/string
         src/common/time
         ${ROOT}/external/invm-cim/rapidxml-1.13
-        ${ROOT}/external/cmpi/include/cmpi
-        ${ROOT}/external/cmpi/include
+        ${ROOT}/external/invm-cim/cmpi/include
+        ${ROOT}/external/invm-cim/cmpi/include/cmpi
         )

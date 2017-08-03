@@ -31,13 +31,28 @@ project(invm-frameworks)
 # Setup
 # --------------------------------------------------------------------------------------------------
 
-# OS 
+# OS
+set(CMAKE_SKIP_RPATH TRUE)
 if (UNIX)
     set(LNX_BUILD 1)
     set(OS_TYPE linux)
+    add_definitions(
+        -fPIC
+        -D__LINUX__
+    )
 elseif (MINGW)
     set(OS_TYPE windows)
     set(WIN_BUILD 1)
+endif ()
+
+if (WIN_BUILD)
+	add_definitions(
+			-D_WIN32_WINNT=0x0601
+			-DWINVER=0x0600
+			-D__WINDOWS__
+	)
+	set(CMAKE_C_FLAGES "${CMAKE_C_FLAGES} -mstack-protector-guard -mno-ms-bitfields")
+	set(CMAKE_CXX_FLAGES "${CMAKE_CXX_FLAGES} -mstack-protector-guard -fstack-protector-all -m64 -mno-ms-bitfields")
 endif ()
 
 # Build Type
@@ -70,15 +85,19 @@ endif()
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags
 # --------------------------------------------------------------------------------------------------
-set(CMAKE_C_FLAGS "-std=c99 -Wall -Werror -Wfatal-errors -fstack-protector-all -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE=500")
-set(CMAKE_CXX_FLAGS "-MMD -D__VERSION_MAJOR__=${VERSION_MAJOR} -D__VERSION_MINOR__=${VERSION_MINOR} -D__VERSION_HOTFIX__=${VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM}")
+set(COMMON_COMPILE_FLAGS "-Wall -Werror -Wfatal-errors -fstack-protector-all -ggdb -MMD -m64 -D__VERSION_MAJOR__=${VERSION_MAJOR} -D__VERSION_MINOR__=${VERSION_MINOR} -D__VERSION_HOTFIX__=${VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM}")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_COMPILE_FLAGS}")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMMON_COMPILE_FLAGS} -std=c++98")
+
 
 if (RELEASE)
-    set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-strict-aliasing -O")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -O")
 else()
-    set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -O -ggdb")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O -ggdb")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
 endif()
 
 add_subdirectory(invm-i18n)
@@ -91,28 +110,28 @@ add_subdirectory(invm-cli)
 get_filename_component(PROJECT_ROOT ./ ABSOLUTE)
 set(RPMBUILD_DIR ${PROJECT_ROOT}/output/rpmbuild)
 
-add_custom_target(rpm 
+add_custom_target(rpm
         COMMAND ${CMAKE_COMMAND} -E echo "Entering make rpm..."
-	# Make directories 
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR} 
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILD 
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILDROOT 
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/SOURCES 
+	# Make directories
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILDROOT
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/SOURCES
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/RPMS
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/SRPMS
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/SPECS
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILD/invm-frameworks-${BUILDNUM}
-	# Copy spec file 
+	# Copy spec file
         COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_ROOT}/install/linux/rel-release/*.spec ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec
 	# Update the spec file with build version
         COMMAND sed -i "s/^%define build_version .*/%define build_version ${BUILDNUM}/g" ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec
-	# Archive the directory 
+	# Archive the directory
         COMMAND cd ${PROJECT_ROOT} && git archive --format=tar --prefix="invm-frameworks-${BUILDNUM}/" HEAD | gzip -c > ${RPMBUILD_DIR}/SOURCES/invm-frameworks-${BUILDNUM}.tar.gz
 	# rpmbuild
-        COMMAND export QA_RPATHS=0x0002 && cd ${PROJECT_ROOT} && rpmbuild -ba ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec --define "_topdir ${RPMBUILD_DIR}" --define "cflag ${CMAKE_C_FLAGS}"
-        COMMAND ${CMAKE_COMMAND} -E echo "Exiting make rpm..." 
-        COMMAND make clean_cmake 
-        )   
+        COMMAND export QA_RPATHS=0x0002 && cd ${PROJECT_ROOT} && rpmbuild -ba ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec --define "_topdir ${RPMBUILD_DIR}" --define "cflag ${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}"
+        COMMAND ${CMAKE_COMMAND} -E echo "Exiting make rpm..."
+        COMMAND make clean_cmake
+        )
 
 # --------------------------------------------------------------------------------------------------
 # invm-frameworks clean_cmake

@@ -27,22 +27,8 @@ endif()
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags
 # --------------------------------------------------------------------------------------------------
-set(CMAKE_CXX_FLAGS "-MMD -D__VERSION_MAJOR__=${VERSION_MAJOR} -D__VERSION_MINOR__=${VERSION_MINOR} -D__VERSION_HOTFIX__=${VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__INTEL_I18N__")
-
 add_definitions(-D__INTEL_I18N__) # use intel i18n library
 
-if (RELEASE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O -ggdb")
-endif()
-
-if (LNX_BUILD)
-    add_definitions(
-            -fPIC
-    )
-endif()
 # --------------------------------------------------------------------------------------------------
 # invm-cli
 # --------------------------------------------------------------------------------------------------
@@ -55,6 +41,11 @@ file(COPY ${CLIFRAMEWORK_HEADERS}
 file(GLOB SRC src/framework/*.cpp)
 
 add_library(invm-cli ${LIB_TYPE} ${SRC})
+
+target_compile_definitions(invm-cli
+        PRIVATE -D_FORTIFY_SOURCE=2
+        PRIVATE -D_XOPEN_SOURCE=500
+)
 
 # this will create the symlinks on Linux
 set_target_properties(invm-cli
