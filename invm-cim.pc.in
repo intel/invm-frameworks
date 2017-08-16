@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: invm-cim
+Description: invm-cim
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -linvm-cim
+Cflags: -I${includedir}/@PACKAGE_NAME@

@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+ 
+Name: invm-cli
+Description: invm-cli
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -linvm-cli
+Cflags: -I${includedir}/@PACKAGE_NAME@

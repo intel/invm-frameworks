@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+ 
+Name: invm-i18n
+Description: invm-i18n
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -linvm-i18n
+Cflags: -I${includedir}/@PACKAGE_NAME@
