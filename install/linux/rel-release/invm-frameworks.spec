@@ -92,7 +92,7 @@ developing applications that use libinvm-cim.
 
 %build
 %cmake
-make BUILDNUM=%{build_version} RELEASE=1 CFLAGS_EXTERNAL="%{?optflags}" %{?_smp_mflags}
+make BUILDNUM_FRAMEWORKS=%{build_version} RELEASE=1 CFLAGS_EXTERNAL="%{?optflags}" %{?_smp_mflags}
 
 %install
 mkdir -p %{buildroot}%{_libdir}

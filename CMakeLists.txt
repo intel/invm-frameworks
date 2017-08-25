@@ -70,22 +70,33 @@ if (BUILD_STATIC)
 endif()
 
 # Build Version
-if (NOT BUILDNUM)
-    execute_process(COMMAND git describe --abbrev=0 OUTPUT_VARIABLE BUILDNUM)
-    if ("${BUILDNUM}" MATCHES "^([a-zA-Z-]*v)(.*)$")
-        #replace
-        string(REGEX REPLACE "^([a-zA-Z-]*v)" "" BUILDNUM "${BUILDNUM}")
-        string(REGEX REPLACE "\n$" "" BUILDNUM "${BUILDNUM}")
-    else ()
-        execute_process(COMMAND pwd OUTPUT_VARIABLE BUILDNUM)
-        set(BUILDNUM 99.99.99.9999)
-    endif()
+if (NOT BUILDNUM_FRAMEWORKS)
+	execute_process(COMMAND git describe --abbrev=0 OUTPUT_VARIABLE BUILDNUM_FRAMEWORKS)
+
+	if ("${BUILDNUM_FRAMEWORKS}" MATCHES "^([a-zA-Z-]*v)(.*)$")
+		#replace
+		string(REGEX REPLACE "^([a-zA-Z-]*v)" "" BUILDNUM_FRAMEWORKS "${BUILDNUM_FRAMEWORKS}")
+		string(REGEX REPLACE "\n$" "" BUILDNUM_FRAMEWORKS "${BUILDNUM_FRAMEWORKS}")
+	else ()
+		execute_process(COMMAND pwd OUTPUT_VARIABLE BUILDNUM_FRAMEWORKS)
+		if (NOT "${BUILDNUM_FRAMEWORKS}" MATCHES "^([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)$")
+			set(BUILDNUM_FRAMEWORKS 99.99.99.9999)
+		endif()
+	endif()
 endif()
+
+string(REPLACE "." ";" FRAMEWORK_VERSION_LIST "${BUILDNUM_FRAMEWORKS}")
+
+#ToDo: windows needs list as "${Listname}"
+list(GET FRAMEWORK_VERSION_LIST 0 FRAMEWORK_VERSION_MAJOR)
+list(GET FRAMEWORK_VERSION_LIST 1 FRAMEWORK_VERSION_MINOR)
+list(GET FRAMEWORK_VERSION_LIST 2 FRAMEWORK_VERSION_HOTFIX)
+list(GET FRAMEWORK_VERSION_LIST 3 FRAMEWORK_VERSION_BUILDNUM)
 
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags
 # --------------------------------------------------------------------------------------------------
-set(COMMON_COMPILE_FLAGS "-Wall -Werror -Wfatal-errors -fstack-protector-all -ggdb -MMD -m64 -D__VERSION_MAJOR__=${VERSION_MAJOR} -D__VERSION_MINOR__=${VERSION_MINOR} -D__VERSION_HOTFIX__=${VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM}")
+set(COMMON_COMPILE_FLAGS "-Wall -Werror -Wfatal-errors -fstack-protector-all -ggdb -MMD -m64 -D__VERSION_MAJOR__=${FRAMEWORK_VERSION_MAJOR} -D__VERSION_MINOR__=${FRAMEWORK_VERSION_MINOR} -D__VERSION_HOTFIX__=${FRAMEWORK_VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${FRAMEWORK_VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM_FRAMEWORKS}")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_COMPILE_FLAGS}")
 
@@ -120,13 +131,13 @@ add_custom_target(rpm
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/RPMS
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/SRPMS
         COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/SPECS
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILD/invm-frameworks-${BUILDNUM}
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${RPMBUILD_DIR}/BUILD/invm-frameworks-${BUILDNUM_FRAMEWORKS}
 	# Copy spec file
         COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_ROOT}/install/linux/rel-release/*.spec ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec
 	# Update the spec file with build version
-        COMMAND sed -i "s/^%define build_version .*/%define build_version ${BUILDNUM}/g" ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec
+        COMMAND sed -i "s/^%define build_version .*/%define build_version ${BUILDNUM_FRAMEWORKS}/g" ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec
 	# Archive the directory
-        COMMAND cd ${PROJECT_ROOT} && git archive --format=tar --prefix="invm-frameworks-${BUILDNUM}/" HEAD | gzip -c > ${RPMBUILD_DIR}/SOURCES/invm-frameworks-${BUILDNUM}.tar.gz
+        COMMAND cd ${PROJECT_ROOT} && git archive --format=tar --prefix="invm-frameworks-${BUILDNUM_FRAMEWORKS}/" HEAD | gzip -c > ${RPMBUILD_DIR}/SOURCES/invm-frameworks-${BUILDNUM_FRAMEWORKS}.tar.gz
 	# rpmbuild
         COMMAND export QA_RPATHS=0x0002 && cd ${PROJECT_ROOT} && rpmbuild -ba ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec --define "_topdir ${RPMBUILD_DIR}" --define "cflag ${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}"
         COMMAND ${CMAKE_COMMAND} -E echo "Exiting make rpm..."

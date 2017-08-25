@@ -72,3 +72,4 @@ target_include_directories(invm-cim PUBLIC
         ${ROOT}/external/invm-cim/cmpi/include
         ${ROOT}/external/invm-cim/cmpi/include/cmpi
         )
+target_compile_options(invm-cim PRIVATE -O)

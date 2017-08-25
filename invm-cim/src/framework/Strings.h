@@ -47,8 +47,8 @@ const std::string EXCEPTION_BADPARAMETER_MSG = "The parameter '%s' is not valid.
 const std::string EXCEPTION_BADATTRIBUTE_MSG = "The attribute '%s' is not valid.";
 
 // overall namespace name
-const std::string INTEL_ROOT_NAMESPACE = "root/intel";
-const std::string INTEROP_NAMESPACE = "root/interop";
+#define	INTEL_ROOT_NAMESPACE "root/intel"
+#define	INTEROP_NAMESPACE "root/interop"
 
 } // wbem
 } // framework

@@ -68,3 +68,4 @@ endif()
 
 target_link_libraries(invm-cli invm-i18n)
 target_include_directories(invm-cli PUBLIC ${I18N_INCLUDE_DIR})
+target_compile_options(invm-cli PRIVATE -O)
