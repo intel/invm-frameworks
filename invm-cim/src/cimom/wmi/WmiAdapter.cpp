@@ -25,7 +25,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <common/logger/logging.h>
+#include <logger/logging.h>
 #include "WmiAdapter.h"
 #include "IntelToWmi.h"
 

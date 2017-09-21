@@ -28,7 +28,7 @@
 #ifndef INTEL_CIM_FRAMEWORK_WMICONTEXT_H
 #define INTEL_CIM_FRAMEWORK_WMICONTEXT_H
 
-#include <cimom/CimomAdapter.h>
+#include "CimomAdapter.h"
 #include <wbemcli.h>
 
 namespace wbem

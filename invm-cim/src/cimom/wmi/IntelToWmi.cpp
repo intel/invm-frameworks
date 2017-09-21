@@ -46,10 +46,10 @@
 #include <mapidbg.h>
 
 #include "IntelToWmi.h"
-#include <framework/Attribute.h>
-#include <framework/ObjectPathBuilder.h>
-#include <framework/Types.h>
-#include <framework/StringUtil.h>
+#include "Attribute.h"
+#include "ObjectPathBuilder.h"
+#include "Types.h"
+#include "StringUtil.h"
 
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 

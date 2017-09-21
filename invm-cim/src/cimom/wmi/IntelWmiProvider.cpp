@@ -33,7 +33,7 @@
 #include "wmiUtilities.h"
 #include "IntelToWmi.h"
 #include "WmiAdapter.h"
-#include <cimom/CimomAdapter.h>
+#include "CimomAdapter.h"
 #include <logger/logging.h>
 
 #include <objbase.h>
@@ -45,14 +45,14 @@
 #include <vector>
 #include <wbemcli.h>
 #include <ntdef.h>
-#include <framework/Attribute.h>
-#include <framework/Exception.h>
-#include <framework/ExceptionBadParameter.h>
-#include <framework/ExceptionNoMemory.h>
-#include <framework/ExceptionNotSupported.h>
-#include <framework/ExceptionSystemError.h>
-#include <framework/ObjectPathBuilder.h>
-#include <framework/ProviderFactory.h>
+#include "Attribute.h"
+#include "Exception.h"
+#include "ExceptionBadParameter.h"
+#include "ExceptionNoMemory.h"
+#include "ExceptionNotSupported.h"
+#include "ExceptionSystemError.h"
+#include "ObjectPathBuilder.h"
+#include "ProviderFactory.h"
 
 /*
  * These would normally be defined in a Microsoft library (wbemuuid.cpp) that isn't available for MinGW, but the

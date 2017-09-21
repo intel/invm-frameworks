@@ -39,9 +39,9 @@
 #include <stdio.h>
 #include <windows.h>
 
-#include <framework/Instance.h>
-#include <framework/InstanceFactory.h>
-#include <framework/ObjectPath.h>
+#include "Instance.h"
+#include "InstanceFactory.h"
+#include "ObjectPath.h"
 
 namespace wbem
 {

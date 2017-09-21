@@ -38,9 +38,9 @@
 #include <fstream>
 #include <stdio.h>
 #include <logger/logging.h>
-#include <framework/Attribute.h>
-#include <framework/Instance.h>
-#include <framework/InstanceFactory.h>
+#include "Attribute.h"
+#include "Instance.h"
+#include "InstanceFactory.h"
 #include "wmiUtilities.h"
 
 extern long g_cObj; //!< keep track of when the module can be unloaded
