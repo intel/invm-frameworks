@@ -41,8 +41,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 # --------------------------------------------------------------------------------------------------
 # invm-i18n
 # --------------------------------------------------------------------------------------------------
-file(COPY src/libIntel_i18n.h
+file(GLOB I18NHEADERS
+	src/libIntel_i18n.h
+	src/system.h
+	)
+file(COPY ${I18NHEADERS}
         DESTINATION ${HEADER_DIR})
+
 set(SRC src/gettext.c
         src/gettext_dummy.c
         src/safe_str.c

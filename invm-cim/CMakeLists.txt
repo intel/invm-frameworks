@@ -20,25 +20,41 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 file(GLOB CIMFRAMEWORK_HEADERS
 	"src/framework/*.h"
 	"src/cimom/*.h"
-	"src/cimom/cmpi/*.h"
 	"src/common/logger/*.h"
 	"src/common/string/*.h"
 	"src/common/time/*.h"
 	"src/common/*.h"
 	)
+
+if (WIN_BUILD)
+	file(GLOB OS_HDR_FILES "src/cimom/wmi/*.h")
+else ()
+	file(GLOB OS_HDR_FILES "src/cimom/cmpi/*.h")
+endif ()
+
+list (APPEND CIMFRAMEWORK_HEADERS ${OS_HDR_FILES})
+
 file(COPY ${CIMFRAMEWORK_HEADERS}
 	DESTINATION ${HEADER_DIR})
 
 FILE(GLOB CIMFRAMEWORK_SRC
-        src/cimom/*
-        src/cimom/cmpi/*
-        src/common/logger/*
-        src/common/string/*
-        src/common/time/*
-        examples/demoprovider/os/*
-        src/common/*
-        src/framework/*
-        )
+	src/cimom/*
+	src/common/logger/*
+	src/common/string/*
+	src/common/time/*
+	examples/demoprovider/os/*
+	src/common/*
+	src/framework/*
+	)
+
+if (WIN_BUILD)
+	file(GLOB OS_SRC_FILES src/cimom/wmi/*)
+else ()
+	file(GLOB OS_SRC_FILES src/cimom/cmpi/*)
+
+endif ()
+
+list (APPEND CIMFRAMEWORK_SRC ${OS_SRC_FILES})
 
 add_library(invm-cim ${LIB_TYPE} ${CIMFRAMEWORK_SRC})
 
