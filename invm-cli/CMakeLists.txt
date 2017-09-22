@@ -15,14 +15,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
 # Dependencies
-option(USE_INSTALLED_FRAMEWORK "Use installed version of framework libraries instead of project output" OFF)
 set(I18N_INCLUDE_DIR ${ROOT}/${OUTPUT_PATH}/include)
-
-if(USE_INSTALLED_FRAMEWORK)
-    find_library(invm-i18n NAMES invm-i18n)
-else()
-    find_library(invm-i18n NO_DEFAULT_PATH NAMES invm-i18n PATHS ${ROOT}/${OUTPUT_PATH})
-endif()
 
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags

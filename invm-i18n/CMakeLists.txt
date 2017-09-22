@@ -53,10 +53,10 @@ set(SRC src/gettext.c
         src/safe_str.c
         src/textdomain.c
         )
-if(LNX_BUILD)
-    set(SRC ${SRC} src/posix_system.c)
-elseif(WIN_BUILD)
+if(WIN_BUILD)
     set(SRC ${SRC} src/win_system.c)
+else()
+    set(SRC ${SRC} src/posix_system.c)
 endif()
 
 add_library(invm-i18n ${LIB_TYPE} ${SRC})
