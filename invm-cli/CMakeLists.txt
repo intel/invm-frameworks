@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(intel_cli_framework)
 
+set(CMAKE_SKIP_RPATH TRUE)
 # Directories ...
 get_filename_component(ROOT ./.. ABSOLUTE)
 
-set(OUTPUT_PATH output/build/${OS_TYPE}/${BUILD_TYPE})
-set(OUTPUT_DIR ${ROOT}/${OUTPUT_PATH})
+set(OUTPUT_DIR ${ROOT}/output/build/${OS_TYPE}/${BUILD_TYPE} CACHE PATH "Build Path")
+
 set(INCLUDE_DIR ${OUTPUT_DIR}/include)
 set(HEADER_DIR ${INCLUDE_DIR}/libinvm-cli)
 
@@ -15,7 +16,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
 # Dependencies
-set(I18N_INCLUDE_DIR ${ROOT}/${OUTPUT_PATH}/include)
+set(I18N_INCLUDE_DIR ${OUTPUT_DIR}/include)
 
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags

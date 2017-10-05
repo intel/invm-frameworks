@@ -3,8 +3,7 @@ project(intel_cim_framework)
 
 get_filename_component(ROOT ./.. ABSOLUTE)
 
-set(OUTPUT_PATH output/build/${OS_TYPE}/${BUILD_TYPE})
-set(OUTPUT_DIR ${ROOT}/${OUTPUT_PATH})
+set(OUTPUT_DIR ${ROOT}/output/build/${OS_TYPE}/${BUILD_TYPE} CACHE PATH "Build Path")
 set(INCLUDE_DIR ${OUTPUT_DIR}/include)
 set(HEADER_DIR ${INCLUDE_DIR}/libinvm-cim)
 

@@ -30,7 +30,7 @@ project(i18n)
 # Directories ...
 get_filename_component(ROOT ./../ ABSOLUTE)
 
-set(OUTPUT_DIR ${ROOT}/output/build/${OS_TYPE}/${BUILD_TYPE})
+set(OUTPUT_DIR ${ROOT}/output/build/${OS_TYPE}/${BUILD_TYPE} CACHE PATH "Build Path")
 set(HEADER_DIR ${OUTPUT_DIR}/include/libinvm-i18n)
 
 set(CMAKE_BINARY_DIR ${OUTPUT_DIR})
