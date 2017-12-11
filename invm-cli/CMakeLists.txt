@@ -18,6 +18,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 # Dependencies
 set(I18N_INCLUDE_DIR ${OUTPUT_DIR}/include)
 
+if(ESX_BUILD)
+       set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,${ESX_SUPPORT_DIR}")
+endif()
+
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags
 # --------------------------------------------------------------------------------------------------
