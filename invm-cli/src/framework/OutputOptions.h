@@ -39,7 +39,7 @@ namespace cli
 namespace framework
 {
 
-class OutputOptions
+class INVM_CLI_API OutputOptions
 {
 	public:
 		OutputOptions(const ParsedCommand &parsedCommand);

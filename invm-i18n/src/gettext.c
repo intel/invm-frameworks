@@ -29,9 +29,14 @@
  * encounter in our code.  Also made changes so it works with MinGW.
  */
 
+#ifdef __MSVC__
+#include <windows.h>
+#else
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
+#include <unistd.h>
+#endif
 
 #include "system.h"
 
@@ -39,7 +44,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+
 #include <string.h>
 
 #include "libIntel_i18n.h"
@@ -60,13 +65,11 @@ void get_lang_env(I18N_STRING);
  */
 static const char *lookup_catalog_file(I18N_STRING path, struct domainbinding *db)
 {
-	struct stat st;
 
-	// make sure the file is there
-	if (stat(path, &st) < 0)
-	{
-		return NULL;
-	}
+    if (!os_doesfileexist(path))
+    {
+        return NULL;
+    }
 
 	if (mapit(path, db) == 0)
 	{
@@ -127,10 +130,9 @@ validate(void *arg, struct mohandle *mohandle)
  * Didn't dig into this function, aside from memory mapping not sure what all else its
  * doing.
  */
-int mapit(const I18N_STRING  path, struct domainbinding *db)
+int mapit(const I18N_STRING path, struct domainbinding *db)
 {
-	int fd;
-	struct stat st;
+    FILE *fd = NULL;
 	char *base;
 	u_int32_t magic, revision;
 	struct moentry *otable, *ttable;
@@ -140,6 +142,7 @@ int mapit(const I18N_STRING  path, struct domainbinding *db)
 	int i;
 	const char *v;
 	struct mohandle *mohandle = &db->mohandle;
+    size_t filesize;
 
 	if (mohandle->addr && mohandle->addr != I18N_MMAP_FAILED &&
 			mohandle->mo.mo_magic)
@@ -149,46 +152,44 @@ int mapit(const I18N_STRING  path, struct domainbinding *db)
 
 	unmapit(db);
 
-	if (stat(path, &st) < 0)
+    if (!os_doesfileexist(path) || !os_getfilesize(path, &filesize))
+    {
+        goto fail;
+    }
+
+    
+    if(!os_isregfile(path) || filesize > I18N_MMAP_MAX)
 	{
 		goto fail;
 	}
 
-	if ((st.st_mode & S_IFMT) != S_IFREG || st.st_size > I18N_MMAP_MAX)
+	fd = fopen(path, "r");
+
+	if (NULL == fd)
 	{
 		goto fail;
 	}
 
-	fd = open(path, O_RDONLY);
-
-	if (fd < 0)
-	{
-		goto fail;
-	}
-
-	if (read(fd, &magic, sizeof (magic)) != sizeof (magic) ||
+	if (fread(&magic, 1, sizeof (magic), fd) != sizeof (magic) ||
 			(magic != MO_MAGIC && magic != MO_MAGIC_SWAPPED))
 	{
-		close(fd);
 		goto fail;
 	}
 
-	if (read(fd, &revision, sizeof (revision)) != sizeof (revision) ||
+	if (fread(&revision, 1, sizeof (revision), fd) != sizeof (revision) ||
 			flip(revision, magic) != MO_REVISION)
 	{
-		close(fd);
 		goto fail;
 	}
 
-	mohandle->addr = my_mmap(NULL, (size_t)st.st_size, fd, (off_t)0);
+	mohandle->addr = my_mmap(NULL, (size_t)filesize, fd, 0);
 	if (!mohandle->addr || mohandle->addr == I18N_MMAP_FAILED)
 	{
-		close(fd);
 		goto fail;
 	}
 
-	close(fd);
-	mohandle->len = (size_t)st.st_size;
+	fclose(fd);
+	mohandle->len = (size_t)filesize;
 
 	base = mohandle->addr;
 	mo = (struct mo *)mohandle->addr;
@@ -288,7 +289,11 @@ int mapit(const I18N_STRING  path, struct domainbinding *db)
 
 	return 0;
 
-	fail:
+fail:
+    if (fd)
+    {
+        fclose(fd);
+    }
 	return -1;
 }
 

@@ -40,7 +40,7 @@ namespace framework {
 /*!
  * When the parser isn't able to find a valid transition after a given token.
  */
-class ParseErrorResult : public SyntaxErrorResult
+class INVM_CLI_API ParseErrorResult : public SyntaxErrorResult
 {
 public:
 	/*!

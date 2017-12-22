@@ -162,12 +162,19 @@ std::string cli::framework::ResultBase::stringFromArgList(const char *format, ..
 
 	// add space for ending null char, create & fill buffer
 	bufferSize++;
-	char buffer[bufferSize];
+	char *buffer = new char[bufferSize];
+    if (NULL == buffer)
+    {
+        return NULL;
+    }
+
 	va_start(args, format);
 	vsnprintf(buffer, bufferSize, format, args);
 
 	// set the error message string
 	m_result = buffer;
+
+    delete buffer;
 	va_end(args);
 
 	return m_result;

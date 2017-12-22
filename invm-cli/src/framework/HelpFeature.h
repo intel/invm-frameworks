@@ -41,7 +41,7 @@ namespace framework
 /*!
  * Implements the CR show -host command to display host server information.
  */
-class HelpFeature : public cli::framework::FeatureBase
+class INVM_CLI_API HelpFeature : public cli::framework::FeatureBase
 {
 public:
 

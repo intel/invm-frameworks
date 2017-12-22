@@ -45,7 +45,7 @@ namespace framework
 /*!
  * Lexer is responsible for converting strings into known token types
  */
-class Lexer
+class INVM_CLI_API Lexer
 {
 public:
 	/*!

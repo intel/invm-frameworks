@@ -54,7 +54,7 @@ const std::string simpleListResultXmlTag = "Results";
 /*!
  * Used when the command results in multiple SimpleResults
  */
-class SimpleListResult : public ResultBase
+class INVM_CLI_API SimpleListResult : public ResultBase
 {
 	public:
 		/*!

@@ -33,6 +33,7 @@
 #ifndef _CLI_FRAMEWORK_LOGGER_H_
 #define _CLI_FRAMEWORK_LOGGER_H_
 
+#include "Export.h"
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -55,7 +56,7 @@ namespace framework
 /*!
  * Represents a message to be logged
  */
-class LogMessage
+class INVM_CLI_API LogMessage
 {
 public:
 	/*!
@@ -151,7 +152,7 @@ private:
 /*!
  * The base class for Channels.
  */
-class LogChannelBase
+class INVM_CLI_API LogChannelBase
 {
 public:
 	/*!
@@ -170,7 +171,7 @@ public:
 /*!
  * A Stream channel that takes a stream to write the logs to. The caller provides the stream
  */
-class StreamChannel : public LogChannelBase
+class INVM_CLI_API StreamChannel : public LogChannelBase
 {
 public:
 	/*!
@@ -194,7 +195,7 @@ private:
 /*!
  * A logging channel that writes all logs to std::cout
  */
-class ConsoleChannel : public StreamChannel
+class INVM_CLI_API ConsoleChannel : public StreamChannel
 {
 public:
 	ConsoleChannel() : StreamChannel(&std::cout) { }
@@ -226,7 +227,7 @@ class EsxLogChannel : public LogChannelBase
  * 		logger << LogMessage::PRIORITY_WARN << "This is a warning" << std::endl;
  * This example writes a "Warning" to whatever channel is set.
  */
-class Logger
+class INVM_CLI_API Logger
 {
 public:
 	/*!

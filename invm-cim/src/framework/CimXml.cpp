@@ -49,6 +49,7 @@
  */
 wbem::framework::CimXml::CimXml(std::string cimXml)
 {
+    char* xml = NULL;
 	try
 	{
 		// xml string being parsed must be modifiable. rapidxml does inline whitespace
@@ -57,7 +58,12 @@ wbem::framework::CimXml::CimXml(std::string cimXml)
 		{
 			throw ExceptionBadParameter("cimXml");
 		}
-		char xml[cimXml.length() + 1];
+
+        xml = new char[cimXml.length() + 1];
+        if (NULL == xml)
+        {
+            throw ExceptionBadParameter("cimXml");
+        }
 		s_strcpy(xml, cimXml.c_str(), cimXml.length() + 1);
 		rapidxml::xml_document<> doc;
 		doc.parse<0>(xml);
@@ -74,8 +80,18 @@ wbem::framework::CimXml::CimXml(std::string cimXml)
 	}
 	catch (const std::exception &)
 	{
+        if (xml)
+        {
+            delete xml;
+            xml = NULL;
+        }
 		throw ExceptionBadParameter("cimXml");
 	}
+
+    if (xml)
+    {
+        delete xml;
+    }
 }
 
 void wbem::framework::CimXml::generateAttributes(const rapidxml::xml_node<> *pInstance,

@@ -29,12 +29,14 @@
 #ifndef INTEL_CIM_FRAMEWORK_INDICATIONSERVICE_H
 #define INTEL_CIM_FRAMEWORK_INDICATIONSERVICE_H
 
+#include "Export.h"
+
 namespace wbem
 {
 namespace framework
 {
 
-class IndicationService
+class INVM_CIM_API IndicationService
 {
 public:
 	IndicationService();

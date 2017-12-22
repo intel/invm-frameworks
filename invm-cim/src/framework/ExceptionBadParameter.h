@@ -42,7 +42,7 @@ namespace framework
 /*!
  * An exception for an invalid input parameter
  */
-class ExceptionBadParameter: public Exception
+class INVM_CIM_API ExceptionBadParameter: public Exception
 {
 	public:
 	/*!

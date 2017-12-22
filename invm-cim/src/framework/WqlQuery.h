@@ -51,7 +51,7 @@ const std::string WQL_SELECT_ALL = "*";
 const std::string WQL_FROM = "FROM";
 const std::string WQL_WHERE = "WHERE";
 
-class WqlQuery
+class INVM_CIM_API WqlQuery
 {
 	public:
 

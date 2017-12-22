@@ -32,6 +32,7 @@
 
 #include <string>
 #include <sstream>
+#include <ctype.h>
 
 #include <time/time_utilities.h>
 #include <logger/logging.h>
@@ -1146,14 +1147,14 @@ void wbem::framework::Attribute::trimStr(STR &str)
     std::string::iterator strStart = str.begin();
     std::string::iterator strEnd = str.end();
 
-    while (std::isspace(*strStart))
+    while (isspace(*strStart))
     {
         ++strStart;
     }
 
     if (strStart != strEnd)
     {
-        while (std::isspace(*(strEnd - 1)))
+        while (isspace(*(strEnd - 1)))
         {
             --strEnd;
         }

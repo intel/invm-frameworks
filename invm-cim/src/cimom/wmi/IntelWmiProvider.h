@@ -486,11 +486,11 @@ public:
 	 * @return
 	 * 	 WBEM_E_FAILED or WBEM_S_NO_ERROR
 	 */
-	HRESULT ProvideEvents(IWbemObjectSink *pSink,long lFlags);
+	HRESULT STDMETHODCALLTYPE ProvideEvents(IWbemObjectSink *pSink,long lFlags);
 
-	HRESULT NewQuery(unsigned long dwId, WBEM_WSTR wszQueryLanguage, WBEM_WSTR wszQuery);
+	HRESULT STDMETHODCALLTYPE NewQuery(unsigned long dwId, WBEM_WSTR wszQueryLanguage, WBEM_WSTR wszQuery);
 
-	HRESULT CancelQuery(unsigned long dwId);
+	HRESULT STDMETHODCALLTYPE CancelQuery(unsigned long dwId);
 
 private:
 	SCODE InstancesToWmi(

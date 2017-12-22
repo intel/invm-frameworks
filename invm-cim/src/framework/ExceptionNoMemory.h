@@ -44,7 +44,7 @@ namespace framework
 /*!
  * Out of memory Wbem library exception
  */
-class ExceptionNoMemory: public Exception
+class INVM_CIM_API ExceptionNoMemory: public Exception
 {
 	public:
 		/*!

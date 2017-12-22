@@ -283,7 +283,7 @@ void convert_seconds_to_datetime_interval(const unsigned long long secs,
  * the datetime string plus a null terminator
  */
 
-void convert_seconds_to_datetime(time_t raw_time, COMMON_DATETIME_STR datetime_buf)
+void convert_seconds_to_datetime(const time_t raw_time, COMMON_DATETIME_STR datetime_buf)
 {
 	int timezone_diff_min = 0;
 	get_timezone_diff((time_t)0, &timezone_diff_min);

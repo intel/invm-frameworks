@@ -44,7 +44,7 @@ namespace wbem
 namespace framework
 {
 
-class ProviderFactory : public InstanceFactoryCreator
+class INVM_CIM_API ProviderFactory : public InstanceFactoryCreator
 {
 public:
 	ProviderFactory();

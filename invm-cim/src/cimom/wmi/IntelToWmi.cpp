@@ -43,7 +43,6 @@
 #include "wmiUtilities.h"
 #include <comutil.h>
 #include <logger/logging.h>
-#include <mapidbg.h>
 
 #include "IntelToWmi.h"
 #include "Attribute.h"

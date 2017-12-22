@@ -53,7 +53,7 @@ static const std::string PROMPT_YES = "y"; // lower case yes answer to y or n pr
  * @todo: With the constructor parameters and the "run" parameters there is some redundancy in
  * what a feature is passed. Need to understand better how Features will or will not use these.
  */
-class FeatureBase
+class INVM_CLI_API FeatureBase
 {
 
 public:

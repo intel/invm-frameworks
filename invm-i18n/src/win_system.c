@@ -45,10 +45,44 @@ DWORD getpagesize()
 	return system_info.dwPageSize;
 }
 
+BOOL os_getfilesize(const char *filename, size_t *filesize)
+{
+    BOOL                        fOk;
+    WIN32_FILE_ATTRIBUTE_DATA   fileInfo;
+
+    if (NULL == filename && NULL != filesize)
+        return FALSE;
+
+    fOk = GetFileAttributesEx(filename, GetFileExInfoStandard, (void*)&fileInfo);
+    if (!fOk)
+        return FALSE;
+
+    //assert(0 == fileInfo.nFileSizeHigh);
+    *filesize = (size_t)fileInfo.nFileSizeLow;
+    return TRUE;
+}
+
+BOOL os_doesfileexist(const char *filename)
+{
+    DWORD dwAttrib = GetFileAttributes(filename);
+
+    if (!((dwAttrib != INVALID_FILE_ATTRIBUTES &&
+        !(dwAttrib & FILE_ATTRIBUTE_DIRECTORY))))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+BOOL os_isregfile(const char *filename)
+{
+    return os_doesfileexist(filename);
+}
+
 /*
  * Generic function to memory map a file.
  */
-void* my_mmap(void* start, size_t length, int fd, size_t offset)
+void* my_mmap(void* start, size_t length, FILE *fd, size_t offset)
 {
 	HANDLE handle;
 
@@ -57,7 +91,7 @@ void* my_mmap(void* start, size_t length, int fd, size_t offset)
 		exit(1);
 	}
 
-	handle = CreateFileMapping((HANDLE)_get_osfhandle(fd), NULL,
+	handle = CreateFileMapping((HANDLE)_get_osfhandle(_fileno(fd)), NULL,
 			PAGE_READONLY, 0, 0, NULL);
 
 	if (handle != NULL)
@@ -86,13 +120,14 @@ int get_locale(I18N_STRING locale)
 {
 	int  error = I18N_SUCCESS;
 	WCHAR localeBuffer[I18N_STRING_LEN];
+    size_t conv_size;
 
 	if (GetUserDefaultLocaleName(localeBuffer, I18N_STRING_LEN)  == 0)
 	{
 		locale[0] = '\0';
 		error = I18N_FAIL;
 	}
-	else if (wcstombs(locale, localeBuffer, I18N_STRING_LEN) == (size_t)-1)
+	else if (0 == wcstombs_s(&conv_size, locale, I18N_STRING_LEN, localeBuffer, I18N_STRING_LEN) && (conv_size > 0))
 	{
 		locale[0] = '\0';
 		error = I18N_FAIL;

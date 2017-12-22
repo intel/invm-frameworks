@@ -64,7 +64,7 @@ const std::string ESX_END_FIELD = "</field>"; //!< ESX end field tag
 /*!
  * Base class for command results
  */
-class ResultBase
+class INVM_CLI_API ResultBase
 {
 public:
 

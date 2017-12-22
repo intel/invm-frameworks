@@ -50,7 +50,7 @@ const std::string SYNTAXERROR_MISSINGVALUE_MSG = TR("A value is required for the
 /*!
  * Sub class of the SyntaxErrorResult to represent a missing property value
  */
-class SyntaxErrorMissingValueResult : public SyntaxErrorResult
+class INVM_CLI_API SyntaxErrorMissingValueResult : public SyntaxErrorResult
 {
 	public:
 		/*!

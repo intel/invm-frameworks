@@ -33,6 +33,7 @@
 #define _CLI_FRAMEWORK_TRACE_H
 
 #include <string>
+#include "CliFrameworkTypes.h"
 
 namespace cli {
 namespace framework {
@@ -40,7 +41,7 @@ namespace framework {
 /*!
  * Traces function entry and exit using the logger
  */
-class Trace {
+class INVM_CLI_API Trace {
 public:
 	/*!
 	 * Create a log entry for tracing a function

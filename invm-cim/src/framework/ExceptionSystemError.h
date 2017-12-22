@@ -41,7 +41,7 @@ namespace wbem
 namespace framework
 {
 
-class ExceptionSystemError: public Exception
+class INVM_CIM_API ExceptionSystemError: public Exception
 {
 	public:
 		/*!

@@ -58,7 +58,7 @@ const std::string INVALIDWQL_REASONUNMATCHEDPARENS = "The query string contains 
 /*!
  * An exception for an invalid WQL query string
  */
-class ExceptionInvalidWqlQuery : public Exception
+class INVM_CIM_API ExceptionInvalidWqlQuery : public Exception
 {
 	public:
 		/*!

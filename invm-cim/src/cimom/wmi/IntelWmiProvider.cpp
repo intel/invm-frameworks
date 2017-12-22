@@ -44,7 +44,7 @@
 #include <windows.h>
 #include <vector>
 #include <wbemcli.h>
-#include <ntdef.h>
+
 #include "Attribute.h"
 #include "Exception.h"
 #include "ExceptionBadParameter.h"
@@ -59,6 +59,7 @@
  * correct value is documentated at http://msdn.microsoft.com/en-us/library/cc250705.aspx and
  * http://api.kde.org/kdesupport-api/kdewin-apidocs/wbemuuid_8cpp_source.html
  */
+#ifndef __MSVC__
 extern "C" const GUID IID_IWbemServices
 	= { 0x9556dc99,0x828c,0x11cf,{ 0xa3,0x7e,0x00,0xaa,0x00,0x32,0x40,0xc7 } };
 extern "C" const GUID IID_IWbemProviderInit
@@ -70,7 +71,7 @@ extern "C" const GUID IID_IWbemEventProviderQuerySink
 	= { 0x580acaf8,0xfa1c,0x11d0,{ 0xad,0x72,0x00,0xc0,0x4f,0xd8,0xfd,0xff } };
 extern "C" const GUID IID_IWbemEventProviderSecurity
 	= { 0x631f7d96,0xd993,0x11d2,{ 0xb3,0x39,0x00,0x10,0x5a,0x1f,0x4a,0xaf } };
-
+#endif
 
 /*
  * IntelWmiProvider::IntelWmiProvider
@@ -427,7 +428,7 @@ SCODE wbem::wmi::IntelWmiProvider::GetByPath
 		{
 			rc = WBEM_E_INVALID_PARAMETER;
 		}
-		catch (wbem::framework::ExceptionSystemError &e)
+		catch (wbem::framework::ExceptionSystemError &)
 		{
 			rc = WBEM_E_PROVIDER_FAILURE;
 		}
@@ -726,7 +727,7 @@ HRESULT STDMETHODCALLTYPE wbem::wmi::IntelWmiProvider::PutInstanceAsync(
 						{
 							result = WBEM_E_INVALID_PARAMETER;
 						}
-						catch (wbem::framework::ExceptionSystemError &e)
+						catch (wbem::framework::ExceptionSystemError &)
 						{
 							result = WBEM_E_PROVIDER_FAILURE;
 						}

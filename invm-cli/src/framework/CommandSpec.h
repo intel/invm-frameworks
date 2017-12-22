@@ -46,7 +46,7 @@ namespace framework
  * Represents the syntax spec for a command including what verb, targets, and properties are supported
  * and which are required.
  */
-class CommandSpec
+class INVM_CLI_API CommandSpec
 {
 public:
 	/*!

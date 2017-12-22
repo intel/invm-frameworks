@@ -33,6 +33,8 @@
 #ifndef _CLI_FRAMEWORK_CLIFRAMEWORKTYPES_H_
 #define _CLI_FRAMEWORK_CLIFRAMEWORKTYPES_H_
 
+#include "Export.h"
+
 #include <vector>
 #include <map>
 #include <string>
@@ -58,7 +60,7 @@ static const std::string UNCHANGED_MSG = N_TR("Unchanged"); //!< no modification
  * @return
  * 		lower case version of value passed
  */
-std::string toLower(const std::string &value);
+INVM_CLI_API std::string toLower(const std::string &value);
 
 
 /*!
@@ -68,28 +70,28 @@ std::string toLower(const std::string &value);
  * @return
  * 		trimmed version of the value passed
  */
-std::string trim(const std::string &value);
+INVM_CLI_API std::string trim(const std::string &value);
 
 /*!
  * Utility method to tokenize a string
  */
-std::vector<std::string> tokenizeString(const char *str, char delimeter);
+INVM_CLI_API std::vector<std::string> tokenizeString(const char *str, char delimeter);
 
 /*!
  * Utility method to compare two strings ignoring case
  */
-bool stringsIEqual(const std::string &str1, const std::string &str2);
+INVM_CLI_API bool stringsIEqual(const std::string &str1, const std::string &str2);
 
 /*!
  * Utility method to check if a string is numeric. Will ignore '.' decimal point and leading '-' (negative numbers).
  */
-bool stringIsNumeric(const std::string &str);
+INVM_CLI_API bool stringIsNumeric(const std::string &str);
 
 /*!
  * logger for the framework.  Different Channels can be set to change where the logs go.
  * By default doesn't output anything
  */
-extern cli::framework::Logger logger;
+INVM_CLI_API extern cli::framework::Logger logger;
 
 /*!
  * The different types of a token
@@ -120,7 +122,7 @@ enum CommandSpecPartType
  * @return
  * 		string representation of the token type
  */
-std::string tokenTypeToString(TokenType type);
+INVM_CLI_API std::string tokenTypeToString(TokenType type);
 
 /*!
  * Defines a token within a CommandSpec
@@ -140,7 +142,7 @@ typedef struct
  * Wraps a CommandSpecPart to make it easier and more readable to update specific fields. Used
  * by a CommandSpec when adding command parts.
  */
-class CommandSpecPartDecorator
+class INVM_CLI_API CommandSpecPartDecorator
 {
 public:
 	CommandSpecPartDecorator(CommandSpecPart &part): m_Part(part){}
@@ -206,11 +208,11 @@ typedef struct
  * @param parsedCommand parsed command to search
  * @param cmdPart command part caller is seeking
  */
-bool parsedCommandContains(const ParsedCommand& parsedCommand, const CommandSpecPart& cmdPart);
+INVM_CLI_API bool parsedCommandContains(const ParsedCommand& parsedCommand, const CommandSpecPart& cmdPart);
 
-std::vector<std::string> getValidOutputFormats();
+INVM_CLI_API std::vector<std::string> getValidOutputFormats();
 
-std::vector<std::string> getValidOutputOptions();
+INVM_CLI_API std::vector<std::string> getValidOutputOptions();
 
 /*!
  * Common Command parts

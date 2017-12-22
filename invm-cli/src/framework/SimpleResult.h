@@ -48,7 +48,7 @@ const std::string simpleResultXmlTag = "Result";
 /*!
  * Result class used when the response is a short text message.
  */
-class SimpleResult : public ResultBase
+class INVM_CLI_API SimpleResult : public ResultBase
 {
 public:
 	/*!

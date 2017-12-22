@@ -42,7 +42,7 @@
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
 
-
+#ifndef __MSVC__
 /*
  * ************************************************************************************************
  * comutil.h functions
@@ -148,6 +148,7 @@ char* _com_util::ConvertBSTRToString(BSTR src)
 	return result;
 };
 
+#endif // __MSVC__
 
 /*
 * Impersonate

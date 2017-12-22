@@ -42,7 +42,7 @@ namespace framework
 /*!
  * An exception for an invalid input Attribute
  */
-class ExceptionBadAttribute: public Exception
+class INVM_CIM_API ExceptionBadAttribute: public Exception
 {
 	public:
 	/*!

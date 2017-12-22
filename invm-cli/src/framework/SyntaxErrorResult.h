@@ -44,7 +44,7 @@ namespace framework
  * Sub class of the ErrorResult.  Used when there is a syntax error.
  * Adds syntax part to indicate which part of the command syntax is potentially wrong.
  */
-class SyntaxErrorResult : public ErrorResult
+class INVM_CLI_API SyntaxErrorResult : public ErrorResult
 {
 public:
 	/*!

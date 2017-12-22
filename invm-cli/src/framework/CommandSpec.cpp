@@ -78,7 +78,10 @@ cli::framework::CommandSpecPartDecorator cli::framework::CommandSpec::addTarget(
 		const std::string &helpText)
 {
 	Trace(__FILE__, __FUNCTION__, __LINE__);
-	return addTarget((CommandSpecPart) {name, isRequired, valueText, isValueRequired, helpText});
+
+    CommandSpecPart part = { name, isRequired, valueText, isValueRequired, helpText };
+
+	return addTarget(part);
 }
 
 cli::framework::CommandSpecPartDecorator cli::framework::CommandSpec::addTarget(const CommandSpecPart& part)
@@ -93,7 +96,10 @@ cli::framework::CommandSpecPartDecorator cli::framework::CommandSpec::addPropert
 		const std::string &helpText)
 {
 	Trace(__FILE__, __FUNCTION__, __LINE__);
-	return addProperty((CommandSpecPart) {name, isRequired, valueText, isValueRequired, helpText});
+
+    CommandSpecPart part = { name, isRequired, valueText, isValueRequired, helpText };
+
+	return addProperty(part);
 }
 
 cli::framework::CommandSpecPartDecorator cli::framework::CommandSpec::addProperty(const CommandSpecPart& part)

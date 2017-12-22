@@ -44,7 +44,7 @@ namespace framework
 /*!
  * Operation not supported Wbem library exception
  */
-class ExceptionNotSupported: public Exception
+class INVM_CIM_API ExceptionNotSupported: public Exception
 {
 	public:
 		/*!

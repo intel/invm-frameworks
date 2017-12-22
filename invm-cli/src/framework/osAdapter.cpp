@@ -73,8 +73,10 @@ return rc;
  */
 char *dlib_suffix(char *buffer, size_t buffer_len)
 {
-#ifdef __WINDOWS__
-	strncpy(buffer, ".dll", (buffer_len < 5 ? buffer_len : 5));
+#ifdef __MSVC__
+	strncpy_s(buffer, (buffer_len < 5 ? buffer_len : 5), ".dll", 5);
+#elif defined __WINDOWS__
+    strncpy(buffer, ".dll", (buffer_len < 5 ? buffer_len : 5));
  #else
 	strncpy(buffer, ".so", (buffer_len < 4 ? buffer_len : 4));
 #endif

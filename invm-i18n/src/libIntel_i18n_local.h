@@ -28,6 +28,7 @@
 #define _LIBINTEL_I18N_LOCAL_H_
 
 #include "libIntel_i18n.h"
+#include "common.h"
 
 typedef unsigned int u_int32_t;
 
@@ -44,6 +45,7 @@ typedef unsigned int u_int32_t;
 #endif
 
 /* *.mo file format */
+PACK_STRUCT(
 struct mo {
 	u_int32_t mo_magic;	/* determines endian */
 	u_int32_t mo_revision;	/* file format revision: 0 */
@@ -52,12 +54,14 @@ struct mo {
 	u_int32_t mo_ttable;	/* T: translated text table offset */
 	u_int32_t mo_hsize;	/* S: size of hashing table */
 	u_int32_t mo_hoffset;	/* H: offset of hashing table */
-} __attribute__((__packed__));
+})
 
+PACK_STRUCT(
 struct moentry {
 	u_int32_t len;		/* strlen(str), so region will be len + 1 */
 	u_int32_t off;		/* offset of \0-terminated string */
-} __attribute__((__packed__));
+})
+
 
 /* libintl internal data format */
 struct moentry_h {

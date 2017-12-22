@@ -26,9 +26,10 @@
  * Keeps track of some basic locale & program info in global variables.
  */
 
-
+#ifndef __MSVC__
 #include <sys/types.h>
 #include <sys/param.h>
+#endif
 
 #include <errno.h>
 #include <stdio.h>

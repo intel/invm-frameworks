@@ -49,7 +49,7 @@ namespace framework
 /*!
  * A CIM object path is a multi-part key that uniquely identifies a given CIM instance.
  */
-class ObjectPath
+class INVM_CIM_API ObjectPath
 {
 	public:
 

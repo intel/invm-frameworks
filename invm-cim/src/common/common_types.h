@@ -32,8 +32,12 @@
 #ifndef _COMMON_TYPES_H
 #define	_COMMON_TYPES_H
 
-#include <wchar.h>
+#ifdef __MSVC__
+#include <stdlib.h>
+#define PATH_MAX _MAX_PATH
+#endif
 
+#include <wchar.h>
 #include <limits.h>
 
 #ifdef __cplusplus

@@ -30,7 +30,7 @@
 /*
  * common logger for the cli framework
  */
-cli::framework::Logger cli::framework::logger;
+INVM_CLI_API cli::framework::Logger cli::framework::logger;
 
 extern std::string cli::framework::toLower(const std::string& value)
 {

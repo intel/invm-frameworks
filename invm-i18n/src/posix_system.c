@@ -31,16 +31,71 @@
 #include "libIntel_i18n_local.h"
 #include "safe_str.h"
 #include <sys/mman.h>
+#include <sys/stat.h>
+#include <stdio.h>
 #include <errno.h>
+#include "system.h"
 
 #define messages "LC_MESSAGES"
+
+
+// return 0 on success
+int os_getfilesize(const char *filename, size_t *filesize)
+{
+    struct stat file_stat;
+
+    if (NULL == filesize)
+    {
+        return -1;
+    }
+
+    if (0 != stat(filename, &file_stat))
+    {
+        return -1;
+    }
+
+    *filesize = file_stat.st_size;
+
+    return 0;
+}
+
+
+BOOL os_doesfileexist(const char *filename)
+{
+    struct stat st;
+
+    // make sure the file is there
+    if (stat(filename, &st) < 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+BOOL os_isregfile(const char *filename)
+{
+    struct stat st;
+
+    // make sure the file is there
+    if (stat(filename, &st) < 0)
+    {
+        return FALSE;
+    }
+
+    if ((st.st_mode & S_IFMT) != S_IFREG || st.st_size > I18N_MMAP_MAX)
+    {
+        return FALSE;
+    }
+
+    return TRUE;
+}
 
 /**
  * Generic function to memory map a file.
  */
-void* my_mmap(void* start, size_t length, int fd, size_t offset)
+void* my_mmap(void* start, size_t length, FILE* fd, size_t offset)
 {
-	return mmap(start, length, PROT_READ, MAP_FILE | MAP_PRIVATE, fd, offset);
+	return mmap(start, length, PROT_READ, MAP_FILE | MAP_PRIVATE, fileno(fd), offset);
 }
 
 /**
@@ -76,9 +131,9 @@ int get_locale(I18N_STRING locale)
 /*
  * return the file path separator for this type of OS
  */
-void get_separator(I18N_STRING separator)
+char* get_separator(I18N_STRING separator)
 {
-	safe_strncpy(separator, I18N_STRING_LEN, "/", I18N_STRING_LEN);
+	return safe_strncpy(separator, I18N_STRING_LEN, "/", I18N_STRING_LEN);
 }
 
 int get_catalog_file(struct domainbinding *binding, I18N_STRING catalog_file)

@@ -25,12 +25,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdio.h>
 #include "libIntel_i18n_local.h"
+
+#ifndef __MSVC__
+typedef int BOOL;
+#define TRUE 1
+#define FALSE 0
+#endif
+
+BOOL os_doesfileexist(const char *filename);
+
+BOOL os_getfilesize(const char *filename, size_t *filesize);
+
+BOOL os_isregfile(const char *filename);
 
 /*
  * Generic function to memory map a file.
  */
-void* my_mmap(void* start, size_t length, int fd, size_t offset);
+void* my_mmap(void* start, size_t length, FILE *fd, size_t offset);
 
 /*
  * Generic function to unmap a file from memory.

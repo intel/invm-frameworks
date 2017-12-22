@@ -32,6 +32,16 @@
 #ifndef _LIBINTEL_I18N_H_
 #define _LIBINTEL_I18N_H_
 
+#ifdef __MSVC__
+#ifdef I18N_EXPORTS
+#define I18N_API __declspec(dllexport)
+#else
+#define I18N_API __declspec(dllimport)
+#endif
+#else // ! __WINDOWS__
+#define I18N_API
+#endif // __WINDOWS__
+
 #ifndef LC_MESSAGES
 #define LC_MESSAGES 1729
 #endif
@@ -52,9 +62,9 @@ extern "C" {
 #define bindtextdomain Intel_bindtextdomain
 
 #ifdef __WINDOWS__
-extern char *gettext(const char *);
-extern char *textdomain(const I18N_STRING);
-extern char *bindtextdomain(const char *, const I18N_STRING);
+I18N_API char *gettext(const char *);
+I18N_API char *textdomain(const I18N_STRING);
+I18N_API char *bindtextdomain(const char *, const I18N_STRING);
 #else
 extern char *gettext(const char *) __THROW __attribute_format_arg__ (1);
 extern char *textdomain(const I18N_STRING) __THROW __attribute_format_arg__ (1);

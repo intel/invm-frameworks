@@ -33,7 +33,7 @@ namespace wbem
 {
 namespace framework
 {
-class NullInstanceFactory : public InstanceFactory
+class INVM_CIM_API NullInstanceFactory : public InstanceFactory
 {
 
 public:

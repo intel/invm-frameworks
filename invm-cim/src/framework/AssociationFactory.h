@@ -37,6 +37,7 @@
 #include "Instance.h"
 #include "InstanceFactory.h"
 #include "AssociationMapper.h"
+#include "Export.h"
 
 namespace wbem
 {
@@ -49,7 +50,7 @@ namespace framework
  * A generic association provider that will use a mapping table to create instances of requested
  * Association Classes
  */
-class AssociationFactory : public wbem::framework::InstanceFactory
+class INVM_CIM_API AssociationFactory : public wbem::framework::InstanceFactory
 {
 public:
 	/*!

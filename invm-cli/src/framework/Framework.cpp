@@ -74,14 +74,23 @@ cli::framework::ResultBase* cli::framework::Framework::execute(const StringList 
 {
 	// This is what nvmcli calls to execute the command line - tokens would be everything after nvmcli
 	Trace(__FILE__, __FUNCTION__, __LINE__);
-	const char *args[tokens.size()];
+	const char **args = new const char*[tokens.size()];
+
+    if (NULL == args)
+    {
+        return NULL;
+    }
 
 	for (size_t i = 0; i < tokens.size(); i++)
 	{
 		args[i] = tokens[i].c_str();
 	}
 
-	return execute((int)tokens.size(), (const char **)args);
+	ResultBase *result = execute((int)tokens.size(), (const char **)args);
+
+    delete args;
+
+    return result;
 }
 
 /*
@@ -184,7 +193,9 @@ cli::framework::ResultBase* cli::framework::Framework::execute(int argCount, con
 	}
 	else
 	{
-		pResult = HelpFeature().run(HelpFeature::HELP, (ParsedCommand){VERB_HELP});
+        ParsedCommand pc = { VERB_HELP };
+
+		pResult = HelpFeature().run(HelpFeature::HELP, pc);
 	}
 	return pResult;
 }

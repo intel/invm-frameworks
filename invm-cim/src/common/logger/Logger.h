@@ -42,6 +42,7 @@
 #include <syslog.h>
 #endif
 #include "s_str.h"
+#include "Export.h"
 
 namespace wbem
 {
@@ -50,16 +51,10 @@ namespace framework
 
 #define LOG_MSG_SIZE	1024
 
-/*
- * A single global instance of the logger.
- */
-class Logger;
-extern Logger gLogger;
-
 /*!
  * Represents a message to be logged
  */
-class LogMessage
+class INVM_CIM_API LogMessage
 {
 public:
 	/*!
@@ -155,7 +150,7 @@ private:
 /*!
  * The base class for Channels.
  */
-class LogChannelBase
+class INVM_CIM_API LogChannelBase
 {
 public:
 	/*!
@@ -174,7 +169,7 @@ public:
 /*!
  * A Stream channel that takes a stream to write the logs to. The caller provides the stream
  */
-class StreamChannel : public LogChannelBase
+class INVM_CIM_API StreamChannel : public LogChannelBase
 {
 public:
 	/*!
@@ -198,7 +193,7 @@ private:
 /*!
  * A logging channel that writes all logs to std::cout
  */
-class ConsoleChannel : public StreamChannel
+class INVM_CIM_API ConsoleChannel : public StreamChannel
 {
 public:
 	ConsoleChannel() : StreamChannel(&std::cout) { }
@@ -211,7 +206,7 @@ public:
  * 		--critical/warning type messages are logged using the syslog API
  * 		--debug/info type messages are logged to stdout or /dev/null as determined by a configuration setting
  */
-class EsxLogChannel : public LogChannelBase
+class INVM_CIM_API EsxLogChannel : public LogChannelBase
 {
 	/*!
 	 * Write the log message to the syslog
@@ -230,7 +225,7 @@ class EsxLogChannel : public LogChannelBase
  * 		logger << LogMessage::PRIORITY_WARN << "This is a warning" << std::endl;
  * This example writes a "Warning" to whatever channel is set.
  */
-class Logger
+class INVM_CIM_API Logger
 {
 public:
 	/*!
@@ -361,6 +356,12 @@ private:
     LogMessage::Priority m_currentMessagePriority;
     LogMessage::Priority m_level;
 };
+
+/*
+* A single global instance of the logger.
+*/
+//class INVM_CIM_API Logger;
+INVM_CIM_API extern Logger gLogger;
 
 } /* framework */
 } /* wbem */

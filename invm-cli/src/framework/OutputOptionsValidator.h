@@ -50,7 +50,7 @@ namespace cli
 {
 namespace framework
 {
-class OutputOptionsValidator
+class INVM_CLI_API OutputOptionsValidator
 {
 	public:
 		OutputOptionsValidator(const ParsedCommand &parsedCommand);

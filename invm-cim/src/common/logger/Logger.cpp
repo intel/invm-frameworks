@@ -33,7 +33,7 @@
  */
 #include "Logger.h"
 
-wbem::framework::Logger wbem::framework::gLogger;
+INVM_CIM_API wbem::framework::Logger wbem::framework::gLogger;
 
 wbem::framework::LogMessage::LogMessage(Priority priority, std::string message)
 : m_priority(priority), m_message(message), m_fileName(""), m_lineNumber(0)

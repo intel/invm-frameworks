@@ -73,7 +73,7 @@ const std::string helpResultNoCommandsStr = N_TR("No commands to display"); //!<
 /*!
  * Result for when help is requested or needed
  */
-class HelpResult : public ResultBase
+class INVM_CLI_API HelpResult : public ResultBase
 {
 public:
 	/*!

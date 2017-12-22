@@ -41,7 +41,7 @@ bool wbem::framework::StringUtil::stringCompareIgnoreCase(std::string str1, std:
 	}
 	for (unsigned int i = 0; i < str1.length(); i++)
 	{
-		if (std::tolower(str1[i]) != std::tolower(str2[i]))
+		if (tolower(str1[i]) != tolower(str2[i]))
 		{
 			return false;
 		}

@@ -48,7 +48,7 @@ const std::string SYNTAXERROR_UNEXPECTEDVALUE_MSG = TR("%s '%s' does not accept 
 /*!
  * Sub class of the SyntaxErrorResult to represent an unexpected property/target/option value
  */
-class SyntaxErrorUnexpectedValueResult : public SyntaxErrorResult
+class INVM_CLI_API SyntaxErrorUnexpectedValueResult : public SyntaxErrorResult
 {
 	public:
 		/*!

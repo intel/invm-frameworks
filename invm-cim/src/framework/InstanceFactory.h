@@ -85,7 +85,7 @@ static const wbem::framework::UINT32 CIM_ERR_METHOD_NOT_AVAILABLE = 16;
 /*!
  * The base class for CIM instance factories.
  */
-class InstanceFactory
+class INVM_CIM_API InstanceFactory
 {
 	public:
 

@@ -30,8 +30,10 @@
  * meaningful for the Intel WBEM library.
  */
 
+#include <memory>
 #include <string/s_str.h>
 #include <string/x_str.h>
+#include <string.h>
 #include <logger/logging.h>
 #include "ExceptionInvalidWqlQuery.h"
 #include "ExceptionNoMemory.h"
@@ -140,9 +142,9 @@ void WqlQuery::parse(const std::string &query,
 
 	// create a copy we can mangle
 	size_t querySize = query.size() + 1;
-	char tempStr[querySize];
-	s_strcpy(tempStr, query.c_str(), sizeof (tempStr));
-	s_strtrim(tempStr, sizeof (tempStr)); // trim off whitespace
+    std::unique_ptr<char[]> tempStr(new char[querySize]);
+	s_strcpy(tempStr.get(), query.c_str(), querySize);
+	s_strtrim(tempStr.get(), querySize); // trim off whitespace
 
 	// remember the sizes of keyword strings
 	// we'll use them for string comparisons
@@ -169,7 +171,7 @@ void WqlQuery::parse(const std::string &query,
 	bool openQuotes = false; // track open quotes
 	char quoteType = '\0'; // track open quotes
 	const char *delim = " \t\n"; // delimiters - whitespace
-	char *pNext = tempStr; // where to start search for next token
+	char *pNext = tempStr.get(); // where to start search for next token
 	char *pCh = x_strtok(&pNext, delim);
 	while (pCh != NULL)
 	{
@@ -326,18 +328,20 @@ void WqlQuery::processSelectAttributes(const std::vector<std::string>& attrToken
 		for (size_t i = 0; i < attrTokens.size(); i++)
 		{
 			// split on commas if necessary
-			size_t length = attrTokens[i].size();
-			char tempStr[length + 1];
-			s_strcpy(tempStr, attrTokens[i].c_str(), sizeof (tempStr));
+			size_t length = attrTokens[i].size() + 1;
+            std::unique_ptr<char[]> tempStr(new char[length]);
+			s_strcpy(tempStr.get(), attrTokens[i].c_str(), length);
+			s_strtrim(tempStr.get(), length);
+
 			// if the token ends with a comma, zero it out
 			// to simplify processing
-			if (tempStr[length - 1] == ',')
+			if (tempStr[strlen(tempStr.get()) - 1] == ',')
 			{
-				tempStr[length - 1] = '\0';
+				tempStr[strlen(tempStr.get()) - 1] = '\0';
 			}
 
 			// tokenize on commas
-			char *pNext = tempStr;
+			char *pNext = tempStr.get();
 			const char *delim = ",";
 			char *pToken = x_strtok(&pNext, delim);
 			while (pToken)

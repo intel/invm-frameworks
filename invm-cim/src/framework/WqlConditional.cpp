@@ -29,6 +29,7 @@
  * This file contains a class to represent a WQL conditional statement.
  */
 
+#include <memory>
 #include <string/s_str.h>
 #include <string/x_str.h>
 #include <stdlib.h>
@@ -67,8 +68,9 @@ WqlConditional::WqlConditional(const std::vector<std::string>& tokens) throw (Ex
 WqlConditional::WqlConditional(const std::string& str) throw (Exception) :
 		m_str(str)
 {
-	char tempStr[str.size() + 1];
-	s_strcpy(tempStr, str.c_str(), sizeof (tempStr));
+	size_t length = str.size() + 1;
+	std::unique_ptr<char[]> tempStr(new char[length]);
+	s_strcpy(tempStr.get(), str.c_str(), length);
 
 	// set of conditional tokens
 	std::vector<std::string> tokens;
@@ -77,7 +79,7 @@ WqlConditional::WqlConditional(const std::string& str) throw (Exception) :
 	bool openQuotes = false; // track open quotes
 	char quoteType = '\0'; // track open quotes
 	const char *delim = " \t\n"; // delimiters - whitespace
-	char *pNext = tempStr; // where to start search for next token
+	char *pNext = tempStr.get(); // where to start search for next token
 	char *pCh = x_strtok(&pNext, delim);
 	while (pCh != NULL)
 	{

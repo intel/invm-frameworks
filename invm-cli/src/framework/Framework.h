@@ -50,7 +50,7 @@ typedef std::map<std::string, cli::framework::FeatureBase*> featureMap; //!< Map
 /*!
  * Static class that contains the main entry point to the framework
  */
-class Framework
+class INVM_CLI_API Framework
 {
 public:
 	/*!

@@ -31,6 +31,7 @@
 #include "InstanceFactory.h"
 #include "Instance.h"
 #include "InstanceFactoryCreator.h"
+#include "Export.h"
 
 namespace wbem
 {
@@ -72,7 +73,7 @@ struct associationMap
 	std::string dependentFk; //!< Type SimpleFk requires dependentFK
 };
 
-class AssociationMapper
+class INVM_CIM_API AssociationMapper
 {
 public:
 

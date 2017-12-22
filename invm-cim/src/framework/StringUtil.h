@@ -32,12 +32,13 @@
 #include <string>
 #include <vector>
 #include "common_types.h"
+#include "Export.h"
 
 namespace wbem
 {
 namespace framework
 {
-	class StringUtil
+	class INVM_CIM_API StringUtil
 	{
 	public:
 		static bool stringCompareIgnoreCase(std::string str1, std::string str2);

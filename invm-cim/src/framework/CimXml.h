@@ -42,7 +42,7 @@
 #include "Exception.h"
 
 #include "ObjectPath.h"
-
+#include "Export.h"
 
 namespace wbem
 {
@@ -67,7 +67,7 @@ static const std::string CX_INSTANCE = "INSTANCE";
 /*!
  * CIM XML to Instance converter.
  */
-class CimXml
+class INVM_CIM_API CimXml
 {
 	public:
 

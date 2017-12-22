@@ -48,7 +48,7 @@ const std::string SYNTAXERROR_BADPROPERTYVALUE_MSG = TR("'%s' is not a valid set
 /*!
  * Sub class of the SyntaxErrorResult to represent an invalid property value
  */
-class SyntaxErrorBadValueResult : public SyntaxErrorResult
+class INVM_CLI_API SyntaxErrorBadValueResult : public SyntaxErrorResult
 {
 	public:
 		/*!

@@ -100,7 +100,7 @@ set(COMMON_COMPILE_FLAGS "-Wall -Werror -Wfatal-errors -fstack-protector-all -gg
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_COMPILE_FLAGS}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMMON_COMPILE_FLAGS} -std=c++98")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMMON_COMPILE_FLAGS} -std=c++11")
 
 
 if (RELEASE)

@@ -39,7 +39,7 @@ namespace cli
 {
 namespace framework
 {
-class CommandVerify
+class INVM_CLI_API CommandVerify
 {
 public:
 	SyntaxErrorResult *verify(const ParsedCommand &parsedCommand,

@@ -39,6 +39,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
+#include "Export.h"
 
 namespace wbem
 {
@@ -52,7 +53,7 @@ namespace wmi
  * Windows OS.
  *
  */
-class IntelWmiProviderFactory : public IClassFactory
+class INVM_CIM_API IntelWmiProviderFactory : public IClassFactory
 {
 protected:
 	ULONG m_cRef; //!< maintain count of references

@@ -88,7 +88,7 @@ struct WqlComparisonClause
  * Represents a conditional expression in a WQL query.
  * @remark for now, we do not deal with the OR operators.
  */
-class WqlConditional
+class INVM_CIM_API WqlConditional
 {
 	public:
 		/*!

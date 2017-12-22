@@ -40,7 +40,7 @@ namespace framework {
 /*!
  * TODO: class description
  */
-class NotImplementedErrorResult : public ErrorResult
+class INVM_CLI_API NotImplementedErrorResult : public ErrorResult
 {
 public:
 	/*!

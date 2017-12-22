@@ -53,7 +53,7 @@ typedef std::vector<std::pair<std::string, PropertyListResult> > propertyObjects
 /*!
  * Used when the command results in multiple PropertyListResults.
  */
-class ObjectListResult : public ResultBase
+class INVM_CLI_API ObjectListResult : public ResultBase
 {
 	public:
 		ObjectListResult();

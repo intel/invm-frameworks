@@ -40,6 +40,7 @@
 
 #include "Exception.h"
 #include "Types.h"
+#include "Export.h"
 
 namespace wbem
 {
@@ -86,7 +87,7 @@ enum DataType
 /*!
  * A generic property of an NvmInstance represented as a key/value pair.
  */
-class Attribute
+class INVM_CIM_API Attribute
 {
 	public:
 

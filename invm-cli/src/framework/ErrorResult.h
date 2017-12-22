@@ -57,7 +57,7 @@ const std::string errorResultXmlTypeAttribute = "Type";
 /*!
  * Result representing an error.
  */
-class ErrorResult : public SimpleResult
+class INVM_CLI_API ErrorResult : public SimpleResult
 {
 public:
 

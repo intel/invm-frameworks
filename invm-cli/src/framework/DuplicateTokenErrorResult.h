@@ -41,7 +41,7 @@ namespace framework
 /*!
  * An error when the user enters the same token more than once
  */
-class DuplicateTokenErrorResult : public SyntaxErrorResult
+class INVM_CLI_API DuplicateTokenErrorResult : public SyntaxErrorResult
 {
 public:
 	/*!

@@ -37,7 +37,7 @@ namespace wbem
 namespace framework
 {
 
-class InstanceFactoryCreator
+class INVM_CIM_API InstanceFactoryCreator
 {
 public:
 	virtual InstanceFactory *getInstanceFactory(const std::string &className) = 0;

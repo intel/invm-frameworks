@@ -39,7 +39,6 @@
 #include "Exception.h"
 #include "ObjectPath.h"
 
-
 namespace wbem
 {
 namespace framework
@@ -48,7 +47,7 @@ namespace framework
 /*!
  * The base class for all CIM instances.
  */
-class Instance
+class INVM_CIM_API Instance
 {
 	public:
 		/*!

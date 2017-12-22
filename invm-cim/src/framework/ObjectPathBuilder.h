@@ -51,7 +51,7 @@ namespace wbem
 		 * Uses the ABNF Notation of Grammar at:
 		 * http://msdn.microsoft.com/en-us/library/cc250722(v=prot.20).aspx
 		 */
-		class ObjectPathBuilder
+		class INVM_CIM_API ObjectPathBuilder
 		{
 		public:
 			/*!

@@ -56,7 +56,7 @@ typedef std::vector<PropertyResult> properties_t;
 /*!
  * Used when the command results are a list of key/value pairs.
  */
-class PropertyListResult : public ResultBase
+class INVM_CLI_API PropertyListResult : public ResultBase
 {
 public:
 	PropertyListResult();

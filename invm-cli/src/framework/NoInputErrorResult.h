@@ -40,7 +40,7 @@ namespace framework {
 /*!
  * Simple error result class. User didn't enter any input
  */
-class NoInputErrorResult : public SyntaxErrorResult
+class INVM_CLI_API NoInputErrorResult : public SyntaxErrorResult
 {
 public:
 	/*!

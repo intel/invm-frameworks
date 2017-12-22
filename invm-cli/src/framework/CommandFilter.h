@@ -39,7 +39,7 @@ namespace cli
 {
 namespace framework
 {
-class CommandFilter
+class INVM_CLI_API CommandFilter
 {
 
 public:

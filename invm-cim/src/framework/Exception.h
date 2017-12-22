@@ -38,6 +38,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "Export.h"
 #include "Strings.h"
 
 #define	ERROR_MESSAGE_LEN 1024 //!< The length of the exception error message
@@ -50,7 +51,7 @@ namespace framework
 /*!
  * Generic exception for the Wbem library.
  */
-class Exception : public std::exception
+class INVM_CIM_API Exception : public std::exception
 {
 	public:
 

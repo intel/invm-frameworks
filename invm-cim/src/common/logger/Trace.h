@@ -35,6 +35,7 @@
 #define _WBEM_FRAMEWORK_TRACE_H
 
 #include <string>
+#include "Export.h"
 
 namespace wbem {
 namespace framework {
@@ -42,7 +43,7 @@ namespace framework {
 /*!
  * Traces function entry and exit using the logger
  */
-class Trace {
+class INVM_CIM_API Trace {
 public:
 	/*!
 	 * Create a log entry for tracing a function

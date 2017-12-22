@@ -52,7 +52,7 @@ namespace framework
 /*!
  * Parser class, responsible for verifying the syntax of a list of tokens
  */
-class Parser
+class INVM_CLI_API Parser
 {
 public:
 	/*!
