@@ -43,6 +43,11 @@
 
 #define	ERROR_MESSAGE_LEN 1024 //!< The length of the exception error message
 
+#ifdef _MSC_VER
+ // https://stackoverflow.com/questions/24511376/how-to-dllexport-a-class-derived-from-stdruntime-error
+#pragma warning( disable : 4275 ) 
+#endif
+
 namespace wbem
 {
 namespace framework
@@ -51,6 +56,7 @@ namespace framework
 /*!
  * Generic exception for the Wbem library.
  */
+
 class INVM_CIM_API Exception : public std::exception
 {
 	public:
