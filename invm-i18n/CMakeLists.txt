@@ -38,14 +38,17 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+if (LNX_BUILD)
+    include(GNUInstallDirs)
+endif()
+
 # --------------------------------------------------------------------------------------------------
 # invm-i18n
 # --------------------------------------------------------------------------------------------------
-file(GLOB I18NHEADERS
+file(GLOB I18NFRAMEWORK_HEADERS
 	src/libIntel_i18n.h
-	src/system.h
 	)
-file(COPY ${I18NHEADERS}
+file(COPY ${I18NFRAMEWORK_HEADERS}
         DESTINATION ${HEADER_DIR})
 
 set(SRC src/gettext.c
@@ -60,6 +63,11 @@ else()
 endif()
 
 add_library(invm-i18n ${LIB_TYPE} ${SRC})
+
+if (LNX_BUILD)
+        install (TARGETS invm-i18n LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        install (FILES ${I18NFRAMEWORK_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libinvm-i18n)
+endif()
 
 # this will create the symlinks on Linux
 set_target_properties(invm-i18n

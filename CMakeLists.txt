@@ -96,7 +96,7 @@ list(GET FRAMEWORK_VERSION_LIST 3 FRAMEWORK_VERSION_BUILDNUM)
 # --------------------------------------------------------------------------------------------------
 # Project wide defines and flags
 # --------------------------------------------------------------------------------------------------
-set(COMMON_COMPILE_FLAGS "-Wall -Werror -Wfatal-errors -fstack-protector-all -ggdb -MMD -m64 -D__VERSION_MAJOR__=${FRAMEWORK_VERSION_MAJOR} -D__VERSION_MINOR__=${FRAMEWORK_VERSION_MINOR} -D__VERSION_HOTFIX__=${FRAMEWORK_VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${FRAMEWORK_VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM_FRAMEWORKS}")
+set(COMMON_COMPILE_FLAGS "-Wall -Wfatal-errors -fstack-protector-all -ggdb -MMD -m64 -D__VERSION_MAJOR__=${FRAMEWORK_VERSION_MAJOR} -D__VERSION_MINOR__=${FRAMEWORK_VERSION_MINOR} -D__VERSION_HOTFIX__=${FRAMEWORK_VERSION_HOTFIX} -D__VERSION_BUILDNUM__=${FRAMEWORK_VERSION_BUILDNUM} -D__VERSION_NUMBER__=${BUILDNUM_FRAMEWORKS}")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_COMPILE_FLAGS}")
 
@@ -141,24 +141,4 @@ add_custom_target(rpm
 	# rpmbuild
         COMMAND export QA_RPATHS=0x0002 && cd ${PROJECT_ROOT} && rpmbuild -ba ${RPMBUILD_DIR}/SPECS/invm-frameworks.spec --define "_topdir ${RPMBUILD_DIR}" --define "cflag ${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}"
         COMMAND ${CMAKE_COMMAND} -E echo "Exiting make rpm..."
-        COMMAND make clean_cmake
         )
-
-# --------------------------------------------------------------------------------------------------
-# invm-frameworks clean_cmake
-# --------------------------------------------------------------------------------------------------
-add_custom_target(clean_cmake
-	COMMAND rm ${PROJECT_ROOT}/CMakeCache.txt
-	COMMAND rm -rf ${PROJECT_ROOT}/CMakeFiles
-	COMMAND rm -rf ${PROJECT_ROOT}/Makefile
-	COMMAND rm -rf ${PROJECT_ROOT}/cmake_install.cmake
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-cim/CMakeFiles
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-cim/Makefile
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-cim/cmake_install.cmake
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-cli/CMakeFiles
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-cli/Makefile
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-cli/cmake_install.cmake
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-i18n/CMakeFiles
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-i18n/Makefile
-	COMMAND rm -rf ${PROJECT_ROOT}/invm-i18n/cmake_install.cmake
-)

@@ -13,6 +13,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
+if (LNX_BUILD)
+	    include(GNUInstallDirs)
+endif ()
+
 # --------------------------------------------------------------------------------------------------
 # libinvm-cim
 # --------------------------------------------------------------------------------------------------
@@ -56,6 +60,11 @@ endif ()
 list (APPEND CIMFRAMEWORK_SRC ${OS_SRC_FILES})
 
 add_library(invm-cim ${LIB_TYPE} ${CIMFRAMEWORK_SRC})
+
+if (LNX_BUILD)
+        install (TARGETS invm-cim DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        install (FILES ${CIMFRAMEWORK_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libinvm-cim)
+endif()
 
 set_target_properties(invm-cim
        PROPERTIES

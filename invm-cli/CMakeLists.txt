@@ -18,6 +18,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 # Dependencies
 set(I18N_INCLUDE_DIR ${OUTPUT_DIR}/include)
 
+if (LNX_BUILD)
+    include(GNUInstallDirs)
+endif()
+
 if(ESX_BUILD)
 	add_definitions(
 		-D__ESX__ -DCLI_OUTPUT_ESX
@@ -42,6 +46,11 @@ file(COPY ${CLIFRAMEWORK_HEADERS}
 file(GLOB SRC src/framework/*.cpp)
 
 add_library(invm-cli ${LIB_TYPE} ${SRC})
+
+if (LNX_BUILD)
+        install (TARGETS invm-cli DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        install (FILES ${CLIFRAMEWORK_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libinvm-cli)
+endif()
 
 target_compile_definitions(invm-cli
         PRIVATE -D_FORTIFY_SOURCE=2

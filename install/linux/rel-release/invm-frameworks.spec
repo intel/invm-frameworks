@@ -6,6 +6,10 @@ Release:        1%{?dist}
 Summary:        Framework for Storage I18N, CLI and CIM applications
 License:        BSD
 Group:          Development/Libraries
+# The following packages are deprecated and now provided by invm-frameworks
+Conflicts:      libinvm-cim
+Conflicts:      libinvm-cli
+Conflicts:      libinvm-i18n
 URL:            https://01.org/intel-nvm-frameworks
 Source:         https://github.com/01org/invm-frameworks/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires:  gettext
@@ -121,48 +125,7 @@ cp -rf ./output/build/linux/debug/include/libinvm-cli %{buildroot}%{_includedir}
 %{_includedir}/libinvm-cim
 %license LICENSE
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%files -n libinvm-i18n
-%doc README.md
-%{_libdir}/libinvm-i18n.so.*
-%license LICENSE
-
-%files -n libinvm-i18n-devel
-%doc README.md
-%{_includedir}/libinvm-i18n
-%license LICENSE
-
-%post -n libinvm-i18n -p /sbin/ldconfig
-%postun -n libinvm-i18n -p /sbin/ldconfig
-
-%files -n libinvm-cli 
-%doc README.md
-%{_libdir}/libinvm-cli.so.*
-%license LICENSE
-
-%files -n libinvm-cli-devel
-%doc README.md
-%{_includedir}/libinvm-cli
-%license LICENSE
-
-%post -n libinvm-cli -p /sbin/ldconfig
-%postun -n libinvm-cli -p /sbin/ldconfig
-
-%files -n libinvm-cim 
-%doc README.md
-%{_libdir}/libinvm-cim.so.*
-%license LICENSE
-
-%files -n libinvm-cim-devel
-%doc README.md
-%{_includedir}/libinvm-cim
-%license LICENSE
-
-%post -n libinvm-cim -p /sbin/ldconfig
-%postun -n libinvm-cim -p /sbin/ldconfig
+%post -n %{name} -p /sbin/ldconfig
+%postun -n %{name} -p /sbin/ldconfig
 
 %changelog
-* Wed May 24 2017 Namratha Kothapalli <namratha.n.kothapalli@intel.com> - 01.00.00.2000-1
-- Initial rpm release
