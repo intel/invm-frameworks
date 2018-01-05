@@ -82,7 +82,7 @@ BOOL os_isregfile(const char *filename)
         return FALSE;
     }
 
-    if ((st.st_mode & S_IFMT) != S_IFREG || st.st_size > I18N_MMAP_MAX)
+    if (!S_ISREG(st.st_mode) || st.st_size > I18N_MMAP_MAX)
     {
         return FALSE;
     }
@@ -95,7 +95,7 @@ BOOL os_isregfile(const char *filename)
  */
 void* my_mmap(void* start, size_t length, FILE* fd, size_t offset)
 {
-	return mmap(start, length, PROT_READ, MAP_FILE | MAP_PRIVATE, fileno(fd), offset);
+	return mmap(start, length, PROT_READ, MAP_PRIVATE, fileno(fd), offset);
 }
 
 /**
