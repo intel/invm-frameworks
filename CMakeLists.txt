@@ -348,8 +348,8 @@ endif()
 # Pkgconfig
 # --------------------------------------------------------------------------------------------------
 configure_file(${ROOT}/install/linux/libinvm-i18n.pc.in ${OUTPUT_DIR}/libinvm-i18n.pc @ONLY)
-configure_file(install/linux/libinvm-cli.pc.in ${OUTPUT_DIR}/libinvm-cli.pc @ONLY)
-configure_file(install/linux/libinvm-cim.pc.in ${OUTPUT_DIR}/libinvm-cim.pc @ONLY)
+configure_file(${ROOT}/install/linux/libinvm-cli.pc.in ${OUTPUT_DIR}/libinvm-cli.pc @ONLY)
+configure_file(${ROOT}/install/linux/libinvm-cim.pc.in ${OUTPUT_DIR}/libinvm-cim.pc @ONLY)
 
 # --------------------------------------------------------------------------------------------------
 # Install
