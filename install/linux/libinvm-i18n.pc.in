@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
+
+Name: libinvm-i18n
+Description: Intel NVM framework library supporting Internationalization (I18N) functionality
+Version: @BUILDNUM@
+Libs: -L${libdir} -linvm-i18n
+Cflags: -I${includedir}/libinvm-i18n

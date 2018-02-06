@@ -17,13 +17,13 @@ Framework library supporting a subset of Internationalization (I18N)
 functionality, storage command line interface (CLI) applications, storage
 common information model (CIM) providers.
 
-%package -n libinvm-i18n
+%package -n libinvm-i18n2
 Summary:        Internationalization library
 License:        BSD
 Group:          Development/Libraries
 Obsoletes:      invm-frameworks
 
-%description -n libinvm-i18n
+%description -n libinvm-i18n2
 The libinvm-i18n package supports a subset of Internationalization (I18N)
 functionality.
 
@@ -31,20 +31,20 @@ functionality.
 Summary:        Development files for libinvm-i18n
 License:        BSD
 Group:          Development/Libraries
-Requires:       libinvm-i18n = %{version}-%{release}
+Requires:       libinvm-i18n2 = %{version}-%{release}
 Obsoletes:      invm-frameworks-devel
 
 %description -n libinvm-i18n-devel
 The libinvm-i18n-devel package contains header files for
 developing applications that use libinvm-i18n.
 
-%package -n libinvm-cli
+%package -n libinvm-cli2
 Summary:        Framework for Storage CLI applications
 License:        BSD
 Group:          Development/Libraries
 Obsoletes:      invm-frameworks
 
-%description -n libinvm-cli
+%description -n libinvm-cli2
 The libinvm-cli package supports storage command line interface (CLI)
 applications.
 
@@ -52,20 +52,20 @@ applications.
 Summary:        Development files for libinvm-cli
 License:        BSD
 Group:          Development/Libraries
-Requires:       libinvm-cli = %{version}-%{release}
+Requires:       libinvm-cli2 = %{version}-%{release}
 Obsoletes:      invm-frameworks-devel
 
 %description -n libinvm-cli-devel
 The libinvm-cli-devel package contains header files for
 developing applications that use libinvm-cli.
 
-%package -n libinvm-cim
+%package -n libinvm-cim2
 Summary:        Framework for Storage CIM providers
 License:        BSD
 Group:          Development/Libraries
 Obsoletes:      invm-frameworks
 
-%description -n libinvm-cim
+%description -n libinvm-cim2
 The libinvm-cim package supports storage common information model (CIM)
 providers.
 
@@ -73,7 +73,7 @@ providers.
 Summary:        Development files for libinvm-cim
 License:        BSD
 Group:          Development/Libraries
-Requires:       libinvm-cim = %{version}-%{release}
+Requires:       libinvm-cim2 = %{version}-%{release}
 Obsoletes:      invm-frameworks-devel
 
 %description -n libinvm-cim-devel
@@ -94,7 +94,7 @@ make -f Makefile %{?_smp_mflags}
 %{!?_cmake_version: cd build}
 make -f Makefile install DESTDIR=%{buildroot}
 
-%files -n libinvm-i18n
+%files -n libinvm-i18n2
 %defattr(-,root,root)
 %doc README.md
 %{_libdir}/libinvm-i18n.so.*
@@ -108,10 +108,10 @@ make -f Makefile install DESTDIR=%{buildroot}
 %{_libdir}/pkgconfig/libinvm-i18n.pc
 %license LICENSE
 
-%post -n libinvm-i18n -p /sbin/ldconfig
-%postun -n libinvm-i18n -p /sbin/ldconfig
+%post -n libinvm-i18n2 -p /sbin/ldconfig
+%postun -n libinvm-i18n2 -p /sbin/ldconfig
 
-%files -n libinvm-cli
+%files -n libinvm-cli2
 %defattr(-,root,root)
 %doc README.md
 %{_libdir}/libinvm-cli.so.*
@@ -125,10 +125,10 @@ make -f Makefile install DESTDIR=%{buildroot}
 %{_libdir}/pkgconfig/libinvm-cli.pc
 %license LICENSE
 
-%post -n libinvm-cli -p /sbin/ldconfig
-%postun -n libinvm-cli -p /sbin/ldconfig
+%post -n libinvm-cli2 -p /sbin/ldconfig
+%postun -n libinvm-cli2 -p /sbin/ldconfig
 
-%files -n libinvm-cim
+%files -n libinvm-cim2
 %defattr(-,root,root)
 %doc README.md
 %{_libdir}/libinvm-cim.so.*
@@ -143,7 +143,7 @@ make -f Makefile install DESTDIR=%{buildroot}
 %{_libdir}/pkgconfig/libinvm-cim.pc
 %license LICENSE
 
-%post -n libinvm-cim -p /sbin/ldconfig
-%postun -n libinvm-cim -p /sbin/ldconfig
+%post -n libinvm-cim2 -p /sbin/ldconfig
+%postun -n libinvm-cim2 -p /sbin/ldconfig
 
 %changelog

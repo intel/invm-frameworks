@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
+
+Name: libinvm-cli
+Description: Intel NVM framework library supporting Command Line Interface (CLI) applications
+Version: @BUILDNUM@
+Libs: -L${libdir} -linvm-cli
+Cflags: -I${includedir}/libinvm-cli

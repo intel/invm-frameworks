@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
+
+Name: libinvm-cim
+Description: Intel NVM framework library supporting Common Information Model (CIM) providers
+Version: @BUILDNUM@
+Libs: -L${libdir} -linvm-cim
+Cflags: -I${includedir}/libinvm-cim
