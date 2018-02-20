@@ -1,4 +1,4 @@
-# invm-frameworks 
+# invm-frameworks
 
 invm-frameworks is a framework library supporting a subset of
 Internationalization (I18N) functionality, storage Command Line Interface (CLI)
@@ -8,29 +8,26 @@ For more information please visit our project home.
 https://01.org/intel-nvm-frameworks
 
 ## Building
-CMake is used to generate Unix Makefiles, then GNU Make is used to build for Linux and Windows. As such we recommend mingw_w64 and msys be used to build in a windows environment. Both of which can be found at mingw.org
 
 ### Linux
-The recommend way to build is:
 ```
 mkdir output
 cd output
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make -j all
+sudo make install
 ```
 
 RPMs can also be built:
-
-	cmake .; make rpm
+```
+make rpm
+```
 
 The RPMs will be in ./output/rpmbuild/RPMS/
 
 ### Windows
-The recommend way for building on Windows is to use the CMake Unix Makefiles generator.
+Install Microsoft Visual Studio 2017
 
-```
-mkdir output
-cd output
-cmake .. -G "Unix Makefiels"
-make -j all
-```
+Open the CMakeLists.txt as a CMake project
+
+Build all with CMake
