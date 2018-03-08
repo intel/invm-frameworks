@@ -10,6 +10,7 @@ URL:            https://01.org/intel-nvm-frameworks
 Source:         https://github.com/01org/invm-frameworks/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires:  gettext
 BuildRequires:  cmake
+BuildRequires:  gcc
 BuildRequires:  gcc-c++
 ExclusiveArch:  x86_64
 
