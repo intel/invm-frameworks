@@ -1,0 +1,3 @@
+usr/lib/*/libinvm-cli.so
+usr/lib/*/pkgconfig/libinvm-cli.pc
+usr/include/libinvm-cli/*

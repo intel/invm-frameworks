@@ -1,0 +1,3 @@
+usr/lib/*/libinvm-i18n.so
+usr/lib/*/pkgconfig/libinvm-i18n.pc
+usr/include/libinvm-i18n/*

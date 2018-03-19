@@ -1,0 +1,58 @@
+Source: invm-frameworks
+Section: libs
+Priority: extra
+Maintainer: Juston Li <juston.li@intel.com>
+Build-Depends: cmake, debhelper (>=10)
+Standards-Version: 3.9.8
+Homepage: https://github.com/intel/ixpdimm_sw
+
+Package: libinvm-cim
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: auto-generated package by debmake: lib #1
+ This package contains the shared library.: #1
+
+Package: libinvm-cim-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libinvm-cim (= ${binary:Version}), ${misc:Depends}
+Description: auto-generated package by debmake: dev #2
+ This package contains the development files.: #2
+
+Package: libinvm-cli
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: auto-generated package by debmake: lib #3
+ This package contains the shared library.: #3
+
+Package: libinvm-cli-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libinvm-cli (= ${binary:Version}), ${misc:Depends}
+Description: auto-generated package by debmake: dev #4
+ This package contains the development files.: #4
+
+Package: libinvm-i18n
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: auto-generated package by debmake: lib #5
+ This package contains the shared library.: #5
+
+Package: libinvm-i18n-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libinvm-i18n (= ${binary:Version}), ${misc:Depends}
+Description: auto-generated package by debmake: dev #6
+ This package contains the development files.: #6
