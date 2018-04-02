@@ -31,10 +31,6 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 
 set(CMAKE_SKIP_BUILD_RPATH TRUE)
 
-if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION} GREATER 2.8.12)
-	cmake_policy(SET CMP0040 OLD)
-endif()
-
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake/Find")
 
 # --------------------------------------------------------------------------------------------------
